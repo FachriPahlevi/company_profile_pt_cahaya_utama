@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Scrollbar width */
+::-webkit-scrollbar {
+    width: 6px; /* Scrollbar lebih tipis */
+    height: 6px; /* Scrollbar horizontal juga lebih tipis */
+  }
+  
+  /* Scrollbar track */
+  ::-webkit-scrollbar-track {
+    background: #e5e7eb; /* Warna abu-abu terang */
+    border-radius: 6px; /* Sudut membulat */
+  }
+  
+  /* Scrollbar thumb */
+  ::-webkit-scrollbar-thumb {
+    background: #9ca3af; /* Warna abu-abu sedang untuk handle */
+    border-radius: 6px; /* Membulat agar halus */
+  }
+  
+  /* Scrollbar thumb on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #6b7280; /* Sedikit lebih gelap saat dihover */
+  }
+  

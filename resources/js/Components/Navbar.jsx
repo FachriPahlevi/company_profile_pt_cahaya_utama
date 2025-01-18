@@ -1,0 +1,76 @@
+import React, { useState } from "react";
+export default function Navbar (){
+    const [isOpen, setIsOpen] = useState(false);
+  
+    const navLinks = [
+      { href: "/perusahaan", text: "Perusahaan" },
+      { href: "#jasa", text: "Jasa" },
+      { href: "#kontak", text: "Kontak" },
+      { href: "#elearning", text: "E-Learning" },
+      { href: "#rekrutmen", text: "Rekrutmen" },
+    ];
+  
+    return (
+      <nav className="fixed top-0 left-0 w-full z-50 bg-transparent">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex justify-between items-center">
+            {/* Logo */}
+            <div className="flex items-center">
+              <img src="/img/logo-cu-ukas-smk3.png" alt="Cahaya Utama" className="h-12" />
+            </div>
+  
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden text-white"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {isOpen ? (
+                  <path d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+  
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex space-x-8">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-white hover:text-gray-300 transition-colors duration-200"
+                >
+                  {link.text}
+                </a>
+              ))}
+            </div>
+          </div>
+  
+          {/* Mobile Navigation */}
+          {isOpen && (
+            <div className="md:hidden mt-4 space-y-4">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="block text-white hover:text-gray-300 transition-colors duration-200"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.text}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      </nav>
+    );
+  };
