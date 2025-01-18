@@ -2,6 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import MainLayout from '@/Layouts/MainLayout';
 import Client from '@/Components/Client';
+import Cooperation from '@/Components/Cooperation';
+import Capabilities from '@/Components/Capabilities';
+import Service from '@/Components/Service';
+import Office from '@/Components/Office';
 
 export default function Company() {
   return (
@@ -24,7 +28,11 @@ export default function Company() {
         </p>    
       </div>
     </motion.div>
+    <Service/>
     <Client/>
+    <Cooperation/>
+    <Capabilities/>
+    <Office/>
     </MainLayout>
   );
 }
