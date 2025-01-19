@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FormController;
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -17,7 +18,11 @@ Route::get('/sonsecurity', function () {
 Route::get('/brilliant-cleaning', function () {
     return Inertia::render('Brilliant',);
 });
+Route::get('/trust-our-resource', function () {
+    return Inertia::render('Trust',);
+});
 
+Route::get('/contact', [FormController::class, 'index'])->name('contact');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

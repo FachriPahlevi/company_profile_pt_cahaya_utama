@@ -12,10 +12,10 @@ export default function Navbar() {
       dropdownItems: [
         { href: "sonsecurity", text: "Son Security" },
         { href: "brilliant-cleaning", text: "Brilliant Clean" },
-        { href: "#sertifikasi", text: "Trust Our Resource" },
+        { href: "trust-our-resource", text: "Trust Our Resource" },
       ],
     },
-    { href: "#kontak", text: "Kontak" },
+    { href: "contact", text: "Kontak" },
     { href: "#elearning", text: "E-Learning" },
     { href: "#rekrutmen", text: "Rekrutmen" },
   ];

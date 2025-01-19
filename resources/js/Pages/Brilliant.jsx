@@ -2,7 +2,7 @@ import Scope from "@/Components/cleaningservice/Scope";
 import Footer from "@/Components/Footer";
 import Office from "@/Components/Office";
 import Documentation from "@/Components/cleaningservice/Documentation";
-import Service from "@/Components/sonsecurity/Service";
+import Equipment from "@/Components/cleaningservice/Equipment";
 import Standard from "@/Components/sonsecurity/Standard";
 import MainLayout from "@/Layouts/MainLayout";
 import React from "react";
@@ -99,7 +99,7 @@ export default function SonSecurity() {
       </div>
       <Scope/>
       <Documentation/>
-      <Standard/>
+      <Equipment/>
       <Office/>
       <Footer/>
     </MainLayout>

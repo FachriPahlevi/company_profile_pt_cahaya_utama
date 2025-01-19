@@ -193,14 +193,6 @@ export default function Office() {
                 </div>
             </div>
 
-            {/* Chat Button */}
-            <div className="fixed bottom-6 left-6">
-                <button className="bg-green-500 text-white rounded-full p-4 flex items-center space-x-2">
-                    <Phone className="h-6 w-6" />
-                    <span>Bantuan? Chat kami!</span>
-                </button>
-            </div>
-
             {/* Scroll to Top Button */}
             <div className="fixed bottom-6 right-6">
                 <button className="bg-gray-800 text-white rounded-lg p-4">
