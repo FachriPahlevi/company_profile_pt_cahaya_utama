@@ -11,6 +11,12 @@ Route::get('/', function () {
 Route::get('/perusahaan', function () {
     return Inertia::render('Company',);
 });
+Route::get('/sonsecurity', function () {
+    return Inertia::render('SonSecurity',);
+});
+Route::get('/brilliant-cleaning', function () {
+    return Inertia::render('Brilliant',);
+});
 
 
 Route::get('/dashboard', function () {
