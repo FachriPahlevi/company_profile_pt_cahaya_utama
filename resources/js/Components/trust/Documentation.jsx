@@ -35,8 +35,8 @@ export default function Documentation() {
                 className="absolute inset-0 w-full h-full object-cover"
             />
             <div className="relative bg-black/50">
-                {/* Two images section with Framer Motion */}
-                <div className="grid grid-cols-5 w-full">
+                {/* Responsive image grid */}
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 w-full">
                     {images.map((src, index) => (
                         <motion.img 
                             key={index}
@@ -47,73 +47,80 @@ export default function Documentation() {
                             whileInView="visible"
                             viewport={{ once: true, amount: 0.2 }}
                             variants={imageVariants}
-                            className="w-full h-96 object-cover"
+                            className="w-full h-48 md:h-64 lg:h-96 object-cover"
                         />
                     ))}
                 </div>
 
-                <div className="container grid grid-cols-3 mx-auto px-4 py-12">
-                    <div className="max-w-3xl mb-12 px-8">
-                        <h1 className="text-4xl font-bold text-yellow-400 mb-4">Kompetensi</h1>
-                        <p className="text-lg text-white">
-                            PT. Cahaya Utama menyediakan tenaga profesional dalam jasa layanan keamanan.
-                            Berpengalaman, berkeahlian, berkepribadian baik dan loyal kepada profesinya.
-                        </p>
-                    </div>
-
-                    <div className="gap-8 space-y-8">
-                        <div className="flex items-start gap-4">
-                            <FaTshirt className="w-8 h-8 flex-shrink-0 text-white" />
-                            <div>
-                                <h2 className="text-xl font-semibold text-white mb-2">Atribut Kepegawaian</h2>
-                                <p className="text-gray-300">Berseragam, ID Card, Kelengkapan Safety</p>
-                            </div>
-                        </div>
-                        <div className="flex items-start gap-4">
-                            <ClipboardCheck className="w-8 h-8 flex-shrink-0 text-white" />
-                            <div>
-                                <h2 className="text-xl font-semibold text-white mb-2">Prosedur Standar Operasional</h2>
-                                <p className="text-gray-300">Visibilitas, Kerapian, Kepatuhan, Loyalitas, Kepantasan, Etika, Sopan Santun, dan 3S (Sapa, Salam dan Senyum)</p>
-                            </div>
-                        </div>
-                        <div className="flex items-start gap-4">
-                            <Trophy className="w-8 h-8 flex-shrink-0 text-white" />
-                            <div>
-                                <h2 className="text-xl font-semibold text-white mb-2">Reward & Punishment</h2>
-                                <p className="text-gray-300">Gamix untuk menciptakan budaya kerja kompetitif dan sehat</p>
-                            </div>
+                {/* Responsive container */}
+                <div className="container mx-auto px-4 py-12">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {/* Kompetensi Section */}
+                        <div className="md:col-span-1 text-center md:text-left">
+                            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-yellow-400 mb-4">Kompetensi</h1>
+                            <p className="text-base text-white">
+                                PT. Cahaya Utama menyediakan tenaga profesional dalam jasa layanan keamanan.
+                                Berpengalaman, berkeahlian, berkepribadian baik dan loyal kepada profesinya.
+                            </p>
                         </div>
 
-                        <div className="flex items-start gap-4">
-                            <LightbulbIcon className="w-8 h-8 flex-shrink-0 text-white" />
-                            <div>
-                                <h2 className="text-xl font-semibold text-white mb-2">Teknologi</h2>
-                                <p className="text-gray-300">Dalam beberapa hal kami telah menggunakan teknologi untuk mendukung operasional kerja</p>
+                        {/* Responsive Columns for Features */}
+                        <div className="md:col-span-2 grid md:grid-cols-2 gap-6">
+                            {/* First Column */}
+                            <div className="space-y-6">
+                                <div className="flex items-start gap-4">
+                                    <FaTshirt className="w-8 h-8 flex-shrink-0 text-white" />
+                                    <div>
+                                        <h2 className="text-lg md:text-xl font-semibold text-white mb-2">Atribut Kepegawaian</h2>
+                                        <p className="text-sm text-gray-300">Berseragam, ID Card, Kelengkapan Safety</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-4">
+                                    <ClipboardCheck className="w-8 h-8 flex-shrink-0 text-white" />
+                                    <div>
+                                        <h2 className="text-lg md:text-xl font-semibold text-white mb-2">Prosedur Standar Operasional</h2>
+                                        <p className="text-sm text-gray-300">Visibilitas, Kerapian, Kepatuhan, Loyalitas</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-4">
+                                    <Trophy className="w-8 h-8 flex-shrink-0 text-white" />
+                                    <div>
+                                        <h2 className="text-lg md:text-xl font-semibold text-white mb-2">Reward & Punishment</h2>
+                                        <p className="text-sm text-gray-300">Budaya kerja kompetitif dan sehat</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-4">
+                                    <LightbulbIcon className="w-8 h-8 flex-shrink-0 text-white" />
+                                    <div>
+                                        <h2 className="text-lg md:text-xl font-semibold text-white mb-2">Teknologi</h2>
+                                        <p className="text-sm text-gray-300">Dukungan teknologi untuk operasional</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div className="gap-8 space-y-8">
-                        <div className="flex items-start gap-4">
-                            <Binoculars className="w-8 h-8 flex-shrink-0 text-white" />
-                            <div>
-                                <h2 className="text-xl font-semibold text-white mb-2">Kontrol dan Pengawasan</h2>
-                                <p className="text-gray-300">Penempatan pengawas/kordinator disetiap group untuk melakukan fungsi kontrol, pengawasan dan kordinasi</p>
-                            </div>
-                        </div>
 
-                        <div className="flex items-start gap-4">
-                            <MonitorSmartphone className="w-8 h-8 flex-shrink-0 text-white" />
-                            <div>
-                                <h2 className="text-xl font-semibold text-white mb-2">Administrasi Kepegawaian</h2>
-                                <p className="text-gray-300">Rekrutmen, Laporan, Asuransi, Penggajian, Presensi, Absensi, Lembur, Pergantian, Penjadwalan, dan instrumen administrasi lainnya</p>
-                            </div>
-                        </div>
-                        <div className="flex items-start gap-4">
-                            <Award className="w-8 h-8 flex-shrink-0 text-white" />
-                            <div>
-                                <h2 className="text-xl font-semibold text-white mb-2">Standar Nasional</h2>
-                                <p className="text-gray-300">Penerapan peraturan sesuai Undang-undang ketenagakerjaan Republik Indonesia</p>
+                            {/* Second Column */}
+                            <div className="space-y-6">
+                                <div className="flex items-start gap-4">
+                                    <Binoculars className="w-8 h-8 flex-shrink-0 text-white" />
+                                    <div>
+                                        <h2 className="text-lg md:text-xl font-semibold text-white mb-2">Kontrol dan Pengawasan</h2>
+                                        <p className="text-sm text-gray-300">Pengawas di setiap group</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-4">
+                                    <MonitorSmartphone className="w-8 h-8 flex-shrink-0 text-white" />
+                                    <div>
+                                        <h2 className="text-lg md:text-xl font-semibold text-white mb-2">Administrasi Kepegawaian</h2>
+                                        <p className="text-sm text-gray-300">Rekrutmen, Laporan, Asuransi, Penggajian</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-4">
+                                    <Award className="w-8 h-8 flex-shrink-0 text-white" />
+                                    <div>
+                                        <h2 className="text-lg md:text-xl font-semibold text-white mb-2">Standar Nasional</h2>
+                                        <p className="text-sm text-gray-300">Sesuai Undang-undang ketenagakerjaan</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

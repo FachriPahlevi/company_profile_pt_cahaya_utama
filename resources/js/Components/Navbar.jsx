@@ -29,19 +29,34 @@ export default function Navbar() {
   };
 
   const handleClickOutside = (e) => {
-    // Only close if clicking outside both the dropdown trigger and menu
     if (!e.target.closest('.dropdown-container')) {
       setActiveDropdown(null);
     }
   };
 
-  // Add event listener for clicks outside dropdown
   React.useEffect(() => {
     document.addEventListener('click', handleClickOutside);
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, []);
+
+  const handleNavigation = (e, href, isDropdownItem = false) => {
+    e.preventDefault();
+    if (href.startsWith('#')) {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else if (href) {
+      window.location.href = href;
+    }
+    
+    if (isDropdownItem) {
+      setActiveDropdown(null);
+      setIsOpen(false);
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-transparent">
@@ -85,12 +100,22 @@ export default function Navbar() {
                 key={link.href}
                 className="relative dropdown-container"
               >
-                <button
-                  onClick={() => link.dropdownItems && handleDropdownClick(link.text)}
-                  className="text-white hover:text-gray-300 transition-colors duration-200"
-                >
-                  {link.text}
-                </button>
+                {link.dropdownItems ? (
+                  <button
+                    onClick={() => handleDropdownClick(link.text)}
+                    className="text-white hover:text-gray-300 transition-colors duration-200"
+                  >
+                    {link.text}
+                  </button>
+                ) : (
+                  <a
+                    href={link.href}
+                    onClick={(e) => handleNavigation(e, link.href)}
+                    className="text-white hover:text-gray-300 transition-colors duration-200"
+                  >
+                    {link.text}
+                  </a>
+                )}
                 {link.dropdownItems && activeDropdown === link.text && (
                   <div 
                     className="absolute left-0 mt-2 w-48 text-white rounded-md shadow-lg py-1 bg-black"
@@ -99,10 +124,10 @@ export default function Navbar() {
                       <a
                         key={item.href}
                         href={item.href}
-                        className="block px-4 py-2 text-white hover:bg-blue-400 hover:rounded-md hover:text-white "
+                        className="block px-4 py-2 text-white hover:bg-blue-400 hover:rounded-md hover:text-white"
                         onClick={(e) => {
-                          e.stopPropagation(); // Prevent the click from bubbling up
-                          setActiveDropdown(null); // Close dropdown after click
+                          e.stopPropagation();
+                          handleNavigation(e, item.href, true);
                         }}
                       >
                         {item.text}
@@ -120,12 +145,25 @@ export default function Navbar() {
           <div className="md:hidden mt-4 space-y-4">
             {navLinks.map((link) => (
               <div key={link.href}>
-                <button
-                  onClick={() => link.dropdownItems && handleDropdownClick(link.text)}
-                  className="block text-white hover:text-gray-300 transition-colors duration-200 w-full text-left"
-                >
-                  {link.text}
-                </button>
+                {link.dropdownItems ? (
+                  <button
+                    onClick={() => handleDropdownClick(link.text)}
+                    className="block text-white hover:text-gray-300 transition-colors duration-200 w-full text-left"
+                  >
+                    {link.text}
+                  </button>
+                ) : (
+                  <a
+                    href={link.href}
+                    onClick={(e) => {
+                      handleNavigation(e, link.href);
+                      setIsOpen(false);
+                    }}
+                    className="block text-white hover:text-gray-300 transition-colors duration-200"
+                  >
+                    {link.text}
+                  </a>
+                )}
                 {link.dropdownItems && activeDropdown === link.text && (
                   <div className="pl-4 mt-2 space-y-2">
                     {link.dropdownItems.map((item) => (
@@ -135,8 +173,7 @@ export default function Navbar() {
                         className="block text-white hover:text-gray-300 transition-colors duration-200"
                         onClick={(e) => {
                           e.stopPropagation();
-                          setIsOpen(false);
-                          setActiveDropdown(null);
+                          handleNavigation(e, item.href, true);
                         }}
                       >
                         {item.text}

@@ -1,16 +1,69 @@
-import Footer from "@/Components/Footer";
-import Office from "@/Components/Office";
-import Documentation from "@/Components/sonsecurity/Documentation";
-import Service from "@/Components/sonsecurity/Service";
-import Standard from "@/Components/sonsecurity/Standard";
-import MainLayout from "@/Layouts/MainLayout";
 import React from "react";
+import MainLayout from "@/Layouts/MainLayout";
+import Service from "@/Components/sonsecurity/Service";
+import Documentation from "@/Components/sonsecurity/Documentation";
+import Standard from "@/Components/sonsecurity/Standard";
+import Office from "@/Components/Office";
+import Footer from "@/Components/Footer";
+import CountUp from "react-countup";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 export default function SonSecurity() {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const statsData = [
+    { 
+      value: 31600, 
+      label: "Tenaga Kerja",
+      prefix: "",
+      suffix: ""
+    },
+    { 
+      value: 37, 
+      label: "Klien",
+      prefix: "",
+      suffix: ""
+    },
+    { 
+      value: 8, 
+      label: "Bidang",
+      prefix: "",
+      suffix: ""
+    }
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 100
+      }
+    }
+  };
+
   return (
     <MainLayout>
-      <div className="relative min-h-screen">
-        {/* Background image with overlay */}
+      <div className="relative min-h-screen overflow-hidden">
+        {/* Background dengan overlay */}
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: 'url(img/background/securityheader01ww.jpg)' }}
@@ -18,89 +71,136 @@ export default function SonSecurity() {
           <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        {/* Content container */}
-        <div className="relative z-10 container mx-auto px-4 h-screen flex items-end">
-          {/* Main content */}
-          <div className="flex flex-col lg:flex-row items-end gap-2 w-full">
-            {/* left column - Security guard image */}
-            <div className="w-full lg:w-1/2 flex flex-col">
-              {/* Header logo */}
-              <div className="mb-8 flex justify-between mx-auto items-center text-center">
-                <img
-                  src="img/sonsecurity/logo-son-security-h.png"
-                  alt="Son Security Logo"
-                  className="h-16 object-contain flex justify-between mx-auto items-center text-center"
-                />
-              </div>
-              <div className="flex justify-center">
-                <img
-                  src="img/sonsecurity/secutiry-crop.png"
-                  alt="Security Personnel"
-                  className="h-[480px] w-80 object-cover object-top"
-                />
-              </div>
-            </div>
-            {/* right column - Logo and content */}
-            <div className="w-full lg:w-1/2 pb-24">
-              {/* Text content */}
-              <div className="text-white space-y-6">
-                <h1 className="text-3xl lg:text-4xl font-medium leading-tight">
-                  Pastikan Lingkungan Anda
-                  <br />
-                  <span className="text-5xl lg:text-6xl font-bold text-white">Aman, Nyaman, dan Terjaga</span>
-                  <br />
-                  <span className="text-4xl">Setiap Saat ...</span>
-                </h1>
+        {/* Konten utama */}
+        <div className="relative z-10 container mx-auto px-4 py-8 md:py-16 lg:py-0 h-full md:h-screen flex items-center">
+          <div className="grid md:grid-cols-2 gap-8 items-center w-full">
+            {/* Kolom kiri - Logo dan Gambar */}
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex flex-col items-center text-center pt-64"
+            >
+              <img
+                src="img/sonsecurity/logo-son-security-h.png"
+                alt="Son Security Logo"
+                className="h-16 mb-8 object-contain"
+              />
+              <img
+                src="img/sonsecurity/secutiry-crop.png"
+                alt="Security Personnel"
+                className="max-h-[480px] w-auto max-w-full object-cover object-top"
+              />
+            </motion.div>
 
-                <div className="pt-4">
-                  <button className="bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-3 rounded-full flex items-center space-x-3 transition duration-300">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                    </svg>
-                    <span className="text-lg">Download e-Paper</span>
-                  </button>
-                </div>
+            {/* Kolom kanan - Konten */}
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-white text-center md:text-left"
+            >
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-medium leading-tight mb-6">
+                Pastikan Lingkungan Anda
+                <br />
+                <span className="text-3xl md:text-5xl lg:text-6xl font-bold block">
+                  Aman, Nyaman, dan Terjaga
+                </span>
+                <span className="text-2xl md:text-4xl block">Setiap Saat ...</span>
+              </h1>
 
-                <p className="text-xl mt-8">
-                  <span className="font-bold">Son Security</span>, layanan penyedia alih daya jasa keamanan
-                  <br />
-                  (Outsourcing for Security) dari Cahaya Utama, untuk Anda...
-                </p>
+              <div className="flex justify-center md:justify-start mb-6">
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-cyan-600 hover:bg-cyan-700 text-white px-6 md:px-8 py-2 md:py-3 rounded-full flex items-center space-x-3 transition duration-300"
+                >
+                  <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                  <span className="text-sm md:text-lg">Download e-Paper</span>
+                </motion.button>
               </div>
-              {/* Stats grid */}
-              <div className="grid grid-cols-3 gap-8 mt-16">
-                <div className="text-center text-white">
-                  <h2 className="text-4xl font-bold">31600</h2>
-                  <p className="text-gray-200 text-lg">Tenaga Kerja Distribusi</p>
-                </div>
-                <div className="text-center text-white">
-                  <h2 className="text-4xl font-bold">37</h2>
-                  <p className="text-gray-200 text-lg">Klien Perusahaan</p>
-                </div>
-                <div className="text-center text-white">
-                  <h2 className="text-4xl font-bold">8</h2>
-                  <p className="text-gray-200 text-lg">Bidang dan Keahlian</p>
-                </div>
-              </div>
-            </div>
+
+              <p className="text-base md:text-xl mb-8">
+                <span className="font-bold">Son Security</span>, layanan penyedia alih daya jasa keamanan
+                <br />
+                (Outsourcing for Security) dari Cahaya Utama, untuk Anda...
+              </p>
+
+              {/* Statistik dengan Animasi */}
+              <motion.div 
+                ref={ref}
+                variants={containerVariants}
+                initial="hidden"
+                animate={inView ? "visible" : "hidden"}
+                className="grid grid-cols-3 gap-4 text-center"
+              >
+                {statsData.map((stat, index) => (
+                  <motion.div 
+                    key={index} 
+                    variants={itemVariants}
+                    className="text-white"
+                  >
+                    <h2 className="text-2xl md:text-4xl font-bold">
+                      {inView ? (
+                        <CountUp 
+                          start={0}
+                          end={stat.value}
+                          duration={2}
+                          separator="."
+                          prefix={stat.prefix}
+                          suffix={stat.suffix}
+                        />
+                      ) : (
+                        0
+                      )}
+                    </h2>
+                    <p className="text-gray-200 text-xs md:text-lg">{stat.label}</p>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
           </div>
         </div>
 
-        {/* Chat button */}
-        <div className="fixed bottom-8 left-8 z-20">
-          <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full flex items-center space-x-3 transition duration-300 shadow-lg">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-            </svg>
-            <span className="text-lg">Bantuan? Chat kami!</span>
-          </button>
-        </div>
+        {/* Tombol Chat */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="fixed bottom-4 md:bottom-8 left-4 md:left-8 z-20"
+        >
+         <motion.button 
+  whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.9 }}
+  className="bg-green-500 hover:bg-green-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-full flex items-center space-x-2 transition duration-300 shadow-lg"
+>
+  <svg 
+    className="w-4 h-4 md:w-6 md:h-6" 
+    fill="none" 
+    stroke="currentColor" 
+    viewBox="0 0 24 24" 
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      strokeWidth="2" 
+      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" 
+    />
+  </svg>
+  <span className="text-xs md:text-lg">Bantuan? Chat kami!</span>
+</motion.button>
+        </motion.div>
       </div>
-      <Service/>
-      <Documentation/>
-      <Standard/>
-      <Office/>
-      <Footer/>
+
+      {/* Komponen tambahan */}
+      <Service />
+      <Documentation />
+      <Standard />
+      <Office />
+      <Footer />
     </MainLayout>
   );
 }

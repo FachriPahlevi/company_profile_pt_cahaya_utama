@@ -61,8 +61,8 @@ export default function Trust() {
           <div className="absolute inset-0 bg-black/20" />
         </div>
 
-        {/* Content container */}
-        <div className="relative z-10 container mx-auto px-4 min-h-screen flex items-center md:items-end">
+        {/* Content container - Tambahkan pt-20 sm:pt-32 untuk mobile */}
+        <div className="relative z-10 container mx-auto px-4 min-h-screen flex items-center pt-20 sm:pt-32 md:items-end">
           {/* Main content */}
           <div className="flex flex-col md:flex-row items-center md:items-end gap-4 md:gap-2 w-full">
             {/* left column - Security guard image */}

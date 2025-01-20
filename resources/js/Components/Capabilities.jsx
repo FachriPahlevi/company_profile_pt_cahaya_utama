@@ -9,7 +9,7 @@ const CapabilitiesItem = ({ end, title, delay }) => {
   return (
     <motion.div
       ref={ref}
-      className="flex flex-col items-center text-center"
+      className="flex flex-col items-center text-center p-4"
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ 
         opacity: isInView ? 1 : 0, 
@@ -24,7 +24,7 @@ const CapabilitiesItem = ({ end, title, delay }) => {
       }}
     >
       <motion.span
-        className="text-5xl md:text-6xl font-bold block"
+        className="text-4xl sm:text-5xl md:text-6xl font-bold block text-yellow-400"
         initial={{ opacity: 0, y: 30 }}
         animate={{ 
           opacity: isInView ? 1 : 0, 
@@ -49,7 +49,7 @@ const CapabilitiesItem = ({ end, title, delay }) => {
         )}
       </motion.span>
       
-      <p className="mt-2 font-medium text-sm md:text-base">
+      <p className="mt-2 font-medium text-sm sm:text-base text-white">
         {title}
       </p>
     </motion.div>
@@ -58,32 +58,36 @@ const CapabilitiesItem = ({ end, title, delay }) => {
 
 const Capabilities = () => {
   return (
-    <section className="bg-[#27506e] text-white py-12 px-5">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-4 md:px-12">
-        <h2 className="text-3xl md:text-5xl font-bold mb-8 text-left md:col-span-1 flex items-center h-full">
-          Kapabilitas
-          <br />
-          Perusahaan
-        </h2>
-        
-        <div className="md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <CapabilitiesItem 
-            end={10} 
-            title="Representatif Kantor & Cabang" 
-            delay={0.1} 
-          />
+    <section className="bg-[#27506e] text-white py-12 px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto max-w-6xl">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 lg:mb-0 text-center lg:text-left col-span-1">
+            Kapabilitas
+            <br className="hidden lg:block" />
+            Perusahaan
+          </h2>
           
-          <CapabilitiesItem 
-            end={134} 
-            title="Manajemen Profesional" 
-            delay={0.1} 
-          />
-          
-          <CapabilitiesItem 
-            end={116} 
-            title="Klien Perusahaan di Tanah Air" 
-            delay={0.1} 
-          />
+          <div className="col-span-1 lg:col-span-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <CapabilitiesItem 
+                end={10} 
+                title="Representatif Kantor & Cabang" 
+                delay={0.1} 
+              />
+              
+              <CapabilitiesItem 
+                end={134} 
+                title="Manajemen Profesional" 
+                delay={0.2} 
+              />
+              
+              <CapabilitiesItem 
+                end={116} 
+                title="Klien Perusahaan di Tanah Air" 
+                delay={0.3} 
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>
