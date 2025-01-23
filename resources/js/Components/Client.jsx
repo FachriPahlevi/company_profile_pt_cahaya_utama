@@ -1,26 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { FaHandshake } from "react-icons/fa";
 
 const ClientSection = () => {
-  const clientLogos = [
-    { name: "Semen Indonesia", logo: "/img/client/Semen_Indonesia_logo.png" },
-    { name: "BCA", logo: "/img/client/BCA_logo.png" },
-    { name: "BNI", logo: "/img/client/BNI_logo.png" },
-    { name: "BII", logo: "/img/client/bii_logo.png" },
-    { name: "Ajinomoto", logo: "/img/client/Ajinomoto_logo.png" },
-    { name: "Indonesia Power", logo: "/img/client/PLN_logo.png" },
-    { name: "Kapal Api", logo: "/img/client/kapal_api_logo.png" },
-    { name: "Gudang Garam", logo: "/img/client/gudang_garam_logo.png" },
-    { name: "Waskita", logo: "/img/client/Waskita_Karya.png" },
-    { name: "Prodia", logo: "/img/client/Prodia_logo.jpeg" },
-    { name: "WIKA", logo: "/img/client/Wijaya_Karya.png" },
-    { name: "Auto 2000", logo: "/img/client/Auto2000_logo.png" },
-    { name: "Corteva", logo: "/img/client/Corteva_logo.png" },
-    { name: "Suzuki Finance", logo: "/img/client/Suzuki_logo.png" },
-    { name: "B-LOG", logo: "/img/client/b_log_logo.png" },
-    { name: "DHL", logo: "/img/client/DHL_Logo.png" },
-    { name: "Indomobil Finance", logo: "/img/client/indo_mobil_logo.jpg" },
-  ];
+  const [clientLogos, setClientLogos] = useState([]);
+
+  useEffect(() => {
+    const fetchClients = async () => {
+      try {
+        const response = await axios.get('/clients'); // Ganti dengan URL API Anda
+        setClientLogos(response.data);
+      } catch (error) {
+        console.error("Error fetching client logos:", error);
+      }
+    };
+
+    fetchClients();
+  }, []);
 
   return (
     <div className="bg-blue-50 py-12 sm:py-16 md:py-20">
@@ -45,9 +41,9 @@ const ClientSection = () => {
           {/* Right section with client logos */}
           <div className="w-full lg:w-3/4">
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
-              {clientLogos.map((client, index) => (
+              {clientLogos.map((client) => (
                 <div 
-                  key={index} 
+                  key={client.id} 
                   className="flex items-center justify-center p-2 hover:bg-blue-100 rounded-lg transition-all duration-300"
                 >
                   <img

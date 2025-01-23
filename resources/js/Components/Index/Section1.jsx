@@ -85,23 +85,23 @@ const Section1 = () => {
                 transition={{ duration: 1 }}
             />
             
-            <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-                <div className="flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12">
+            <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-24">
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8 lg:gap-12">
                     {/* Left Content */}
                     <motion.div 
-                        className="w-full lg:w-1/2 space-y-8 md:space-y-12 px-0 sm:px-4 lg:px-12"
+                        className="w-full lg:w-1/2 space-y-6 md:space-y-8 px-0 sm:px-2 lg:px-8"
                         variants={fadeInUp}
                         initial="initial"
                         animate="animate"
                     >
                         <motion.div className="text-center lg:text-left">
                             <motion.h1 
-                                className="text-3xl sm:text-4xl md:text-5xl font-light text-gray-300"
+                                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-gray-300 leading-tight"
                                 variants={fadeInUp}
                             >
                                 lebih dari
                                 <motion.div 
-                                    className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white my-4"
+                                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white my-2 sm:my-3"
                                     variants={pulseAnimation}
                                     animate="animate"
                                 >
@@ -114,7 +114,7 @@ const Section1 = () => {
                         </motion.div>
                         
                         <motion.div 
-                            className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-8"
+                            className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8"
                             variants={staggerChildren}
                             initial="initial"
                             animate="animate"
@@ -126,20 +126,20 @@ const Section1 = () => {
                             ].map((service, index) => (
                                 <motion.div 
                                     key={index}
-                                    className="text-center space-y-2 p-4"
+                                    className="text-center space-y-2 p-3 sm:p-4"
                                     variants={popUp}
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                 >
                                     <motion.div 
-                                        className="flex justify-center items-center h-12"
+                                        className="flex justify-center items-center h-10 sm:h-12"
                                         animate="animate"
                                     >
-                                        <img src='/img/service/bullet-01.png' alt={service.title} className="h-4 mr-2" />
-                                        <img src={service.img} alt={service.title} className="h-8" />
+                                        <img src='/img/service/bullet-01.png' alt={service.title} className="h-3 sm:h-4 mr-1 sm:mr-2" />
+                                        <img src={service.img} alt={service.title} className="h-6 sm:h-8" />
                                     </motion.div>
-                                    <h3 className="text-white font-bold text-lg sm:text-xl">{service.title}</h3>
-                                    <p className="text-gray-400 text-sm sm:text-base">{service.desc}</p>
+                                    <h3 className="text-white font-bold text-base sm:text-lg">{service.title}</h3>
+                                    <p className="text-gray-400 text-xs sm:text-sm">{service.desc}</p>
                                 </motion.div>
                             ))}
                         </motion.div>
@@ -147,7 +147,7 @@ const Section1 = () => {
 
                     {/* Right Content */}
                     <motion.div 
-                        className="w-full lg:w-1/2 mt-8 lg:mt-0"
+                        className="w-full lg:w-1/2 mt-6 lg:mt-0"
                         variants={slideInFromRight}
                         initial="initial"
                         animate="animate"
@@ -173,7 +173,7 @@ const Section1 = () => {
                                         key={index}
                                         src={person.src}
                                         alt="Person"
-                                        className={`absolute bottom-0 h-32 sm:h-40 md:h-48 object-contain ${person.position}`}
+                                        className={`absolute bottom-0 h-24 sm:h-32 md:h-40 lg:h-48 object-contain ${person.position}`}
                                         style={{ zIndex: person.zIndex }}
                                         initial={{ y: 100, opacity: 0 }}
                                         animate={{ 
@@ -192,13 +192,13 @@ const Section1 = () => {
                         </motion.div>
 
                         <motion.div 
-                            className="flex justify-center items-center mt-8"
+                            className="flex justify-center items-center mt-6 sm:mt-8"
                             initial={{ y: 50, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 1, duration: 0.5 }}
                         >                                
                             <motion.div 
-                                className="font-bold text-sm sm:text-base bg-gray-900 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full shadow-xl z-20 flex items-center backdrop-blur-sm bg-opacity-90"
+                                className="font-bold text-xs sm:text-sm md:text-base bg-gray-900 text-white px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 rounded-full shadow-xl z-20 flex items-center backdrop-blur-sm bg-opacity-90"
                                 whileHover={{ 
                                     scale: 1.05,
                                     boxShadow: "0 0 20px rgba(255,255,255,0.3)"
@@ -220,7 +220,7 @@ const Section1 = () => {
                 transition={{ delay: 1.5, duration: 0.8 }}
             >
                 <motion.button 
-                    className="bg-green-600 text-white w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center shadow-xl rounded-full hover:bg-green-700 transition-colors duration-200"
+                    className="bg-green-600 text-white w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center shadow-xl rounded-full hover:bg-green-700 transition-colors duration-200"
                     whileHover={{ 
                         scale: 1.1,
                         boxShadow: "0 0 20px rgba(74, 222, 128, 0.5)"
@@ -229,11 +229,11 @@ const Section1 = () => {
                     variants={pulseAnimation}
                     animate="animate"
                 >
-                    <FaPhoneAlt className="text-lg sm:text-xl" />
+                    <FaPhoneAlt className="text-sm sm:text-base md:text-lg" />
                 </motion.button>
 
                 <motion.div 
-                    className="bg-white text-black rounded-xl px-3 sm:px-4 py-1.5 sm:py-2 shadow-md text-sm sm:text-base"
+                    className="bg-white text-black rounded-xl px-2 sm:px-3 py-1 sm:py-1.5 shadow-md text-xs sm:text-sm"
                     whileHover={{ 
                         scale: 1.05,
                         boxShadow: "0 0 20px rgba(255,255,255,0.2)"
