@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cooperation;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class CooperationController extends Controller
 {
@@ -42,9 +46,14 @@ class CooperationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Cooperation $cooperation)
+    public function show()
     {
-        //
+        $cooperations = Cooperation::all();
+
+        
+        return Inertia::render('Admin/Cooperation', [
+            'cooperations' => $cooperations,
+        ]);
     }
 
     /**

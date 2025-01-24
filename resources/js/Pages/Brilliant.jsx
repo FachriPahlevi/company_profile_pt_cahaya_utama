@@ -154,25 +154,6 @@ export default function SonSecurity() {
             </motion.div>
           </div>
         </div>
-
-        {/* Chat button */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="fixed bottom-8 left-8 z-20"
-        >
-          <motion.button 
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full flex items-center space-x-3 transition duration-300 shadow-lg"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-            </svg>
-            <span className="text-lg">Bantuan? Chat kami!</span>
-          </motion.button>
-        </motion.div>
       </div>
       <Scope/>
       <Documentation/>

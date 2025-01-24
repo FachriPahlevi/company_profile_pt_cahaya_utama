@@ -28,7 +28,7 @@ const Section = () => {
                 }}
             />
             
-            <div className="relative container mx-auto h-screen flex flex-col px-4 lg:px-8">
+            <div className="relative container mx-auto h-screen flex flex-col px-4 lg:px-8 py-12">
                 {/* Main Content Section */}
                 <div className="flex-1 flex items-center py-8 md:py-12 lg:py-16">
                     <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-8 lg:gap-12">
@@ -43,7 +43,7 @@ const Section = () => {
                                 <motion.img 
                                     src="/img/cu-uniform.png"
                                     alt="Uniform"
-                                    className="w-32 sm:w-40 lg:w-48 h-auto"
+                                    className="w-24 sm:w-40 lg:w-48 h-auto"
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ duration: 0.5 }}
@@ -123,25 +123,11 @@ const Section = () => {
                         </motion.div>
                     </div>
                 </div>
-
                 {/* Bottom Navigation */}
-                <div className="py-4 sm:py-6 bg-gradient-to-r from-transparent via-black/40 to-transparent backdrop-blur-sm">
-                    <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8">
-                        {/* Chat Button */}
-                        <motion.div 
-                            className="flex items-center gap-3"
-                            whileHover={{ scale: 1.05 }}
-                        >
-                            <div className="bg-green-500 rounded-full p-2 sm:p-3">
-                                <FaPhoneAlt className="text-lg sm:text-xl text-white" />
-                            </div>
-                            <div className="bg-white text-black px-3 sm:px-4 py-1 sm:py-2 rounded-lg">
-                                <p className="font-medium text-sm sm:text-base">Bantuan? Chat kami!</p>
-                            </div>
-                        </motion.div>
-
+                <div className="py-2 sm:py-4 bg-gradient-to-r justify-center from-transparent via-black/40 to-transparent backdrop-blur-sm mx-auto">
+                    <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 mx-auto">
                         {/* Category Items */}
-                        <div className="flex items-start gap-4 sm:gap-8 lg:gap-12 overflow-x-auto pb-2 w-full sm:w-auto">
+                        <div className="flex items-center gap-4 sm:gap-8 lg:gap-12 overflow-x-auto pb-2 w-full sm:w-auto">
                             <div className="flex flex-col items-center text-white min-w-[100px] sm:min-w-0">
                                 <FaCog className="text-xl sm:text-2xl mb-1 sm:mb-2" />
                                 <p className="font-medium text-sm sm:text-base">Manufaktur</p>

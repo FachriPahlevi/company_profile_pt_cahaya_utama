@@ -61,7 +61,7 @@ const Cooperation = () => {
           {/* Bagian kiri dengan ikon dan teks */}
           <div className="md:w-1/4">
             <div className="mb-6 flex justify-center">
-              <FaHandshake className="w-16 h-16 text-center text-gray-700" />
+              <img src="/img/cooperation/handshake.jpg" className="w-16 h-16 text-center text-gray-700" />
             </div>
             <div className="flex justify-center">
               <h2 className="text-gray-700 text-2xl font-medium leading-relaxed">

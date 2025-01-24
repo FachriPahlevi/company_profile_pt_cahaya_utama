@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Recruitment;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class RecruitmentController extends Controller
 {
@@ -12,7 +13,7 @@ class RecruitmentController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Recruitment/Index');    
     }
 
     /**

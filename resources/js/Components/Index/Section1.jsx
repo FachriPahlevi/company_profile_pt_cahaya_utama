@@ -85,7 +85,7 @@ const Section1 = () => {
                 transition={{ duration: 1 }}
             />
             
-            <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-24">
+            <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-24 py-24">
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8 lg:gap-12">
                     {/* Left Content */}
                     <motion.div 
@@ -114,7 +114,7 @@ const Section1 = () => {
                         </motion.div>
                         
                         <motion.div 
-                            className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8"
+                            className="grid grid-cols-3 gap-3 sm:gap-4 mt-4 sm:mt-6"
                             variants={staggerChildren}
                             initial="initial"
                             animate="animate"
@@ -126,20 +126,20 @@ const Section1 = () => {
                             ].map((service, index) => (
                                 <motion.div 
                                     key={index}
-                                    className="text-center space-y-2 p-3 sm:p-4"
+                                    className="text-center space-y-2 p-2 sm:p-3"
                                     variants={popUp}
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                 >
                                     <motion.div 
-                                        className="flex justify-center items-center h-10 sm:h-12"
+                                        className="flex justify-center items-center h-8 sm:h-10"
                                         animate="animate"
                                     >
-                                        <img src='/img/service/bullet-01.png' alt={service.title} className="h-3 sm:h-4 mr-1 sm:mr-2" />
-                                        <img src={service.img} alt={service.title} className="h-6 sm:h-8" />
+                                        <img src='/img/service/bullet-01.png' alt={service.title} className="h-2.5 sm:h-3 mr-1 sm:mr-2" />
+                                        <img src={service.img} alt={service.title} className="h-5 sm:h-7" />
                                     </motion.div>
-                                    <h3 className="text-white font-bold text-base sm:text-lg">{service.title}</h3>
-                                    <p className="text-gray-400 text-xs sm:text-sm">{service.desc}</p>
+                                    <h3 className="text-white font-bold text-sm sm:text-base">{service.title}</h3>
+                                    <p className="text-gray-400 text-xs">{service.desc}</p>
                                 </motion.div>
                             ))}
                         </motion.div>
@@ -211,37 +211,6 @@ const Section1 = () => {
                     </motion.div>
                 </div>
             </div>
-
-            {/* Fixed Contact Button */}
-            <motion.div 
-                className="fixed bottom-4 sm:bottom-6 left-4 sm:left-6 z-50 flex items-center space-x-2 sm:space-x-4"
-                initial={{ x: -100, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 1.5, duration: 0.8 }}
-            >
-                <motion.button 
-                    className="bg-green-600 text-white w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center shadow-xl rounded-full hover:bg-green-700 transition-colors duration-200"
-                    whileHover={{ 
-                        scale: 1.1,
-                        boxShadow: "0 0 20px rgba(74, 222, 128, 0.5)"
-                    }}
-                    whileTap={{ scale: 0.9 }}
-                    variants={pulseAnimation}
-                    animate="animate"
-                >
-                    <FaPhoneAlt className="text-sm sm:text-base md:text-lg" />
-                </motion.button>
-
-                <motion.div 
-                    className="bg-white text-black rounded-xl px-2 sm:px-3 py-1 sm:py-1.5 shadow-md text-xs sm:text-sm"
-                    whileHover={{ 
-                        scale: 1.05,
-                        boxShadow: "0 0 20px rgba(255,255,255,0.2)"
-                    }}
-                >
-                    <p className="font-semibold">Bantuan? Chat Kami!</p>
-                </motion.div>
-            </motion.div>
         </div>
     );
 };

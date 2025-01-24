@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CooperationController;
+use App\Http\Controllers\RecruitmentController;
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -24,6 +25,8 @@ Route::get('/trust-our-resource', function () {
     return Inertia::render('Trust',);
 });
 
+Route::get('/recruitment', [RecruitmentController::class, 'index'])->name('recruitment');
+
 //api data
 Route::get('/clients', [ClientController::class, 'index']);
 
@@ -33,6 +36,8 @@ Route::post('/admincu/clients/create', [ClientController::class, 'store'])->name
 Route::get('/cooperations', [CooperationController::class, 'index']);
 
 Route::get('/admincu', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::get('/admincu/cooperations', [CooperationController::class, 'show'])->name('admin.cooperation');
 
 // Route::get('/admincu/client', [ClientController::class, 'index'])->name('client.index');
 // Route::get('/admincu/client', [ClientController::class, 'index'])->name('client.index');

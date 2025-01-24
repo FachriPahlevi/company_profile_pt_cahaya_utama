@@ -1,3 +1,4 @@
+import FixedContactButton from "@/Components/FixedContactButton";
 import Navbar from "@/Components/Navbar";
 import React from "react";
 
@@ -8,6 +9,7 @@ export default function MainLayout({ children }) {
       <main className="flex-grow w-full">
         {children}
       </main>
+      <FixedContactButton className=""/>
     </div>
   );
 }

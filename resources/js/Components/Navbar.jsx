@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
 
   const navLinks = [
     { href: "/perusahaan", text: "Perusahaan" },
@@ -17,37 +18,38 @@ export default function Navbar() {
     },
     { href: "contact", text: "Kontak" },
     { href: "#elearning", text: "E-Learning" },
-    { href: "#rekrutmen", text: "Rekrutmen" },
+    { href: "recruitment", text: "Rekrutmen" },
   ];
 
-  const handleDropdownClick = (text) => {
-    if (activeDropdown === text) {
-      setActiveDropdown(null);
-    } else {
-      setActiveDropdown(text);
-    }
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
 
-  const handleClickOutside = (e) => {
-    if (!e.target.closest('.dropdown-container')) {
-      setActiveDropdown(null);
-    }
-  };
+    const handleClickOutside = (e) => {
+      if (!e.target.closest('.dropdown-container')) {
+        setActiveDropdown(null);
+      }
+    };
 
-  React.useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
     document.addEventListener('click', handleClickOutside);
+
     return () => {
+      window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('click', handleClickOutside);
     };
   }, []);
+
+  const handleDropdownClick = (text) => {
+    setActiveDropdown(activeDropdown === text ? null : text);
+  };
 
   const handleNavigation = (e, href, isDropdownItem = false) => {
     e.preventDefault();
     if (href.startsWith('#')) {
       const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      element?.scrollIntoView({ behavior: 'smooth' });
     } else if (href) {
       window.location.href = href;
     }
@@ -59,21 +61,26 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-transparent">
-      <div className="container mx-auto px-4 py-4">
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+      scrolled ? 'bg-black/80 backdrop-blur-sm' : 'bg-transparent'
+    }`}>
+      <div className="container mx-auto px-4 py-3 md:py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center">
-            <img
-              src="/img/logo-cu-ukas-smk3.png"
-              alt="Cahaya Utama"
-              className="h-12"
-            />
+            <a href="/">
+              <img
+                src="/img/logo-cu-ukas-smk3.png"
+                alt="Cahaya Utama"
+                className="h-8 md:h-10 lg:h-12"
+              />
+            </a>
           </div>
+
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white"
+            className="md:hidden text-white z-60"
             onClick={() => setIsOpen(!isOpen)}
           >
             <svg
@@ -94,7 +101,7 @@ export default function Navbar() {
           </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-6 lg:space-x-8">
             {navLinks.map((link) => (
               <div
                 key={link.href}
@@ -103,7 +110,7 @@ export default function Navbar() {
                 {link.dropdownItems ? (
                   <button
                     onClick={() => handleDropdownClick(link.text)}
-                    className="text-white hover:text-gray-300 transition-colors duration-200"
+                    className="text-white text-sm lg:text-base hover:text-blue-400 transition-colors duration-200"
                   >
                     {link.text}
                   </button>
@@ -111,20 +118,20 @@ export default function Navbar() {
                   <a
                     href={link.href}
                     onClick={(e) => handleNavigation(e, link.href)}
-                    className="text-white hover:text-gray-300 transition-colors duration-200"
+                    className="text-white text-sm lg:text-base hover:text-blue-400 transition-colors duration-200"
                   >
                     {link.text}
                   </a>
                 )}
                 {link.dropdownItems && activeDropdown === link.text && (
                   <div 
-                    className="absolute left-0 mt-2 w-48 text-white rounded-md shadow-lg py-1 bg-black"
+                    className="absolute left-0 mt-2 w-48 text-white rounded-md shadow-lg py-1 bg-black/90"
                   >
                     {link.dropdownItems.map((item) => (
                       <a
                         key={item.href}
                         href={item.href}
-                        className="block px-4 py-2 text-white hover:bg-blue-400 hover:rounded-md hover:text-white"
+                        className="block px-4 py-2 text-sm text-white hover:bg-blue-400 hover:rounded-md"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleNavigation(e, item.href, true);
@@ -142,44 +149,53 @@ export default function Navbar() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden mt-4 space-y-4">
+          <div 
+            className="md:hidden absolute top-full left-0 w-full bg-black/90 backdrop-blur-sm py-4 px-4 space-y-4"
+            onClick={() => setIsOpen(false)}
+          >
             {navLinks.map((link) => (
               <div key={link.href}>
                 {link.dropdownItems ? (
-                  <button
-                    onClick={() => handleDropdownClick(link.text)}
-                    className="block text-white hover:text-gray-300 transition-colors duration-200 w-full text-left"
-                  >
-                    {link.text}
-                  </button>
+                  <div>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDropdownClick(link.text);
+                      }}
+                      className="block text-white w-full text-left hover:text-blue-400 transition-colors duration-200"
+                    >
+                      {link.text}
+                    </button>
+                    {activeDropdown === link.text && (
+                      <div className="pl-4 mt-2 space-y-2">
+                        {link.dropdownItems.map((item) => (
+                          <a
+                            key={item.href}
+                            href={item.href}
+                            className="block text-white hover:text-blue-400 transition-colors duration-200"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleNavigation(e, item.href, true);
+                            }}
+                          >
+                            {item.text}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ) : (
                   <a
                     href={link.href}
                     onClick={(e) => {
+                      e.stopPropagation();
                       handleNavigation(e, link.href);
                       setIsOpen(false);
                     }}
-                    className="block text-white hover:text-gray-300 transition-colors duration-200"
+                    className="block text-white hover:text-blue-400 transition-colors duration-200"
                   >
                     {link.text}
                   </a>
-                )}
-                {link.dropdownItems && activeDropdown === link.text && (
-                  <div className="pl-4 mt-2 space-y-2">
-                    {link.dropdownItems.map((item) => (
-                      <a
-                        key={item.href}
-                        href={item.href}
-                        className="block text-white hover:text-gray-300 transition-colors duration-200"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleNavigation(e, item.href, true);
-                        }}
-                      >
-                        {item.text}
-                      </a>
-                    ))}
-                  </div>
                 )}
               </div>
             ))}
