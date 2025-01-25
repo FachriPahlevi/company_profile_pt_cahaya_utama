@@ -17,7 +17,6 @@ const Section = () => {
 
     return (
         <div className="relative min-h-screen overflow-hidden">
-            {/* Background with gradient overlay */}
             <div 
                 className="absolute inset-0 bg-gradient-to-br from-blue-400 via-blue-600 to-purple-900"
                 style={{
@@ -29,69 +28,67 @@ const Section = () => {
             />
             
             <div className="relative container mx-auto h-screen flex flex-col px-4 lg:px-8 py-12">
-                {/* Main Content Section */}
                 <div className="flex-1 flex items-center py-8 md:py-12 lg:py-16">
                     <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-8 lg:gap-12">
-                        {/* Left Content */}
                         <motion.div 
                             className="w-full lg:w-1/2"
                             variants={fadeInUp}
                             initial="initial"
                             animate="animate"
                         >
-                            <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4 sm:gap-8">
+                            <div className="flex flex-row items-center gap-4 sm:gap-8"> 
                                 <motion.img 
                                     src="/img/cu-uniform.png"
                                     alt="Uniform"
-                                    className="w-24 sm:w-40 lg:w-48 h-auto"
+                                    className="w-20 sm:w-32 lg:w-40 h-auto"
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ duration: 0.5 }}
                                 />
-                                <div className="flex flex-col gap-2 text-center sm:text-left">
+                                <div className="flex flex-col gap-1 sm:gap-2 text-left"> 
                                     <motion.p 
-                                        className="text-xl sm:text-2xl text-gray-300 font-light"
+                                        className="text-2xl sm:text-3xl lg:text-4xl text-gray-300 font-medium" 
                                         variants={fadeInUp}
                                     >
                                         untuk ...
                                     </motion.p>
                                     <motion.h1 
-                                        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight"
+                                        className="text-3xl sm:text-4xl lg:text-6   xl font-bold text-white leading-tight" 
                                         variants={fadeInUp}
                                     >
                                         Dunia Industri
                                     </motion.h1>
                                     <motion.h2 
-                                        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight"
+                                        className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white leading-tight"
                                         variants={fadeInUp}
                                     >
                                         & Sektor Usaha
                                     </motion.h2>
                                     <motion.p 
-                                        className="text-xl sm:text-2xl text-gray-300 font-light"
+                                        className="text-2xl sm:text-3xl lg:text-4xl text-gray-300 font-medium"
                                         variants={fadeInUp}
                                     >
                                         di Tanah Air
                                     </motion.p>
                                     <motion.div 
-                                        className="mt-4 sm:mt-6"
+                                        className="mt-2 sm:mt-4" 
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         transition={{ delay: 0.5 }}
                                     >
                                         <motion.button 
-                                            className="bg-black/70 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full backdrop-blur-sm flex items-center justify-center gap-2 mx-auto sm:mx-0"
+                                            className="bg-black/70 text-white px-4 sm:px-6 py-2 rounded-full backdrop-blur-sm flex items-center justify-center gap-2" 
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
                                         >
-                                            <span className="text-sm sm:text-base">Hotline 031 8481201</span>
+                                            <span className="text-xs sm:text-sm">Hotline 031 8481201</span>
                                         </motion.button>
                                     </motion.div>
                                 </div>
                             </div>
                         </motion.div>
 
-                        {/* Right Content - Map */}
+
                         <motion.div 
                             className="w-full lg:w-1/2 relative"
                             initial={{ opacity: 0, x: 50 }}
@@ -112,7 +109,6 @@ const Section = () => {
                                         ease: "easeInOut"
                                     }}
                                 />
-                                {/* Building icons positioned absolutely over map */}
                                 <div className="absolute inset-0">
                                     <img src="/img/building/building-1.png" alt="Building" className="w-4 sm:w-6 absolute top-1/4 left-1/4" />
                                     <img src="/img/building/building-2.png" alt="Building" className="w-4 sm:w-6 absolute top-1/3 right-1/3" />
@@ -123,30 +119,56 @@ const Section = () => {
                         </motion.div>
                     </div>
                 </div>
-                {/* Bottom Navigation */}
-                <div className="py-2 sm:py-4 bg-gradient-to-r justify-center from-transparent via-black/40 to-transparent backdrop-blur-sm mx-auto">
-                    <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 mx-auto">
-                        {/* Category Items */}
-                        <div className="flex items-center gap-4 sm:gap-8 lg:gap-12 overflow-x-auto pb-2 w-full sm:w-auto">
-                            <div className="flex flex-col items-center text-white min-w-[100px] sm:min-w-0">
-                                <FaCog className="text-xl sm:text-2xl mb-1 sm:mb-2" />
-                                <p className="font-medium text-sm sm:text-base">Manufaktur</p>
-                                <p className="text-xs text-gray-300 text-center">Industri Proses dan Pabrik</p>
-                            </div>
-                            <div className="flex flex-col items-center text-white min-w-[100px] sm:min-w-0">
-                                <FaFlag className="text-xl sm:text-2xl mb-1 sm:mb-2" />
-                                <p className="font-medium text-sm sm:text-base">BUMN</p>
-                                <p className="text-xs text-gray-300 text-center">Badan Usaha Milik Negara</p>
-                            </div>
-                            <div className="flex flex-col items-center text-white min-w-[100px] sm:min-w-0">
-                                <FaCube className="text-xl sm:text-2xl mb-1 sm:mb-2" />
-                                <p className="font-medium text-sm sm:text-base">Perbankan</p>
-                                <p className="text-xs text-gray-300 text-center">Pelaku Usaha Jasa Keuangan</p>
-                            </div>
-                            <div className="flex flex-col items-center text-white min-w-[80px] sm:min-w-0">
-                                <p className="font-bold text-base sm:text-lg">dan</p>
-                                <p className="font-bold text-base sm:text-lg">lain-lain</p>
-                            </div>
+
+                <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-black/50 via-black/70 to-black/50 backdrop-blur-sm">
+                    <div className="container mx-auto px-4"
+                       style={{
+                        backgroundImage: "url('/img/people/devider-2.png')",
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundBlendMode: 'overlay'
+                    }}>
+                        <div className="grid grid-cols-4 lg:flex lg:flex-row justify-between lg:justify-center items-center py-4 gap-2 lg:gap-24 mb-4">
+                            <motion.div 
+                                className="flex flex-col items-center lg:flex-row gap-2 text-white cursor-pointer text-center"
+                                whileHover={{ scale: 1.05 }}
+                            >
+                                <FaCog className="text-2xl sm:text-3xl lg:text-4xl" />
+                                <div className="text-center lg:text-left">
+                                    <p className="text-xs lg:text-lg font-medium">Manufaktur</p>
+                                    <p className="text-xs text-gray-300 hidden lg:block">Industri Proses dan Pabrik</p>
+                                </div>
+                            </motion.div>
+            
+                            <motion.div 
+                                className="flex flex-col items-center lg:flex-row gap-2 text-white cursor-pointer text-center"
+                                whileHover={{ scale: 1.05 }}
+                            >
+                                <FaFlag className="text-2xl sm:text-3xl lg:text-4xl" />
+                                <div className="text-center lg:text-left">
+                                    <p className="text-xs lg:text-lg font-medium">BUMN</p>
+                                    <p className="text-xs text-gray-300 hidden lg:block">Badan Usaha Milik Negara</p>
+                                </div>
+                            </motion.div>
+            
+                            <motion.div 
+                                className="flex flex-col items-center lg:flex-row gap-2 text-white cursor-pointer text-center"
+                                whileHover={{ scale: 1.05 }}
+                            >
+                                <FaCube className="text-2xl sm:text-3xl lg:text-4xl" />
+                                <div className="text-center lg:text-left">
+                                    <p className="text-xs lg:text-lg font-medium">Bank</p>
+                                    <p className="text-xs text-gray-300 hidden lg:block">Pelaku Usaha Jasa Keuangan</p>
+                                </div>
+                            </motion.div>
+            
+                            <motion.div 
+                                className="text-white cursor-pointer text-center"
+                                whileHover={{ scale: 1.05 }}
+                            >
+                                <p className="text-xs lg:text-lg font-bold">dan</p>
+                                <p className="text-xs lg:text-lg font-bold">lain</p>
+                            </motion.div>
                         </div>
                     </div>
                 </div>

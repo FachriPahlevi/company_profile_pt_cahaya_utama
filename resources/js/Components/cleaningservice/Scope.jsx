@@ -47,7 +47,7 @@ export default function Scope() {
     };
 
     return (
-        <div className="bg-gray-800 text-white py-12 px-4 md:px-8">
+        <div className="bg-[#343332] text-white py-12 px-4 md:px-8">
             {/* Header Section */}
             <motion.div 
                 initial={{ opacity: 0, y: -50 }}
@@ -56,8 +56,8 @@ export default function Scope() {
                 className="grid grid-cols-1 md:grid-cols-2 items-center gap-8 px-4 md:px-12 mb-12"
             >
                 <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 justify-center">
-                    <FaBroom className="text-4xl md:text-6xl text-white" />
-                    <h1 className="text-yellow-400 text-3xl md:text-6xl font-bold text-center md:text-left">
+                    <img src='img/brilliant/janitor_tools.png' className="w-40 h-40" />
+                    <h1 className="text-yellow-400 text-2xl md:text-5xl font-bold text-center md:text-left">
                         Lingkup Pekerjaan <br /> Cleaning Service
                     </h1>
                 </div>
@@ -88,7 +88,7 @@ export default function Scope() {
                         whileHover={{ scale: 1.05 }}
                         className="flex items-center space-x-4 p-4 rounded-lg transition-all duration-300 hover:bg-gray-700"
                     >
-                        <service.Icon className="text-4xl md:text-5xl text-yellow-400 flex-shrink-0" />
+                        <service.Icon className="text-4xl md:text-5xl text-white flex-shrink-0" />
                         <div>
                             <h3 className="text-lg md:text-xl font-semibold mb-2">{service.title}</h3>
                             <p className="text-sm md:text-base text-gray-400">

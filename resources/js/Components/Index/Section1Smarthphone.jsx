@@ -1,8 +1,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Phone } from "lucide-react";
 
-const Section1 = () => {
+const Section1Smartphone = () => {
     const fadeInUp = {
         initial: { opacity: 0, y: 60 },
         animate: { 
@@ -74,22 +73,21 @@ const Section1 = () => {
                 transition={{ duration: 1 }}
             />
             
-            <div className="relative container mx-auto px-4 py-8 sm:py-12">
-                {/* Mobile-first layout with vertical stacking */}
-                <div className="flex flex-col items-center justify-center space-y-8">
-                    {/* Content for Mobile */}
+            <div className="relative mx-auto px-4 py-6 mt-12">
+                <div className="flex flex-col items-center gap-4">
+                    {/* Top Content */}
                     <motion.div 
-                        className="w-full text-center"
+                        className="w-full text-center mb-4"
                         variants={fadeInUp}
                         initial="initial"
                         animate="animate"
                     >
                         <motion.h1 
-                            className="text-2xl xs:text-3xl sm:text-4xl font-light text-gray-300 leading-tight"
+                            className="text-xl font-light text-gray-300 leading-tight"
                         >
                             lebih dari
                             <motion.div 
-                                className="text-4xl xs:text-5xl sm:text-6xl font-bold text-white my-2"
+                                className="text-3xl font-bold text-white my-1"
                                 variants={pulseAnimation}
                                 animate="animate"
                             >
@@ -97,55 +95,20 @@ const Section1 = () => {
                             </motion.div>
                             tenaga kerja telah kami tempatkan
                         </motion.h1>
-                        
-                        {/* Services for Mobile */}
-                        <motion.div 
-                            className="flex flex-row mt-6 justify-center space-x-4"
-                            variants={staggerChildren}
-                            initial="initial"
-                            animate="animate"
-                        >
-                            {[
-                                { img: "/img/service/logo-son-security-h.png", title: "Security", desc: "Service Provider" },
-                                { img: "/img/service/logo-brilliant-clean.png", title: "Cleaning", desc: "Service Provider" },
-                                { img: "/img/service/logo-only-tor-trans.png", title: "Labor", desc: "Service Provider" }
-                            ].map((service, index) => (
-                                <motion.div 
-                                    key={index}
-                                    className="text-center space-y-2 p-2"
-                                    variants={popUp}
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                >
-                                    <motion.div 
-                                        className="flex justify-center items-center h-8"
-                                        animate="animate"
-                                    >
-                                        <img src='/img/service/bullet-01.png' alt={service.title} className="h-2.5 mr-1" />
-                                        <img src={service.img} alt={service.title} className="h-5" />
-                                    </motion.div>
-                                    <h3 className="text-white font-bold text-sm">{service.title}</h3>
-                                    <p className="text-gray-400 text-xs">{service.desc}</p>
-                                </motion.div>
-                            ))}
-                        </motion.div>
                     </motion.div>
 
-                    {/* Image Section for Mobile */}
+                    {/* Center Content */}
                     <motion.div 
                         className="w-full relative"
                         variants={slideInFromRight}
                         initial="initial"
                         animate="animate"
                     >
-                        <motion.div 
-                            className="relative w-full"
-                            animate="animate"
-                        >
+                        <motion.div className="relative w-full">
                             <img 
                                 src="/img/networkss.png" 
                                 alt="Network" 
-                                className="w-full max-w-full h-auto mx-auto"
+                                className="w-full h-auto"
                             />
                             <AnimatePresence>
                                 {[
@@ -158,7 +121,7 @@ const Section1 = () => {
                                         key={index}
                                         src={person.src}
                                         alt="Person"
-                                        className={`absolute bottom-0 h-20 sm:h-24 object-contain ${person.position}`}
+                                        className={`absolute bottom-0 h-16 object-contain ${person.position}`}
                                         style={{ zIndex: person.zIndex }}
                                         initial={{ y: 100, opacity: 0 }}
                                         animate={{ 
@@ -176,13 +139,14 @@ const Section1 = () => {
                             </AnimatePresence>
                         </motion.div>
 
-                        {/* Hotline Section */}
                         <motion.div 
                             className="absolute z-20 left-1/2 transform -translate-x-1/2"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                            style={{ 
+                                bottom: '50px', // Atur jarak dari bawah
+                                transition: 'transform 0.3s ease' // Tambahkan transisi smooth
+                            }}
                         >
-                            <div className="bg-black px-3 py-1.5 rounded-full flex items-center space-x-2">
+                            <div className="bg-black px-3 py-1 rounded-full">
                                 <span className="text-white font-bold text-xs">
                                     Hotline 031 8481201
                                 </span>
@@ -192,8 +156,37 @@ const Section1 = () => {
                         <img 
                             src="/img/people/devider-2.png" 
                             alt="divider" 
-                            className="w-full h-full object-cover relative z-10"
+                            className="w-full h-auto relative z-10"
                         />
+                    </motion.div>
+
+                    {/* Bottom Content */}
+                    <motion.div 
+                        className="flex justify-around w-full mt-4"
+                        variants={staggerChildren}
+                        initial="initial"
+                        animate="animate"
+                    >
+                        {[
+                            { img: "/img/service/logo-son-security-h.png", title: "Security", desc: "Service Provider" },
+                            { img: "/img/service/logo-brilliant-clean.png", title: "Cleaning", desc: "Service Provider" },
+                            { img: "/img/service/logo-only-tor-trans.png", title: "Labor", desc: "Service Provider" }
+                        ].map((service, index) => (
+                            <motion.div 
+                                key={index}
+                                className="text-center w-1/3"
+                                variants={popUp}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                <motion.div className="flex justify-center items-center mb-1">
+                                    <img src='/img/service/bullet-01.png' alt="bullet" className="h-2 mr-1" />
+                                    <img src={service.img} alt={service.title} className="h-4" />
+                                </motion.div>
+                                <h3 className="text-white font-bold text-xs">{service.title}</h3>
+                                <p className="text-gray-400 text-xs">{service.desc}</p>
+                            </motion.div>
+                        ))}
                     </motion.div>
                 </div>
             </div>
@@ -201,4 +194,4 @@ const Section1 = () => {
     );
 };
 
-export default Section1;
+export default Section1Smartphone;
