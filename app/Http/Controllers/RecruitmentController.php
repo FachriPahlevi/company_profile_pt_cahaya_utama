@@ -13,7 +13,7 @@ class RecruitmentController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Recruitment/Index');    
+        return Inertia::render('Recruitment/Anchor');    
     }
 
     /**

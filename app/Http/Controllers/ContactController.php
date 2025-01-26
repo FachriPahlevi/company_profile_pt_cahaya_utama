@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Log;
+
 use Illuminate\Support\Facades\Validator;
 
-class FormController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -51,7 +54,7 @@ class FormController extends Controller
 
         try {
             // Simpan data ke database
-            $submission = FormSubmission::create([
+            $submission = Contact::create([
                 'full_name' => $data['fullName'],
                 'company_name' => $data['companyName'],
                 'phone_number' => $data['phoneNumber'],
@@ -80,11 +83,46 @@ class FormController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
+    
+
+public function show(Request $request)
+{
+    $query = Contact::query();
+    $search = $request->input('s');
+
+    // Log the search input
+    Log::info('Searching contacts', ['search' => $search]);
+
+    // Check if search is empty or not provided
+    if ($search) {
+        $query->where(function($q) use ($search) {
+            $q->where('full_name', 'like', "%{$search}%")
+              ->orWhere('company_name', 'like', "%{$search}%")
+              ->orWhere('phone_number', 'like', "%{$search}%");
+        });
     }
 
+    try {
+        // Paginate 10 results (default or filtered)
+        $contacts = $query->latest()->paginate(10);
+        
+        // Log the results
+        Log::info('Contacts retrieved', ['contacts_count' => $contacts->count(), 'contacts' => $contacts->toArray()]);
+    } catch (\Exception $e) {
+        // Log the error
+        Log::error('Error retrieving contacts', ['error' => $e->getMessage()]);
+        
+        // Optionally, you can return an error response or handle it as needed
+        return response()->json(['error' => 'Unable to retrieve contacts'], 500);
+    }
+
+    return Inertia::render('Admin/Contact', [
+        'initialContacts' => $contacts,
+        'filters' => [
+            'search' => $search,
+        ],
+    ]);
+}
     /**
      * Show the form for editing the specified resource.
      */

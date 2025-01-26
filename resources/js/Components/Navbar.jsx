@@ -17,7 +17,7 @@ export default function Navbar() {
       ],
     },
     { href: "contact", text: "Kontak" },
-    { href: "#elearning", text: "E-Learning" },
+    { href: "e-learning", text: "E-Learning" },
     { href: "recruitment", text: "Rekrutmen" },
   ];
 

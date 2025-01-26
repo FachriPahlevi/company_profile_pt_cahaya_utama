@@ -76,9 +76,9 @@ const Section1 = () => {
             
             <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-24">
                 <div className="flex flex-col-reverse sm:flex-col-reverse md:flex-col-reverse lg:flex-row items-center justify-between gap-6 md:gap-8 lg:gap-12">
-                    {/* Right Content (akan berada di atas pada smartphone) */}
+                    {/* Right Content*/}
                     <motion.div 
-                        className="w-full lg:w-1/2 order-first lg:order-last mt-6 lg:mt-0 relative"
+                        className="w-full lg:w-1/2 order-first lg:order-last mt-6 lg:mt-6 relative"
                         variants={slideInFromRight}
                         initial="initial"
                         animate="animate"

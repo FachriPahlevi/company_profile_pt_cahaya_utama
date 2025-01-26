@@ -9,18 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('offices', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->nullable(false);
-            $table->enum('region_id')->nullable()->constrained()->onDelete('cascade');
-            $table->string('address')->nullable();
-            $table->string('city')->nullable();
-            $table->string('phone')->nullable();
-            $table->timestamps();
-        });
-    }
+    // public function up(): void
+    // {
+    //     Schema::create('offices', function (Blueprint $table) {
+    //         $table->id();
+    //         $table->string('name')->nullable(false);
+    //         $table->enum('region_id')->nullable()->constrained()->onDelete('cascade');
+    //         $table->string('address')->nullable();
+    //         $table->string('city')->nullable();
+    //         $table->string('phone')->nullable();
+    //         $table->timestamps();
+    //     });
+    // }
 
     /**
      * Reverse the migrations.

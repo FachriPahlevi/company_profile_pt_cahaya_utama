@@ -19,7 +19,7 @@ const Home = () => {
 
         const timer = setInterval(() => {
             setCurrentSection((prev) => (prev === 2 ? 1 : prev + 1));
-        }, 70000); // 7000 ms = 7 detik
+        }, 7000); // 7000 ms = 7 detik
 
         return () => {
             clearInterval(timer); // Membersihkan interval saat komponen unmount

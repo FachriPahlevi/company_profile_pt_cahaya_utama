@@ -3,26 +3,47 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FormController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CooperationController;
 use App\Http\Controllers\RecruitmentController;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Cache;
 
 Route::get('/', function () {
-    return Inertia::render('Index',);
+    return Cache::remember('homepage', now()->addHours(24), function () {
+        return Inertia::render('Index');
+    });
 });
+
 Route::get('/perusahaan', function () {
-    return Inertia::render('Company',);
+    return Cache::remember('company_page', now()->addHours(24), function () {
+        return Inertia::render('Company');
+    });
 });
+
 Route::get('/sonsecurity', function () {
-    return Inertia::render('SonSecurity',);
+    return Cache::remember('sonsecurity_page', now()->addHours(24), function () {
+        return Inertia::render('SonSecurity');
+    });
 });
+
 Route::get('/brilliant-cleaning', function () {
-    return Inertia::render('Brilliant',);
+    return Cache::remember('brilliant_cleaning_page', now()->addHours(24), function () {
+        return Inertia::render('Brilliant');
+    });
 });
+
 Route::get('/trust-our-resource', function () {
-    return Inertia::render('Trust',);
+    return Cache::remember('trust_our_resource_page', now()->addHours(24), function () {
+        return Inertia::render('Trust');
+    });
+});
+
+Route::get('/e-learning', function () {
+    return Cache::remember('elearning_page', now()->addHours(24), function () {
+        return Inertia::render('Elearning');
+    });
 });
 
 Route::get('/recruitment', [RecruitmentController::class, 'index'])->name('recruitment');
@@ -46,11 +67,9 @@ Route::get('/admincu/cooperations', [CooperationController::class, 'show'])->nam
 
 
 
-Route::get('/contact', [FormController::class, 'index'])->name('contact');
-
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::get('/admincu/contacts', [ContactController::class, 'show'])->name('admin.contact');
+Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

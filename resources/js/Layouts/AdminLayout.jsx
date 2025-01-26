@@ -31,8 +31,8 @@ export default function AdminLayout({ children }) {
       <header className="md:hidden bg-white shadow-sm px-4 py-3 flex justify-between items-center fixed top-0 left-0 right-0 z-50">
         <div className="flex items-center">
           <img 
-            src="/img/logo_sig.png" 
-            alt="SIG Logo" 
+            src="/img/logo/fav-icon-150x150.png" 
+            alt="Cahaya Utama Logo" 
             className="h-8 mr-3" 
           />
         </div>
