@@ -28,8 +28,6 @@ class CooperationSeeder extends Seeder
             DB::table('cooperations')->insert([
                 'name' => $cooperation['name'],
                 'logo' => $cooperation['logo'],
-                'width' => $cooperation['width'],
-                'height' => $cooperation['height'],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

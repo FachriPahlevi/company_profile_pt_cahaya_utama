@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, RefreshCw, User, Building2, Phone, Calendar } from 'lucide-react';
+import { Search, RefreshCw, User, Building2, Phone, Calendar, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { router, usePage } from '@inertiajs/react';
@@ -100,6 +100,7 @@ const Contact = () => {
                                                         { icon: User, label: 'Nama' },
                                                         { icon: Building2, label: 'Perusahaan' },
                                                         { icon: Phone, label: 'Nomor HP' },
+                                                        { icon: MessageCircle, label: 'Pesan' },
                                                         { icon: Calendar, label: 'Tanggal Kontak' }
                                                     ].map(({ icon: Icon, label }) => (
                                                         <th key={label} className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -117,6 +118,7 @@ const Contact = () => {
                                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{contact.full_name}</td>
                                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{contact.company_name}</td>
                                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{contact.phone_number}</td>
+                                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{contact.subject}</td>
                                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                                             {new Date(contact.created_at).toLocaleDateString('id-ID', {
                                                                 day: 'numeric',

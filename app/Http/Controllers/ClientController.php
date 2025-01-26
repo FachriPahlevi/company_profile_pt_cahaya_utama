@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Log;
 
 class ClientController extends Controller
 {
@@ -20,7 +21,7 @@ class ClientController extends Controller
         // Cek apakah data sudah ada di cache
         $clients = Cache::remember('clients', now()->addMinutes(10), function () {
             // Ambil data client dari database jika belum ada di cache
-            return Client::select('id', 'name', 'logo', 'width', 'height')->get();
+            return Client::select('id', 'name', 'logo')->get();
         });
 
         // Kembalikan data dalam format JSON
@@ -44,8 +45,6 @@ class ClientController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255|unique:clients,name',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'width' => 'nullable|numeric',
-            'height' => 'nullable|numeric',
         ]);
 
         // Kembalikan error jika validasi gagal
@@ -67,8 +66,6 @@ class ClientController extends Controller
         $client = Client::create([
             'name' => $request->input('name'),
             'logo' => $logoPath ? '/storage/' . $logoPath : null,
-            'width' => $request->input('width'),
-            'height' => $request->input('height'),
         ]);
 
         return response()->json($client, 201);
@@ -81,7 +78,7 @@ class ClientController extends Controller
     {
         $clients = Client::all();
         
-        return Inertia::render('Admin/Client', [
+        return Inertia::render('Admin/Client/Index', [
             'clients' => $clients,
         ]);
     }
@@ -97,61 +94,45 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
-    {
-        // Cari client yang akan diupdate
-        $client = Client::findOrFail($id);
+   
 
-        // Validasi input
-        $validator = Validator::make($request->all(), [
-            'name' => 'sometimes|required|string|max:255|unique:clients,name,' . $id,
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'width' => 'nullable|numeric',
-            'height' => 'nullable|numeric',
+     public function update(Request $request, $id)
+     {
+        Log::info('Parsed Request Data', [
+            'request_all' => $request->all(),
         ]);
-
-        // Kembalikan error jika validasi gagal
-        if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
-        // Proses update data
-        $updateData = [];
-
-        // Update nama jika ada
-        if ($request->has('name')) {
-            $updateData['name'] = $request->input('name');
-        }
-
-        // Update width dan height
-        if ($request->has('width')) {
-            $updateData['width'] = $request->input('width');
-        }
-        if ($request->has('height')) {
-            $updateData['height'] = $request->input('height');
-        }
-
-        // Proses upload logo baru
-        if ($request->hasFile('logo')) {
-            // Hapus logo lama jika ada
-            if ($client->logo) {
-                Storage::disk('public')->delete(str_replace('/storage/', '', $client->logo));
-            }
-
-            // Upload logo baru
-            $logo = $request->file('logo');
-            $logoName = Str::slug($request->input('name') ?? $client->name) . '-logo-' . time() . '.' . $logo->getClientOriginalExtension();
-            $logoPath = $logo->storeAs('clients', $logoName, 'public');
-            $updateData['logo'] = '/storage/' . $logoPath;
-        }
-
-        // Update client
-        $client->update($updateData);
-
-        return response()->json($client);
-    }
+         // Validasi request
+         $validator = Validator::make($request->all(), [
+             'name' => 'required|string|max:255',
+             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240', // 10MB max
+         ]);
+ 
+         if ($validator->fails()) {
+             return response()->json([
+                 'message' => 'Validation error',
+                 'errors' => $validator->errors()
+             ], 422);
+         }
+ 
+         // Ambil data client
+         $client = Client::findOrFail($id);
+         $client->name = $request->name;
+ 
+         // Cek apakah ada file logo baru yang diupload
+         if ($request->hasFile('logo')) {
+             $logoPath = $request->file('logo')->store('logos', 'public'); // Simpan ke storage
+             $client->logo = $logoPath;
+         }
+ 
+         $client->save();
+ 
+         return response()->json([
+             'message' => 'Client updated successfully',
+             'client' => $client
+         ], 200);
+     }
+     
+     
 
     /**
      * Remove the specified resource from storage.

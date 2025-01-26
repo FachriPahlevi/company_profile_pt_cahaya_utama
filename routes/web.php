@@ -51,30 +51,35 @@ Route::get('/recruitment', [RecruitmentController::class, 'index'])->name('recru
 //api data
 Route::get('/clients', [ClientController::class, 'index']);
 
-Route::get('/admincu/clients', [ClientController::class, 'show'])->name('admin.client');
-Route::post('/admincu/clients/create', [ClientController::class, 'store'])->name('admin.client.create');
-
 Route::get('/cooperations', [CooperationController::class, 'index']);
 
-Route::get('/admincu', [DashboardController::class, 'index'])->name('dashboard');
-
-Route::get('/admincu/cooperations', [CooperationController::class, 'show'])->name('admin.cooperation');
-
-// Route::get('/admincu/client', [ClientController::class, 'index'])->name('client.index');
-// Route::get('/admincu/client', [ClientController::class, 'index'])->name('client.index');
-// Route::post('/admincu/client', [ClientController::class, 'store'])->name('client.store');
-// Route::post('/admincu/client', [ClientController::class, 'index'])->name('client.store');
-
-
-
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-Route::get('/admincu/contacts', [ContactController::class, 'show'])->name('admin.contact');
 Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/admincu/contacts', [ContactController::class, 'show'])->name('admin.contact');
+
+    // Route::get('/admincu', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/admincu/cooperations', [CooperationController::class, 'show'])->name('admin.cooperation');
+    Route::delete('/admincu/cooperation/destroy', [CooperationController::class, 'destroy'])->name('cooperation.destroy');
+    Route::put('/admincu/cooperation/update', [CooperationController::class, 'update'])->name('cooperation.update');
+    Route::post('/admincu/cooperation', [CooperationController::class, 'store'])->name('cooperation.store');
+
+    Route::get('/client', [ClientController::class, 'index'])->name('client.index');
+    Route::get('/admincu/clients', [ClientController::class, 'show'])->name('admin.client');    
+    Route::delete('/admincu/client/destroy', [ClientController::class, 'destroy'])->name('client.destroy');
+    // Route::put('/admincu/client/update', [ClientController::class, 'update'])->name('client.update');
+    Route::put('/client/update/{id}', [ClientController::class, 'update'])->name('client.update');
+    
+
+    Route::post('/admincu/client/store', [ClientController::class, 'store'])->name('client.store');
+
+
 });
 
 require __DIR__.'/auth.php';

@@ -39,7 +39,7 @@ export default function Login({ status, canResetPassword }) {
                 <div className="flex flex-col items-center mb-8">
                     <div className="w-24 h-24 bg-blue-50 rounded-full p-1 shadow-xl mb-6">
                         <div className="w-full h-full bg-blue-50 rounded-full flex items-center justify-center">
-                            <Link href="https://sig.id/">
+                            <Link href="#">
                                 <img
                                     src="/img/logo/fav-icon-150x150.png"
                                     alt="Logo"

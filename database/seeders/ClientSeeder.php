@@ -38,8 +38,6 @@ class ClientSeeder extends Seeder
             DB::table('clients')->insert([
                 'name' => $client['name'],
                 'logo' => $client['logo'],
-                'width' => $client['width'],  // Menambahkan kolom width
-                'height' => $client['height'], // Menambahkan kolom height
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

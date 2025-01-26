@@ -13,6 +13,7 @@ import { HiOutlineOfficeBuilding } from "react-icons/hi";
 import { Link, router } from '@inertiajs/react';
 import axios from 'axios';
 import { FaSignOutAlt, FaUser } from 'react-icons/fa';
+import { PhoneCall } from 'lucide-react';
 
 export default function Sidebar({ auth, isMobile = false, isDesktop = false }) {
   const [selectedKey, setSelectedKey] = useState(window.location.pathname);
@@ -53,20 +54,15 @@ export default function Sidebar({ auth, isMobile = false, isDesktop = false }) {
       label: "Cooperations",
       path: "/admincu/cooperations",
     },
+    // {
+    //   icon: <HiOutlineOfficeBuilding className="w-5 h-5" />,
+    //   label: "Offices",
+    //   path: "/admincu/offices",
+    // },
     {
-      icon: <HiOutlineOfficeBuilding className="w-5 h-5" />,
-      label: "Offices",
-      path: "/admincu/offices",
-    },
-    {
-      icon: <RiMoneyDollarCircleLine className="w-5 h-5" />,
-      label: "Transaction",
-      path: "/sales",
-    },
-    {
-      icon: <RiCheckDoubleLine className="w-5 h-5" />,
-      label: "Approvals",
-      path: "/approval",
+      icon: <PhoneCall className="w-5 h-5" />,
+      label: "Contacts",
+      path: "/admincu/contacts",
     },
     // Uncomment jika diperlukan
     // {

@@ -19,8 +19,8 @@ class CooperationController extends Controller
     {
         // Cek apakah data sudah ada di cache
         $cooperations = Cache::remember('cooperations', now()->addMinutes(10), function () {
-            // Ambil data client dari database jika belum ada di cache
-            return Cooperation::select('id', 'name', 'logo', 'width', 'height')->get();
+            // Ambil data cooperation dari database jika belum ada di cache
+            return Cooperation::select('id', 'name', 'logo')->get();
         });
 
         // Kembalikan data dalam format JSON
@@ -39,9 +39,36 @@ class CooperationController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+{
+    // Validasi input
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|string|max:255|unique:cooperations,name',
+        'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    // Kembalikan error jika validasi gagal
+    if ($validator->fails()) {
+        return response()->json([
+            'errors' => $validator->errors()
+        ], 422);
     }
+
+    // Proses upload logo
+    $logoPath = null;
+    if ($request->hasFile('logo')) {
+        $logo = $request->file('logo');
+        $logoName = Str::slug($request->input('name')) . '-logo-' . time() . '.' . $logo->getClientOriginalExtension(); // Perbaikan di sini
+        $logoPath = $logo->storeAs('cooperations', $logoName, 'public');
+    }
+
+    // Buat cooperation baru
+    $cooperation = Cooperation::create([
+        'name' => $request->input('name'),
+        'logo' => $logoPath ? '/storage/' . $logoPath : null,
+    ]);
+
+    return response()->json($cooperation, 201);
+}
 
     /**
      * Display the specified resource.
@@ -51,7 +78,7 @@ class CooperationController extends Controller
         $cooperations = Cooperation::all();
 
         
-        return Inertia::render('Admin/Cooperation', [
+        return Inertia::render('Admin/Cooperation/Index', [
             'cooperations' => $cooperations,
         ]);
     }
@@ -67,9 +94,55 @@ class CooperationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Cooperation $cooperation)
+    public function update(Request $request)
     {
-        //
+        // Validasi bahwa `id` disediakan
+        if (!$request->has('id')) {
+            return response()->json([
+                'error' => 'ID cooperation tidak ditemukan dalam permintaan.',
+            ], 400);
+        }
+    
+        // Cari cooperation berdasarkan ID
+        $cooperation = Cooperation::findOrFail($request->id);
+    
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'name' => 'sometimes|required|string|max:255|unique:cooperations,name,' . $cooperation->id,
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+    
+        // Kembalikan error jika validasi gagal
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+    
+        // Siapkan data untuk diupdate
+        $updateData = $request->only(['name']);
+    
+        // Proses upload logo baru jika ada
+        if ($request->hasFile('logo')) {
+            // Hapus logo lama jika ada
+            if ($cooperation->logo) {
+                Storage::disk('public')->delete(str_replace('/storage/', '', $cooperation->logo));
+            }
+    
+            // Upload logo baru
+            $logo = $request->file('logo');
+            $logoName = Str::slug($request->input('name') ?? $cooperation->name) . '-logo-' . time() . '.' . $logo->getClientOriginalExtension();
+            $logoPath = $logo->storeAs('cooperations', $logoName, 'public');
+            $updateData['logo'] = '/storage/' . $logoPath;
+        }
+    
+        // Update data cooperation
+        $cooperation->update($updateData);
+    
+        return response()->json([
+            'message' => 'cooperation berhasil diperbarui.',
+            'data' => $cooperation,
+        ]);
     }
 
     /**

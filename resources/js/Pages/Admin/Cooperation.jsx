@@ -15,8 +15,6 @@ const Cooperation = ({ cooperations, auth }) => {
   const [currentcooperation, setCurrentcooperation] = useState({
     name: '',
     logo: null,
-    width: '',
-    height: ''
   });
 
   // Confirm cooperation deletion
@@ -142,7 +140,7 @@ const Cooperation = ({ cooperations, auth }) => {
           
           <button 
             onClick={() => {
-              setCurrentcooperation({ name: '', logo: null, width: '', height: '' });
+              setCurrentcooperation({ name: '', logo: null });
               setIsAddModalOpen(true);
             }}
             className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
@@ -163,9 +161,6 @@ const Cooperation = ({ cooperations, auth }) => {
                         </th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Logo
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Dimensi
                         </th>
                         <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Aksi
@@ -191,9 +186,6 @@ const Cooperation = ({ cooperations, auth }) => {
                             ) : (
                               <span className="text-gray-500">Tidak ada logo</span>
                             )}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {cooperation.width} x {cooperation.height}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <div className="flex justify-end space-x-2">
@@ -255,17 +247,6 @@ const Cooperation = ({ cooperations, auth }) => {
                   required
                 />
               </div>
-              <div className="w-1/2 ml-2">
-                <label className="block text-gray-700">Height</label>
-                <input
-                  type="number"
-                  name="height"
-                  value={currentcooperation.height}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border rounded"
-                  required
-                />
-              </div>
             </div>
             <div className="flex justify-end">
               <button
@@ -319,17 +300,6 @@ const Cooperation = ({ cooperations, auth }) => {
                   type="number"
                   name="width"
                   value={currentcooperation.width}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border rounded"
-                  required
-                />
-              </div>
-              <div className="w-1/2 ml-2">
-                <label className="block text-gray-700">Height</label>
-                <input
-                  type="number"
-                  name="height"
-                  value={currentcooperation.height}
                   onChange={handleInputChange}
                   className="w-full px-3 py-2 border rounded"
                   required
