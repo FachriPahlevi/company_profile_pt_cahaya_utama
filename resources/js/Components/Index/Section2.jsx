@@ -167,7 +167,7 @@ const Section = () => {
                                 whileHover={{ scale: 1.05 }}
                             >
                                 <p className="text-xs lg:text-lg font-bold">dan</p>
-                                <p className="text-xs lg:text-lg font-bold">lain</p>
+                                <p className="text-xs lg:text-lg font-bold">lain-lain</p>
                             </motion.div>
                         </div>
                     </div>

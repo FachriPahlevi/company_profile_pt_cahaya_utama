@@ -61,7 +61,7 @@ const Cooperation = () => {
           {/* Bagian kiri dengan ikon dan teks */}
           <div className="md:w-1/4">
             <div className="mb-6 flex justify-center">
-              <img src="/img/cooperation/handshake.jpg" className="w-16 h-16 text-center text-gray-700" />
+              <img src="/img/cooperation/handshake.png" className="w-16 h-16 text-center text-gray-700" />
             </div>
             <div className="flex justify-center">
               <h2 className="text-gray-700 text-2xl font-medium leading-relaxed">
@@ -82,11 +82,7 @@ const Cooperation = () => {
                     <img
                       src={client.logo}
                       alt={client.name}
-                      style={{ 
-                        width: client.width || 'auto', 
-                        height: client.height || 'auto' 
-                      }}
-                      className="object-contain"
+                      className="object-contain w-32 h-32"
                     />
                   </div>
                 ))}

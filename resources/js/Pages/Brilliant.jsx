@@ -8,6 +8,7 @@ import Office from "@/Components/Office";
 import Documentation from "@/Components/cleaningservice/Documentation";
 import Equipment from "@/Components/cleaningservice/Equipment";
 import MainLayout from "@/Layouts/MainLayout";
+import { Helmet } from "react-helmet";
 
 export default function SonSecurity() {
   const [ref, inView] = useInView({
@@ -47,9 +48,20 @@ export default function SonSecurity() {
 
   return (
     <MainLayout>
+      <Helmet>
+        <title>Brilliant Cleaning Service - Layanan Kebersihan Profesional PT. Cahaya Utama</title>
+        <meta name="description" content="Brilliant Cleaning Service dari PT. Cahaya Utama menawarkan layanan kebersihan terbaik untuk kantor, rumah, dan fasilitas komersial. Kami memastikan kebersihan menyeluruh, kualitas tinggi, dan hasil memuaskan dengan tenaga kerja terlatih dan berpengalaman." />
+        <meta name="keywords" content="Brilliant Cleaning Service, layanan kebersihan profesional, jasa kebersihan kantor, kebersihan rumah, kebersihan fasilitas komersial, PT. Cahaya Utama, kebersihan berkualitas, jasa kebersihan terlatih" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content="Brilliant Cleaning Service - Layanan Kebersihan Profesional PT. Cahaya Utama" />
+        <meta property="og:description" content="Temukan layanan kebersihan profesional terbaik di Brilliant Cleaning Service PT. Cahaya Utama. Kami melayani kebersihan untuk kantor, rumah, dan berbagai fasilitas komersial dengan hasil yang tak tertandingi." />
+        <meta property="og:url" content="https://www.cahayautamapt.com/brilliant-cleaning" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
       <div className="relative min-h-screen flex items-center justify-center">
         {/* Background image with overlay */}
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: 'url(img/background/As.jpg)' }}
         >
@@ -61,7 +73,7 @@ export default function SonSecurity() {
           {/* Main content */}
           <div className="grid md:grid-cols-2 gap-8 items-center">
             {/* left column - Security guard image */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
@@ -85,7 +97,7 @@ export default function SonSecurity() {
             </motion.div>
 
             {/* right column - Logo and content */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
@@ -101,12 +113,20 @@ export default function SonSecurity() {
                   <span className="text-3xl lg:text-4xl font-bold leading-tight">Sehat, Nyaman & Higienis...</span>
                 </h1>
 
-                <motion.div 
+                <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="pt-4"
                 >
-                  <button className="bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-3 rounded-full flex items-center space-x-3 transition duration-300">
+                  <button className="bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-3 rounded-full flex items-center space-x-3 transition duration-300"
+                    onClick={() => {
+                      const link = document.createElement("a");
+                      link.href = "/file/Compro.pdf"; // Ganti dengan URL PDF yang benar
+                      link.download = "e-Paper.pdf"; // Nama file yang diunduh
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                    }}>
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                     </svg>
@@ -120,9 +140,9 @@ export default function SonSecurity() {
                   (Outsourcing for Cleaning Service) dari Cahaya Utama, untuk Anda...
                 </p>
               </div>
-              
+
               {/* Animated Stats Grid */}
-              <motion.div 
+              <motion.div
                 ref={ref}
                 variants={containerVariants}
                 initial="hidden"
@@ -130,14 +150,14 @@ export default function SonSecurity() {
                 className="grid grid-cols-3 gap-8 mt-16"
               >
                 {statsData.map((stat, index) => (
-                  <motion.div 
-                    key={index} 
+                  <motion.div
+                    key={index}
                     variants={itemVariants}
                     className="text-center text-white"
                   >
                     <h2 className="text-4xl font-bold">
                       {inView ? (
-                        <CountUp 
+                        <CountUp
                           start={0}
                           end={stat.value}
                           duration={2}
@@ -155,11 +175,11 @@ export default function SonSecurity() {
           </div>
         </div>
       </div>
-      <Scope/>
-      <Documentation/>
-      <Equipment/>
-      <Office/>
-      <Footer/>
+      <Scope />
+      <Documentation />
+      <Equipment />
+      <Office />
+      <Footer />
     </MainLayout>
   );
 }

@@ -8,6 +8,7 @@ import Footer from "@/Components/Footer";
 import CountUp from "react-countup";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { Helmet } from "react-helmet";
 
 export default function SonSecurity() {
   const [ref, inView] = useInView({
@@ -16,20 +17,20 @@ export default function SonSecurity() {
   });
 
   const statsData = [
-    { 
-      value: 31600, 
+    {
+      value: 31600,
       label: "Tenaga Kerja",
       prefix: "",
       suffix: ""
     },
-    { 
-      value: 37, 
+    {
+      value: 37,
       label: "Klien",
       prefix: "",
       suffix: ""
     },
-    { 
-      value: 8, 
+    {
+      value: 8,
       label: "Bidang",
       prefix: "",
       suffix: ""
@@ -62,9 +63,20 @@ export default function SonSecurity() {
 
   return (
     <MainLayout>
+      <Helmet>
+        <title>Outsourcing Keamanan Profesional - PT. Cahaya Utama</title>
+        <meta name="description" content="PT. Cahaya Utama menyediakan layanan outsourcing keamanan profesional yang handal untuk perusahaan Anda. Dengan tenaga kerja terlatih dan berpengalaman, kami menjamin keamanan optimal untuk fasilitas Anda, baik di area komersial, perkantoran, maupun fasilitas industri." />
+        <meta name="keywords" content="outsourcing keamanan, jasa keamanan, PT. Cahaya Utama, layanan keamanan profesional, keamanan fasilitas, outsourcing security, tenaga kerja terlatih, layanan keamanan perusahaan" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content="Outsourcing Keamanan Profesional - PT. Cahaya Utama" />
+        <meta property="og:description" content="Temukan solusi outsourcing keamanan terbaik dengan PT. Cahaya Utama. Kami menyediakan tenaga keamanan terlatih untuk melindungi fasilitas perusahaan Anda, dengan standar profesionalisme dan kualitas terbaik." />
+        <meta property="og:url" content="https://www.cahayautamapt.com/sonsecurity" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
       <div className="relative min-h-screen overflow-hidden">
         {/* Background dengan overlay */}
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: 'url(img/background/securityheader01ww.jpg)' }}
         >
@@ -75,7 +87,7 @@ export default function SonSecurity() {
         <div className="relative z-10 container mx-auto px-4 py-8 md:py-16 lg:py-0 h-full md:h-screen flex items-center">
           <div className="grid md:grid-cols-2 gap-8 items-center w-full">
             {/* Kolom kiri - Logo dan Gambar */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
@@ -94,7 +106,7 @@ export default function SonSecurity() {
             </motion.div>
 
             {/* Kolom kanan - Konten */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
@@ -110,9 +122,17 @@ export default function SonSecurity() {
               </h1>
 
               <div className="flex justify-center md:justify-start mb-6">
-                <motion.button 
+                <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    const link = document.createElement("a");
+                    link.href = "/file/Compro.pdf"; // Ganti dengan URL PDF yang benar
+                    link.download = "e-Paper.pdf"; // Nama file yang diunduh
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
                   className="bg-cyan-600 hover:bg-cyan-700 text-white px-6 md:px-8 py-2 md:py-3 rounded-full flex items-center space-x-3 transition duration-300"
                 >
                   <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -129,7 +149,7 @@ export default function SonSecurity() {
               </p>
 
               {/* Statistik dengan Animasi */}
-              <motion.div 
+              <motion.div
                 ref={ref}
                 variants={containerVariants}
                 initial="hidden"
@@ -137,14 +157,14 @@ export default function SonSecurity() {
                 className="grid grid-cols-3 gap-4 text-center"
               >
                 {statsData.map((stat, index) => (
-                  <motion.div 
-                    key={index} 
+                  <motion.div
+                    key={index}
                     variants={itemVariants}
                     className="text-white"
                   >
                     <h2 className="text-2xl md:text-4xl font-bold">
                       {inView ? (
-                        <CountUp 
+                        <CountUp
                           start={0}
                           end={stat.value}
                           duration={2}

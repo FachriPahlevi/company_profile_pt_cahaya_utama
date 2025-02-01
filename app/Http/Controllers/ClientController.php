@@ -139,16 +139,29 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        $client = Client::findOrFail($id);
-
-        // Hapus file logo jika ada
-        if ($client->logo) {
-            Storage::disk('public')->delete(str_replace('/storage/', '', $client->logo));
+        try {
+            // Mencari client berdasarkan ID
+            $client = Client::findOrFail($id);
+            
+            // Menghapus client
+            $client->delete();
+    
+            // Mengembalikan respons sukses
+            return response()->json([
+                'message' => 'Client berhasil dihapus'
+            ], 200); // Status 200 OK
+        } catch (ModelNotFoundException $e) {
+            // Jika client tidak ditemukan
+            Log::error("Client not found: ID {$id} - " . $e->getMessage());
+            return response()->json([
+                'message' => 'Client tidak ditemukan'
+            ], 404); // Status 404 Not Found
+        } catch (\Exception $e) {
+            // Menangani kesalahan lain
+            Log::error("Error deleting client: ID {$id} - " . $e->getMessage());
+            return response()->json([
+                'message' => 'Gagal menghapus client'
+            ], 500); // Status 500 Internal Server Error
         }
-
-        // Hapus client
-        $client->delete();
-
-        return response()->json(null, 204);
     }
 }

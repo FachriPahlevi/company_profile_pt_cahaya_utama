@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -22,37 +22,77 @@ const Modal = ({ show, onClose, children }) => {
 };
 
 const EditModal = ({ isOpen, onClose, currentCooperation, handleInputChange }) => {
-  const editCooperation = (e) => {
+  const [localCooperation, setLocalCooperation] = useState({ ...currentCooperation });
+  const [previewLogo, setPreviewLogo] = useState(currentCooperation.logo || null);
+
+  useEffect(() => {
+    setLocalCooperation({ ...currentCooperation });
+    setPreviewLogo(currentCooperation.logo || null);
+  }, [currentCooperation]);
+
+  const handleLocalInputChange = (e) => {
+    const { name, value, files } = e.target;
+
+    if (name === 'logo' && files && files[0]) {
+      const file = files[0];
+      setLocalCooperation(prev => ({
+        ...prev,
+        logo: file
+      }));
+      setPreviewLogo(URL.createObjectURL(file));
+    } else {
+      setLocalCooperation(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
+
+    handleInputChange(e);
+  };
+
+  const editCooperation = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
-    Object.keys(currentCooperation).forEach((key) => {
-      formData.append(key, currentCooperation[key]);
-    });
-    formData.append('_method', 'PUT'); // Laravel method spoofing
+    formData.append('_method', 'PUT'); // Gunakan ini karena FormData tidak support PUT
+    formData.append('name', localCooperation.name || '');
 
-    axios
-      .post(route('cooperation.update', currentCooperation.id), formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      })
-      .then(() => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Cooperation Berhasil Diperbarui',
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 3000,
-        });
-        window.location.reload();
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Gagal Memperbarui Cooperation',
-          text: error.response?.data?.message || 'Terjadi kesalahan',
-        });
+    if (localCooperation.logo instanceof File) {
+      formData.append('logo', localCooperation.logo);
+    }
+
+    try {
+      console.log('Data yang dikirim:');
+      for (let [key, value] of formData.entries()) {
+        console.log(key, value);
+      }
+
+      const response = await axios.post(`/cooperation/update/${localCooperation.id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Accept': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+        },
       });
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Cooperation Berhasil Diperbarui',
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+      });
+
+      onClose(); // Tutup modal setelah berhasil update
+    } catch (error) {
+      console.error('Error updating cooperation:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Gagal Memperbarui Cooperation',
+        text: error.response?.data?.message || 'Terjadi kesalahan',
+      });
+    }
   };
 
   return (
@@ -78,8 +118,8 @@ const EditModal = ({ isOpen, onClose, currentCooperation, handleInputChange }) =
               <input
                 type="text"
                 name="name"
-                value={currentCooperation.name}
-                onChange={handleInputChange}
+                value={localCooperation.name || ''}
+                onChange={handleLocalInputChange}
                 className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
               />
@@ -101,18 +141,25 @@ const EditModal = ({ isOpen, onClose, currentCooperation, handleInputChange }) =
                         id="logo"
                         name="logo"
                         type="file"
-                        onChange={handleInputChange}
+                        onChange={handleLocalInputChange}
                         className="sr-only"
+                        accept=".png,.jpg,.jpeg,.gif"
                       />
                     </label>
                     <p className="pl-1">atau drag and drop</p>
                   </div>
+                  {previewLogo && (
+                    <div className="mt-2">
+                      <img
+                        src={typeof previewLogo === 'string' ? previewLogo : URL.createObjectURL(previewLogo)}
+                        alt="Preview Logo"
+                        className="h-16 w-auto rounded-md object-cover"
+                      />
+                    </div>
+                  )}
                   <p className="text-xs text-gray-500">PNG, JPG hingga 10MB</p>
                 </div>
               </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
             </div>
           </div>
 

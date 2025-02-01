@@ -8,7 +8,7 @@ const ClientSection = () => {
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const response = await axios.get('/clients'); // Ganti dengan URL API Anda
+        const response = await axios.get('/clients');
         setClientLogos(response.data);
       } catch (error) {
         console.error("Error fetching client logos:", error);

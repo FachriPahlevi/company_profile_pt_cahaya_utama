@@ -66,13 +66,13 @@ Route::middleware('auth')->group(function () {
     // Route::get('/admincu', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/admincu/cooperations', [CooperationController::class, 'show'])->name('admin.cooperation');
-    Route::delete('/admincu/cooperation/destroy', [CooperationController::class, 'destroy'])->name('cooperation.destroy');
-    Route::put('/admincu/cooperation/update', [CooperationController::class, 'update'])->name('cooperation.update');
+    Route::delete('/admincu/cooperation/destroy/{id}', [CooperationController::class, 'destroy'])->name('cooperation.destroy');
+    Route::put('/cooperation/update/{id}', [CooperationController::class, 'update'])->name('cooperation.update');
     Route::post('/admincu/cooperation', [CooperationController::class, 'store'])->name('cooperation.store');
 
     Route::get('/client', [ClientController::class, 'index'])->name('client.index');
     Route::get('/admincu/clients', [ClientController::class, 'show'])->name('admin.client');    
-    Route::delete('/admincu/client/destroy', [ClientController::class, 'destroy'])->name('client.destroy');
+    Route::delete('/admincu/client/destroy/{id}', [ClientController::class, 'destroy'])->name('client.destroy');
     // Route::put('/admincu/client/update', [ClientController::class, 'update'])->name('client.update');
     Route::put('/client/update/{id}', [ClientController::class, 'update'])->name('client.update');
     

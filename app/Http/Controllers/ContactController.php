@@ -31,54 +31,55 @@ class ContactController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        // Validasi input
-        $validator = Validator::make($request->all(), [
-            'fullName' => 'required|string|max:255',
-            'companyName' => 'required|string|max:255',
-            'phoneNumber' => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:15',
-            'subject' => 'required|string|max:255',
-            'message' => 'required|string',
+{
+    // Validasi input
+    $validator = Validator::make($request->all(), [
+        'fullName' => 'required|string|max:255',
+        'companyName' => 'required|string|max:255',
+        'phoneNumber' => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:15',
+        'subject' => 'required|string|max:255',
+        'message' => 'required|string',
+    ]);
+
+    // Jika validasi gagal, kembalikan respons dengan kesalahan
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => 'error',
+            'errors' => $validator->errors(), // Mengembalikan kesalahan validasi
+        ], 400);
+    }
+
+    // Ambil data yang telah divalidasi
+    $data = $validator->validated();
+
+    try {
+        // Simpan data ke database
+        $submission = Contact::create([
+            'full_name' => $data['fullName'],
+            'company_name' => $data['companyName'],
+            'phone_number' => $data['phoneNumber'],
+            'subject' => $data['subject'],
+            'message' => $data['message'],
         ]);
 
-        // Jika validasi gagal, kembalikan respons dengan kesalahan
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 'error',
-                'errors' => $validator->errors(),
-            ], 400);
-        }
+ // Mengembalikan respons sukses
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Form berhasil dikirim!',
+            'data' => $submission,
+        ], 201);
+    } catch (\Exception $e) {
+        // Log kesalahan untuk analisis lebih lanjut
+        Log::error('Error saving form submission: ' . $e->getMessage());
 
-        // Ambil data yang telah divalidasi
-        $data = $validator->validated();
-
-        try {
-            // Simpan data ke database
-            $submission = Contact::create([
-                'full_name' => $data['fullName'],
-                'company_name' => $data['companyName'],
-                'phone_number' => $data['phoneNumber'],
-                'subject' => $data['subject'],
-                'message' => $data['message'],
-            ]);
-
-            // Mengembalikan respons sukses
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Form berhasil dikirim!',
-                'data' => $submission,
-            ], 201);
-        } catch (\Exception $e) {
-            // Log kesalahan untuk analisis lebih lanjut
-            Log::error('Error saving form submission: ' . $e->getMessage());
-
-            // Mengembalikan respons kesalahan
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Terjadi kesalahan saat mengirim form. Silakan coba lagi.',
-            ], 500);
-        }
+        // Mengembalikan respons kesalahan dengan detail
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Terjadi kesalahan saat mengirim form. Silakan coba lagi.',
+            'error' => $e->getMessage(), // Menyertakan pesan kesalahan dari exception
+        ], 500);
     }
+}
 
     /**
      * Display the specified resource.

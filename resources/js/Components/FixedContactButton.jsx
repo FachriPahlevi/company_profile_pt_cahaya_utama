@@ -11,27 +11,27 @@ const FixedContactButton = () => {
       <AnimatePresence>
         {!showDropdown ? (
           <motion.div
-          className="flex items-center space-x-2"
-          initial={{ scale: 1 }}
-          animate={{ scale: 1 }}
-          exit={{ scale: 0, rotate: 180 }}
-          transition={{ duration: 0.3 }}
-        >
-          {/* Icon WhatsApp */}
-          <motion.button
-            className="bg-[#39cd46] text-white w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-full shadow-lg hover:bg-[#36b640] transition-all"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setShowDropdown(true)}
+            className="flex items-center space-x-2"
+            initial={{ scale: 1 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0, rotate: 180 }}
+            transition={{ duration: 0.3 }}
           >
-            <BsWhatsapp className="w-6 h-6 sm:w-7 sm:h-7" />
-          </motion.button>
+            {/* Icon WhatsApp */}
+            <motion.button
+              className="bg-[#39cd46] text-white w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-full shadow-lg hover:bg-[#36b640] transition-all"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setShowDropdown(true)}
+            >
+              <BsWhatsapp className="w-6 h-6 sm:w-7 sm:h-7" />
+            </motion.button>
 
-          {/* Teks "Bantuan? Chat kami" */}
-          <div className="bg-white text-gray-800 text-sm sm:text-base px-4 py-2 rounded-full shadow-md">
-            Bantuan? Chat kami
-          </div>
-        </motion.div>
+            {/* Teks "Bantuan? Chat kami" */}
+            <div className="bg-white text-gray-800 text-sm sm:text-base px-4 py-2 rounded-full shadow-md">
+              Bantuan? Chat kami
+            </div>
+          </motion.div>
         ) : (
           <div className="relative">
             {/* Dropdown */}
@@ -64,7 +64,12 @@ const FixedContactButton = () => {
               </div>
 
               <div className="p-3 sm:p-4">
-                <div className="border-l-4 border-green-500 flex items-start gap-2 sm:gap-3 p-2 sm:p-3 shadow-md rounded-md hover:bg-gray-50 transition">
+                <a
+                  href="https://wa.me/6282261246252"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border-l-4 border-green-500 flex items-start gap-2 sm:gap-3 p-2 sm:p-3 shadow-md rounded-md hover:bg-gray-50 transition"
+                >
                   <img
                     src="img/logo/fav-icon-150x150.png"
                     alt="Profile"
@@ -77,8 +82,9 @@ const FixedContactButton = () => {
                       Ada yang bisa kami bantu?
                     </p>
                   </div>
-                </div>
+                </a>
               </div>
+
             </motion.div>
 
             {/* Tombol X di luar dropdown */}

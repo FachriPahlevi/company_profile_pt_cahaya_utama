@@ -1,2 +1,9 @@
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /login/
+Disallow: /cart/
+Disallow: /checkout/
+Allow: /company/
+Allow: /contact/
+
+Sitemap: https://cahayautamapt.com/sitemap.xml

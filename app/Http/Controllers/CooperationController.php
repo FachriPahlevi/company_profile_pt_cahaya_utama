@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Log;
 
 class CooperationController extends Controller
 {
@@ -94,62 +95,70 @@ class CooperationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        // Validasi bahwa `id` disediakan
-        if (!$request->has('id')) {
-            return response()->json([
-                'error' => 'ID cooperation tidak ditemukan dalam permintaan.',
-            ], 400);
-        }
-    
-        // Cari cooperation berdasarkan ID
-        $cooperation = Cooperation::findOrFail($request->id);
-    
-        // Validasi input
+       Log::info('Parsed Request Data', [
+           'request_all' => $request->all(),
+       ]);
+        // Validasi request
         $validator = Validator::make($request->all(), [
-            'name' => 'sometimes|required|string|max:255|unique:cooperations,name,' . $cooperation->id,
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'name' => 'required|string|max:255',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240', // 10MB max
         ]);
-    
-        // Kembalikan error jika validasi gagal
+
         if ($validator->fails()) {
             return response()->json([
-                'errors' => $validator->errors(),
+                'message' => 'Validation error',
+                'errors' => $validator->errors()
             ], 422);
         }
-    
-        // Siapkan data untuk diupdate
-        $updateData = $request->only(['name']);
-    
-        // Proses upload logo baru jika ada
+
+        // Ambil data client
+        $client = Cooperation::findOrFail($id);
+        $client->name = $request->name;
+
+        // Cek apakah ada file logo baru yang diupload
         if ($request->hasFile('logo')) {
-            // Hapus logo lama jika ada
-            if ($cooperation->logo) {
-                Storage::disk('public')->delete(str_replace('/storage/', '', $cooperation->logo));
-            }
-    
-            // Upload logo baru
-            $logo = $request->file('logo');
-            $logoName = Str::slug($request->input('name') ?? $cooperation->name) . '-logo-' . time() . '.' . $logo->getClientOriginalExtension();
-            $logoPath = $logo->storeAs('cooperations', $logoName, 'public');
-            $updateData['logo'] = '/storage/' . $logoPath;
+            $logoPath = $request->file('logo')->store('logos', 'public'); // Simpan ke storage
+            $client->logo = $logoPath;
         }
-    
-        // Update data cooperation
-        $cooperation->update($updateData);
-    
+
+        $client->save();
+
         return response()->json([
-            'message' => 'cooperation berhasil diperbarui.',
-            'data' => $cooperation,
-        ]);
+            'message' => 'Client updated successfully',
+            'client' => $client
+        ], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cooperation $cooperation)
+    public function destroy($id)
     {
-        //
+        try {
+            // Mencari client berdasarkan ID
+            $cooperation = Cooperation::findOrFail($id);
+            
+            // Menghapus client
+            $cooperation->delete();
+    
+            // Mengembalikan respons sukses
+            return response()->json([
+                'message' => 'Client berhasil dihapus'
+            ], 200); // Status 200 OK
+        } catch (ModelNotFoundException $e) {
+            // Jika client tidak ditemukan
+            Log::error("Client not found: ID {$id} - " . $e->getMessage());
+            return response()->json([
+                'message' => 'Client tidak ditemukan'
+            ], 404); // Status 404 Not Found
+        } catch (\Exception $e) {
+            // Menangani kesalahan lain
+            Log::error("Error deleting client: ID {$id} - " . $e->getMessage());
+            return response()->json([
+                'message' => 'Gagal menghapus client'
+            ], 500); // Status 500 Internal Server Error
+        }
     }
 }

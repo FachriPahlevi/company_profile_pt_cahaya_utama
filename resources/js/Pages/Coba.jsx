@@ -1,177 +1,196 @@
-import React, { useState, useEffect } from 'react';
-import { Search, RefreshCw, User, Building2, MessageSquare, Calendar } from 'lucide-react';
-import { motion } from 'framer-motion';
-import AdminLayout from '@/Layouts/AdminLayout';
-import axios from 'axios';
+import React from "react";
+import MainLayout from "@/Layouts/MainLayout";
+import Service from "@/Components/sonsecurity/Service";
+import Documentation from "@/Components/sonsecurity/Documentation";
+import Standard from "@/Components/sonsecurity/Standard";
+import Office from "@/Components/Office";
+import Footer from "@/Components/Footer";
+import CountUp from "react-countup";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { Helmet } from "react-helmet";
 
-const Contact = ({ initialContacts, filters }) => {
-    const [contacts, setContacts] = useState(initialContacts || { data: [], links: [] });
-    const [search, setSearch] = useState(filters?.search || '');
-    const [loading, setLoading] = useState(false);
+export default function SonSecurity() {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
-    const fetchContacts = async (searchQuery = '', page = 1) => {
-        setLoading(true);
-        try {
-            const response = await axios.get(route('admin.contact'), {
-                params: {
-                    search: searchQuery,
-                    page: page
-                }
-            });
-            
-            setContacts(response.data.initialContacts);
-        } catch (error) {
-            console.error('Error fetching contacts:', error);
-            setContacts({ data: [], links: [] });
-        } finally {
-            setLoading(false);
-        }
-    };
+  const statsData = [
+    {
+      value: 31600,
+      label: "Tenaga Kerja",
+      prefix: "",
+      suffix: ""
+    },
+    {
+      value: 37,
+      label: "Klien",
+      prefix: "",
+      suffix: ""
+    },
+    {
+      value: 8,
+      label: "Bidang",
+      prefix: "",
+      suffix: ""
+    }
+  ];
 
-    useEffect(() => {
-        if (search) {
-            fetchContacts(search);
-        } else {
-            setContacts(initialContacts);
-        }   
-    }, [search]);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2
+      }
+    }
+  };
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-        fetchContacts(search);
-    };
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 100
+      }
+    }
+  };
 
-    const handlePageChange = (url) => {
-        const page = new URL(url).searchParams.get('page');
-        fetchContacts(search, page);
-    };
+  return (
+    <MainLayout>
+      <Helmet>
+        <title>Outsourcing Keamanan Profesional - PT. Cahaya Utama</title>
+        <meta name="description" content="PT. Cahaya Utama menyediakan layanan outsourcing keamanan profesional yang handal untuk perusahaan Anda. Dengan tenaga kerja terlatih dan berpengalaman, kami menjamin keamanan optimal untuk fasilitas Anda, baik di area komersial, perkantoran, maupun fasilitas industri." />
+        <meta name="keywords" content="outsourcing keamanan, jasa keamanan, PT. Cahaya Utama, layanan keamanan profesional, keamanan fasilitas, outsourcing security, tenaga kerja terlatih, layanan keamanan perusahaan" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content="Outsourcing Keamanan Profesional - PT. Cahaya Utama" />
+        <meta property="og:description" content="Temukan solusi outsourcing keamanan terbaik dengan PT. Cahaya Utama. Kami menyediakan tenaga keamanan terlatih untuk melindungi fasilitas perusahaan Anda, dengan standar profesionalisme dan kualitas terbaik." />
+        <meta property="og:url" content="https://www.cahayautamapt.com/sonsecurity" />
+        <meta property="og:type" content="website" />
+      </Helmet>
 
-    return (
-        <AdminLayout>
-        <div className="min-h-screen bg-gray-50">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-white rounded-lg shadow-lg overflow-hidden"
-                >
-                    <div className="p-6 border-b border-gray-200">
-                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                            <h1 className="text-2xl font-bold text-gray-800">
-                                Daftar Kontak Masuk
-                            </h1>
-                            <form onSubmit={handleSearch} className="w-full sm:w-auto">
-                                <div className="relative">
-                                    <input
-                                        type="text"
-                                        value={search}
-                                        onChange={(e) => setSearch(e.target.value)}
-                                        placeholder="Cari kontak..."
-                                        className="w-full sm:w-80 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                                    />
-                                    <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    {loading ? (
-                        <div className="flex justify-center items-center p-8">
-                            <RefreshCw className="h-8 w-8 text-blue-500 animate-spin" />
-                        </div>
-                    ) : (
-                        <div className="overflow-x-auto">
-                            {contacts?.data && contacts.data.length > 0 ? (
-                                <table className="w-full">
-                                    <thead>
-                                        <tr className="bg-gray-50">
-                                            <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                <div className="flex items-center space-x-2">
-                                                    <User className="h-4 w-4" />
-                                                    <span>Nama</span>
-                                                </div>
-                                            </th>
-                                            <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                <div className="flex items-center space-x-2">
-                                                    <Building2 className="h-4 w-4" />
-                                                    <span>Perusahaan</span>
-                                                </div>
-                                            </th>
-                                            <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                <div className="flex items-center space-x-2">
-                                                    <MessageSquare className="h-4 w-4" />
-                                                    <span>Subjek</span>
-                                                </div>
-                                            </th>
-                                            <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                <div className="flex items-center space-x-2">
-                                                    <Calendar className="h-4 w-4" />
-                                                    <span>Tanggal</span>
-                                                </div>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-gray-200">
-                                        {contacts.data.map((contact, index) => (
-                                            <motion.tr
-                                                key={contact.id}
-                                                initial={{ opacity: 0, y: 20 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                transition={{ delay: index * 0.1 }}
-                                                className="hover:bg-gray-50 transition-colors"
-                                            >
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                    {contact.full_name}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                                                    {contact.company_name}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                                                    {contact.subject}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                                                    {new Date(contact.created_at).toLocaleDateString('id-ID', {
-                                                        day: 'numeric',
-                                                        month: 'long',
-                                                        year: 'numeric'
-                                                    })}
-                                                </td>
-                                            </motion.tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            ) : (
-                                <div className="text-center py-8">
-                                    <p className="text-gray-500">Tidak ada kontak yang ditemukan.</p>
-                                </div>
-                            )}
-                        </div>
-                    )}
-
-                    {contacts?.links && contacts.links.length > 0 && (
-                        <div className="px-6 py-4 border-t border-gray-200">
-                            <div className="flex flex-wrap justify-center gap-2">
-                                {contacts.links.map((link) => (
-                                    <button
-                                        key={link.label}
-                                        onClick={() => handlePageChange(link.url)}
-                                        disabled={!link.url}
-                                        className={`px-4 py-2 text-sm rounded-md transition-colors ${
-                                            link.active
-                                                ? 'bg-blue-500 text-white'
-                                                : 'text-gray-500 hover:bg-gray-100'
-                                        } ${!link.url ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                        dangerouslySetInnerHTML={{ __html: link.label }}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    )}
-                </motion.div>
-            </div>
+      <div className="relative min-h-screen overflow-hidden">
+        {/* Background dengan overlay */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: 'url(img/background/securityheader01ww.jpg)' }}
+        >
+          <div className="absolute inset-0 bg-black/40" />
         </div>
-        </AdminLayout>
-    );
-};
 
-export default Contact;
+        {/* Konten utama */}
+        <div className="relative z-10 container mx-auto px-4 py-8 md:py-16 lg:py-0 h-full md:h-screen flex items-center">
+          <div className="grid md:grid-cols-2 gap-8 items-center w-full">
+            {/* Kolom kiri - Logo dan Gambar */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex flex-col items-center text-center pt-64"
+            >
+              <img
+                src="img/sonsecurity/logo-son-security-h.png"
+                alt="Son Security Logo"
+                className="h-16 mb-8 object-contain"
+              />
+              <img
+                src="img/sonsecurity/secutiry-crop.png"
+                alt="Security Personnel"
+                className="max-h-[480px] w-auto max-w-full object-cover object-top"
+              />
+            </motion.div>
+
+            {/* Kolom kanan - Konten */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-white text-center md:text-left"
+            >
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-medium leading-tight mb-6">
+                Pastikan Lingkungan Anda
+                <br />
+                <span className="text-3xl md:text-5xl lg:text-6xl font-bold block">
+                  Aman, Nyaman, dan Terjaga
+                </span>
+                <span className="text-2xl md:text-4xl block">Setiap Saat ...</span>
+              </h1>
+
+              <div className="flex justify-center md:justify-start mb-6">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    const link = document.createElement("a");
+                    link.href = "/file/Compro.pdf"; // Ganti dengan URL PDF yang benar
+                    link.download = "e-Paper.pdf"; // Nama file yang diunduh
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
+                  className="bg-cyan-600 hover:bg-cyan-700 text-white px-6 md:px-8 py-2 md:py-3 rounded-full flex items-center space-x-3 transition duration-300"
+                >
+                  <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                  <span className="text-sm md:text-lg">Download e-Paper</span>
+                </motion.button>
+              </div>
+
+              <p className="text-base md:text-xl mb-8">
+                <span className="font-bold">Son Security</span>, layanan penyedia alih daya jasa keamanan
+                <br />
+                (Outsourcing for Security) dari Cahaya Utama, untuk Anda...
+              </p>
+
+              {/* Statistik dengan Animasi */}
+              <motion.div
+                ref={ref}
+                variants={containerVariants}
+                initial="hidden"
+                animate={inView ? "visible" : "hidden"}
+                className="grid grid-cols-3 gap-4 text-center"
+              >
+                {statsData.map((stat, index) => (
+                  <motion.div
+                    key={index}
+                    variants={itemVariants}
+                    className="text-white"
+                  >
+                    <h2 className="text-2xl md:text-4xl font-bold">
+                      {inView ? (
+                        <CountUp
+                          start={0}
+                          end={stat.value}
+                          duration={2}
+                          separator="."
+                          prefix={stat.prefix}
+                          suffix={stat.suffix}
+                        />
+                      ) : (
+                        0
+                      )}
+                    </h2>
+                    <p className="text-gray-200 text-xs md:text-lg">{stat.label}</p>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* Komponen tambahan */}
+      <Service />
+      <Documentation />
+      <Standard />
+      <Office />
+      <Footer />
+    </MainLayout>
+  );
+}

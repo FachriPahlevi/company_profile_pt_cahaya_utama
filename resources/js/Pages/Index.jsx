@@ -4,6 +4,7 @@ import MainLayout from "@/Layouts/MainLayout";
 import Section1 from "@/Components/Index/Section1";
 import Section2 from "@/Components/Index/Section2";
 import Section1Smartphone from "@/Components/Index/section1smarthphone";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
     const [currentSection, setCurrentSection] = useState(1);
@@ -29,6 +30,18 @@ const Home = () => {
 
     return (
         <MainLayout>
+            <Helmet>
+                <title>PT. Cahaya Utama - Layanan Outsourcing Profesional di Indonesia</title>
+                <meta name="description" content="PT. Cahaya Utama adalah penyedia layanan outsourcing profesional di bidang keamanan, kebersihan, dan tenaga kerja terampil di Indonesia. Kami berkomitmen untuk memberikan layanan berkualitas tinggi kepada klien kami." />
+                <meta name="keywords" content="PT. Cahaya Utama, outsourcing, layanan kebersihan, jasa keamanan, tenaga kerja, outsourcing Indonesia" />
+                <meta name="author" content="PT. Cahaya Utama" />
+                <meta property="og:title" content="PT. Cahaya Utama - Layanan Outsourcing Profesional di Indonesia" />
+                <meta property="og:description" content="Penyedia jasa outsourcing terbaik untuk keamanan, kebersihan, dan tenaga kerja profesional di Indonesia." />
+                <meta property="og:image" content="https://cahayautamapt.com/logo.png" />
+                <meta property="og:url" content="https://cahayautamapt.com" />
+                <meta name="twitter:card" content="summary_large_image" />
+            </Helmet>
+
             <div className="relative h-full"> {/* Tambahkan relative untuk membungkus animasi */}
                 <AnimatePresence>
                     {currentSection === 1 && (

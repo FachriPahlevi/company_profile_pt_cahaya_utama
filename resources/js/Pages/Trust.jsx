@@ -6,56 +6,68 @@ import Equipment from "@/Components/cleaningservice/Equipment";
 import MainLayout from "@/Layouts/MainLayout";
 import React, { useState, useEffect } from "react";
 import CountUp from "react-countup";
+import { Helmet } from "react-helmet";
 
 export default function Trust() {
-   const [isVisible, setIsVisible] = useState(false);
-  
-    useEffect(() => {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
-        },
-        { threshold: 0.1 }
-      );
-  
-      const statsElement = document.getElementById('stats-section');
-      if (statsElement) {
-        observer.observe(statsElement);
-      }
-  
-      return () => {
-        if (statsElement) {
-          observer.unobserve(statsElement);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
         }
-      };
-    }, []);
-  
-    const stats = [
-      {
-        value: 14700,
-        label: "Tenaga Kerja Distribusi",
-        suffix: "+"
       },
-      {
-        value: 13,
-        label: "Klien Perusahaan",
-        suffix: ""
-      },
-      {
-        value: 7,
-        label: "Bidang dan Keahlian",
-        suffix: ""
+      { threshold: 0.1 }
+    );
+
+    const statsElement = document.getElementById('stats-section');
+    if (statsElement) {
+      observer.observe(statsElement);
+    }
+
+    return () => {
+      if (statsElement) {
+        observer.unobserve(statsElement);
       }
-    ];
+    };
+  }, []);
+
+  const stats = [
+    {
+      value: 14700,
+      label: "Tenaga Kerja Distribusi",
+      suffix: "+"
+    },
+    {
+      value: 13,
+      label: "Klien Perusahaan",
+      suffix: ""
+    },
+    {
+      value: 7,
+      label: "Bidang dan Keahlian",
+      suffix: ""
+    }
+  ];
 
   return (
     <MainLayout>
+      <Helmet>
+        <title>Percayakan Sumber Daya Anda pada PT. Cahaya Utama - Solusi Outsourcing Terpercaya</title>
+        <meta name="description" content="PT. Cahaya Utama adalah mitra terpercaya untuk solusi outsourcing sumber daya manusia, menawarkan tenaga kerja terampil, berpengalaman, dan profesional di berbagai bidang. Percayakan kebutuhan operasional Anda kepada kami untuk hasil yang maksimal." />
+        <meta name="keywords" content="outsourcing sumber daya manusia, solusi outsourcing, tenaga kerja terampil, outsourcing PT. Cahaya Utama, tenaga kerja profesional, outsourcing terpercaya, solusi bisnis" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content="Percayakan Sumber Daya Anda pada PT. Cahaya Utama - Solusi Outsourcing Terpercaya" />
+        <meta property="og:description" content="Cari tahu mengapa PT. Cahaya Utama adalah pilihan tepat untuk solusi outsourcing sumber daya manusia. Kami menyediakan tenaga kerja terampil dan berpengalaman untuk mendukung kesuksesan operasional bisnis Anda." />
+        <meta property="og:url" content="https://www.cahayautamapt.com/trust-our-resource" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
       <div className="relative min-h-screen">
         {/* Background image with overlay */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-cover"
           style={{ backgroundImage: 'url(img/background/background01-Recoveredqxx.jpg)' }}
         >
           <div className="absolute inset-0 bg-black/20" />
@@ -97,11 +109,11 @@ export default function Trust() {
                 </p>
               </div>
             </div>
-            
+
             {/* right column - Stats */}
             <div className="w-full md:w-1/2 flex flex-col">
               <div className="flex justify-center">
-                <div 
+                <div
                   id="stats-section"
                   className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mt-8 sm:mt-12 lg:mt-16 pb-8 sm:pb-10 lg:pb-12 w-full px-4"
                 >
@@ -134,11 +146,11 @@ export default function Trust() {
           </div>
         </div>
       </div>
-      <Scope/>
-      <Documentation/>
-      <Equipment/>
-      <Office/>
-      <Footer/>
+      <Scope />
+      <Documentation />
+      <Equipment />
+      <Office />
+      <Footer />
     </MainLayout>
   );
 }

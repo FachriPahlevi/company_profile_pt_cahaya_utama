@@ -15,7 +15,7 @@ class ClientSeeder extends Seeder
     public function run()
     {
         $clientLogos = [
-            ['name' => 'Semen Indonesia', 'logo' => '/img/client/Semen_Indonesia_logo.png', 'width' => '90px', 'height' => 'auto'],
+            ['name' => 'Semen Indonesia', 'logo' => '/img/client/semen_indonesia_logo.png', 'width' => '90px', 'height' => 'auto'],
             ['name' => 'BCA', 'logo' => '/img/client/BCA_logo.png', 'width' => '100px', 'height' => 'auto'],
             ['name' => 'BNI', 'logo' => '/img/client/BNI_logo.png', 'width' => '120px', 'height' => 'auto'],
             ['name' => 'BII', 'logo' => '/img/client/bii_logo.png', 'width' => '110px', 'height' => 'auto'],

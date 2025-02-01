@@ -1,34 +1,61 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Search, RefreshCw, User, Building2, Phone, Calendar, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { router, usePage } from '@inertiajs/react';
-import { debounce } from 'lodash';
+import { Helmet } from 'react-helmet';
+
+// Custom debounce hook
+const useDebounce = (value, delay) => {
+    const [debouncedValue, setDebouncedValue] = useState(value);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedValue(value);
+        }, delay);
+
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [value, delay]);
+
+    return debouncedValue;
+};
 
 const Contact = () => {
     const { initialContacts, filters } = usePage().props;
     const [search, setSearch] = useState(filters?.search || '');
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(initialContacts?.current_page || 1);
+    const [error, setError] = useState(null);
 
-    const performSearch = debounce((searchTerm, currentPage) => {
+    // Use the custom debounce hook
+    const debouncedSearch = useDebounce(search, 500);
+
+    const performSearch = useCallback((searchTerm, currentPage) => {
         setLoading(true);
-        router.get(route('admin.contact'), 
-            { 
-                s: searchTerm, 
-                page: currentPage 
-            }, 
-            { 
+        setError(null);
+        router.get(route('admin.contact'),
+            {
+                s: searchTerm,
+                page: currentPage
+            },
+            {
                 preserveState: true,
                 preserveScroll: true,
-                onFinish: () => setLoading(false)
+                onFinish: () => setLoading(false),
+                onError: (response) => {
+                    if (response.error) {
+                        setError(response.error);
+                    }
+                }
             }
         );
-    }, 500);
+    }, []);
 
     useEffect(() => {
-        performSearch(search, page);
-    }, [search, page]);
+        performSearch(debouncedSearch, page);
+    }, [debouncedSearch, page, performSearch]);
 
     const handleSearch = (e) => {
         const newSearch = e.target.value;
@@ -47,6 +74,17 @@ const Contact = () => {
 
     return (
         <AdminLayout>
+            <Helmet>
+                <title>Hubungi PT. Cahaya Utama - Solusi Outsourcing Profesional untuk Bisnis Anda</title>
+                <meta name="description" content="Ingin tahu lebih banyak tentang solusi outsourcing yang kami tawarkan? Hubungi PT. Cahaya Utama untuk informasi lebih lanjut mengenai layanan kebersihan, keamanan, dan tenaga kerja terampil yang dapat meningkatkan efisiensi operasional bisnis Anda." />
+                <meta name="keywords" content="kontak PT. Cahaya Utama, hubungi kami, solusi outsourcing, layanan kebersihan, layanan keamanan, tenaga kerja profesional, outsourcing terpercaya, solusi bisnis" />
+                <meta name="robots" content="index, follow" />
+                <meta property="og:title" content="Hubungi PT. Cahaya Utama - Solusi Outsourcing Profesional untuk Bisnis Anda" />
+                <meta property="og:description" content="Hubungi kami untuk mengetahui bagaimana PT. Cahaya Utama dapat membantu memenuhi kebutuhan operasional bisnis Anda dengan solusi outsourcing kebersihan, keamanan, dan tenaga kerja profesional yang handal." />
+                <meta property="og:url" content="https://www.cahayautamapt.com/contact" />
+                <meta property="og:type" content="website" />
+            </Helmet>
+
             <div className="min-h-screen bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <motion.div
@@ -71,17 +109,16 @@ const Contact = () => {
                                         />
                                         <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
                                     </div>
-                                    {/* {(search || page !== 1) && (
-                                        <button 
-                                            onClick={handleReset}
-                                            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors"
-                                        >
-                                            Reset
-                                        </button>
-                                    )} */}
                                 </div>
                             </div>
                         </div>
+
+                        {/* Error Message */}
+                        {error && (
+                            <div className="p-4 text-red-600 text-center">
+                                {error}
+                            </div>
+                        )}
 
                         {/* Loading Indicator */}
                         {loading ? (
@@ -138,11 +175,10 @@ const Contact = () => {
                                                     <button
                                                         key={index}
                                                         onClick={() => handlePageChange(index + 1)}
-                                                        className={`px-4 py-2 rounded-lg transition-colors ${
-                                                            index + 1 === initialContacts.current_page 
-                                                            ? 'bg-blue-500 text-white' 
-                                                            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                                                        }`}
+                                                        className={`px-4 py-2 rounded-lg transition-colors ${index + 1 === initialContacts.current_page
+                                                                ? 'bg-blue-500 text-white'
+                                                                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                                                            }`}
                                                     >
                                                         {index + 1}
                                                     </button>

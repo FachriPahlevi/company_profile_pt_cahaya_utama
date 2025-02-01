@@ -1,11 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Check, Mail, FileText, AlertCircle, ChevronRight, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "@inertiajs/react";
+import { Helmet } from "react-helmet";
 
 const Requirements = () => {
   const [agreed, setAgreed] = useState(false);
   const [activeStep, setActiveStep] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      setIsMobile(/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent));
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const documents = [
     {
@@ -66,87 +80,69 @@ const Requirements = () => {
     }
   ];
 
-  const steps = [
-    {
-      title: "Persiapan Dokumen",
-      description: "Siapkan semua dokumen yang diperlukan"
-    },
-    {
-      title: "Verifikasi Data",
-      description: "Periksa kembali kelengkapan data"
-    },
-    {
-      title: "Pengiriman",
-      description: "Kirim dokumen via email"
-    }
-  ];
+  const generateEmailTemplate = () => {
+    return `Yth. HRD PT. Cahaya Utama,
 
-  const emailTemplate = `Kepada Yth. Tim HRD
-    PT. Cahaya Utama
-    di Tempat
+Saya tertarik untuk melamar pekerjaan melalui perusahaan outsourcing PT. Cahaya Utama. Berikut data saya:
 
-    Perihal: Surat Lamaran Pekerjaan
+Nama: [Nama Lengkap]
+Posisi yang dilamar: [Posisi]
+Nomor HP: [Nomor HP]
+Email: [Alamat Email]
+Alamat: [Alamat]
 
-    Dengan hormat,
+Terlampir saya sertakan CV dan dokumen pendukung.
 
-    Saya yang bertanda tangan di bawah ini:
+Terima kasih.
 
-    Nama Lengkap     : [Nama Lengkap Anda]
-    Tempat/Tgl Lahir : [Tempat, Tanggal Lahir]
-    Jenis Kelamin    : [Laki-laki/Perempuan]
-    Alamat Domisili  : [Alamat Lengkap]
-    No. Telepon      : [Nomor Handphone]
-    Email            : [Alamat Email Aktif]
-
-    Pendidikan Terakhir:
-    - Institusi  : [Nama Sekolah/Universitas]
-    - Jurusan    : [Program Studi]
-    - Tahun Lulus: [Tahun Kelulusan]
-
-    Dengan ini saya mengajukan lamaran untuk posisi:
-    - Posisi yang Dilamar : [Posisi Outsourcing]
-    - Penempatan         : [Nama Perusahaan Client]
-    - Minat Kerja        : [Full Time/Part Time]
-
-    Kualifikasi Singkat:
-    1. [Keahlian Utama]
-    2. [Pengalaman Relevan]
-    3. [Sertifikasi yang Dimiliki]
-
-    Lampiran yang saya sertakan:
-    - Curriculum Vitae (CV)
-    - Ijazah Terakhir
-    - Kartu Identitas (KTP)
-    - Pas Foto Terbaru
-
-    Saya bersedia mengikuti seluruh proses seleksi dan siap ditempatkan sesuai kebutuhan perusahaan. Demikian surat lamaran ini saya sampaikan. Atas perhatian dan pertimbangan Bapak/Ibu, saya ucapkan terima kasih.
-
-    Hormat saya,
-    [Tanda Tangan]
-    [Nama Lengkap]
-    [Tanggal Melamar]`;
+Hormat saya,
+[Nama Lengkap]`;
+  };
 
   const handleSendEmail = () => {
-    if (agreed) {
-      const emailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=nurfachrialisnan@gmail.com&subject=${encodeURIComponent('Lamaran Pekerjaan Outsourcing')}&body=${encodeURIComponent(emailTemplate)}`;
+    if (!agreed) return;
 
-      try {
-        window.open(emailUrl, '_blank', 'noopener,noreferrer');
-      } catch (error) {
-        console.error("Gagal membuka email", error);
-        alert("Tidak dapat membuka Gmail. Silakan coba lagi.");
+    const emailAddress = 'Loker@cahaya-utama.com';
+    const subject = 'Lamaran Pekerjaan Outsourcing';
+    const body = generateEmailTemplate();
+
+    try {
+      if (isMobile) {
+        // For mobile devices
+        const mailtoLink = `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailtoLink;
+      } else {
+        // For desktop browsers
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.open(gmailUrl, '_blank', 'noopener,noreferrer');
       }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      // Universal fallback that works on both mobile and desktop
+      const mailtoLink = `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailtoLink;
     }
   };
 
   const handleBack = () => {
-    window.history.back(); // Kembali ke halaman sebelumnya
+    window.history.back();
   };
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow-lg min-h-screen">
       {/* Tombol Back */}
-      <button 
+      <Helmet>
+        <title>Halaman Recruitment - PT. Cahaya Utama</title>
+        <meta name="description" content="Temukan lowongan pekerjaan terbaru di PT. Cahaya Utama. Bergabung dengan tim kami dan raih kesempatan karir yang menarik di bidang outsourcing manajemen sumber daya manusia." />
+        <meta name="keywords" content="lowongan kerja, PT Cahaya Utama, pekerjaan outsourcing, karir, recruitment, sumber daya manusia" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content="Halaman Recruitment - PT. Cahaya Utama" />
+        <meta property="og:description" content="Temukan peluang karir di PT. Cahaya Utama dan bergabung dalam tim profesional kami. Kunjungi halaman recruitment kami untuk info lebih lanjut." />
+        <meta property="og:url" content="https://www.cahayautamapt.com/recruitment" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
+      <button
         onClick={handleBack}
         className="absolute top-6 left-6 bg-gray-100 hover:bg-gray-200 p-2 rounded-full transition-colors"
       >
@@ -159,23 +155,6 @@ const Requirements = () => {
         <p className="mt-2 text-gray-600">
           Lengkapi informasi berikut dengan teliti. Tanda <span className="text-red-500">*</span> menandakan wajib diisi
         </p>
-      </div>
-
-      {/* Progress Steps */}
-      <div className="mb-8">
-        <div className="flex flex-wrap justify-between">
-          {steps.map((step, index) => (
-            <div key={index} className="flex flex-col items-center w-full sm:w-1/3 mb-4">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${activeStep > index + 1 ? "bg-green-500" : activeStep === index + 1 ? "bg-blue-500" : "bg-gray-200"} text-white mb-2`}>
-                {activeStep > index + 1 ? <Check size={16} /> : index + 1}
-              </div>
-              <div className="text-center">
-                <p className="font-semibold text-gray-900">{step.title}</p>
-                <p className="text-sm text-gray-500">{step.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
 
       {/* Posisi yang Tersedia */}
@@ -264,14 +243,15 @@ const Requirements = () => {
           </span>
         </label>
 
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-4">
           <button
             onClick={handleSendEmail}
             disabled={!agreed}
-            className={`flex items-center gap-2 px-6 py-2 rounded-lg ${agreed ? "bg-blue-500 hover:bg-blue-600 text-white" : "bg-gray-200 text-gray-500 cursor-not-allowed"} transition-colors`}
+            className={`flex items-center gap-2 px-6 py-2 rounded-lg ${agreed ? "bg-blue-500 hover:bg-blue-600 text-white" : "bg-gray-200 text-gray-500 cursor-not-allowed"
+              } transition-colors`}
           >
             <Mail size={18} />
-            Kirim Dokumen
+            Kirim via Email
             <ChevronRight size={18} />
           </button>
 

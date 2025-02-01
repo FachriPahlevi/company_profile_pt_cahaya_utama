@@ -61,7 +61,7 @@ const Section1Smartphone = () => {
 
     return (
         <div 
-            className="relative min-h-screen bg-cover bg-center bg-fixed overflow-hidden"
+            className="relative min-h-screen max--screen bg-cover bg-center bg-fixed overflow-hidden"
             style={{
                 backgroundImage: "url('/img/school-8955552-scaled.jpg')"
             }}
@@ -73,7 +73,7 @@ const Section1Smartphone = () => {
                 transition={{ duration: 1 }}
             />
             
-            <div className="relative mx-auto px-4 py-6 mt-12">
+            <div className="relative mx-auto px-4 py-6 mt-20">
                 <div className="flex flex-col items-center gap-4">
                     {/* Top Content */}
                     <motion.div 

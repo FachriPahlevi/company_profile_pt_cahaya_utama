@@ -35,30 +35,36 @@ const Index = ({ cooperations, auth }) => {
     });
   };
 
-  const deleteCooperation = (id) => {
-    axios.delete(route('cooperations.destroy', id))
-      .then(response => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Cooperation Berhasil Dihapus',
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 3000,
-          toast: true
-        });
-        window.location.reload();
-      })
-      .catch(error => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Gagal Menghapus Cooperation',
-          text: error.response?.data?.message || 'Terjadi kesalahan',
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 3000,
-          toast: true
-        });
+  const deleteCooperation = async (id) => {
+    try {
+      // Mengirim permintaan DELETE ke server
+      const response = await axios.delete(`/admincu/cooperation/destroy/${id}`);
+      
+      // Menampilkan toast sukses jika penghapusan berhasil
+      console.log(response);
+      Swal.fire({
+        icon: "success",
+        title: "Client Berhasil Dihapus",
+        text: response.data.message, // Menggunakan pesan dari respons
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        toast: true,
       });
+  
+  
+    } catch (error) {
+      // Menampilkan toast error jika terjadi kesalahan
+      Swal.fire({
+        icon: "error",
+        title: "Gagal Menghapus Client",
+        text: error.response?.data?.message || "Terjadi kesalahan", // Menampilkan pesan error dari server
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        toast: true,
+      });
+    }
   };
 
   const handleInputChange = (e) => {
