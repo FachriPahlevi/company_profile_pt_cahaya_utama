@@ -1,13 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { BsWhatsapp } from "react-icons/bs";
 
 const FixedContactButton = () => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showIcon, setShowIcon] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowIcon(false);
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <div className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 md:bottom-8 md:left-8 lg:bottom-12 lg:left-12 z-50 flex justify-end">
+    <div className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 md:bottom-8 md:left-8 lg:bottom-12 lg:left-12 z-50 ">
+    <AnimatePresence>
+        {showIcon && !showDropdown && (
+          <motion.img
+            src='/img/icon_cs.png'
+            className="w-20 h-20 sm:w-24 sm:h-24 md:w-20 md:h-28 drop-shadow-xl"
+            alt="Customer Service Icon"
+            initial={{ opacity: 0, y: -50, x: -10 }}
+            animate={{ opacity: 1, y: 0, x: -10 }}
+            exit={{ opacity: 0, y: -50, x: -20 }}
+            transition={{ duration: 4, ease: "easeInOut" }}
+          />
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {!showDropdown ? (
           <motion.div

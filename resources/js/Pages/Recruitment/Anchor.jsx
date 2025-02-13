@@ -81,7 +81,7 @@ const Requirements = () => {
   ];
 
   const generateEmailTemplate = () => {
-    return `Yth. HRD PT. Cahaya Utama,
+    return `Yth. SDM PT. Cahaya Utama,
 
 Saya tertarik untuk melamar pekerjaan melalui perusahaan outsourcing PT. Cahaya Utama. Berikut data saya:
 
@@ -103,7 +103,7 @@ Hormat saya,
     if (!agreed) return;
 
     const emailAddress = 'Loker@cahaya-utama.com';
-    const subject = 'Lamaran Pekerjaan Outsourcing';
+    const subject = '[Nama Lengkap_Posisi]';
     const body = generateEmailTemplate();
 
     try {

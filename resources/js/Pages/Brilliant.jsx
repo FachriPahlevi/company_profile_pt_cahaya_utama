@@ -120,12 +120,11 @@ export default function SonSecurity() {
                 >
                   <button className="bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-3 rounded-full flex items-center space-x-3 transition duration-300"
                     onClick={() => {
-                      const link = document.createElement("a");
-                      link.href = "/file/Compro.pdf"; // Ganti dengan URL PDF yang benar
-                      link.download = "e-Paper.pdf"; // Nama file yang diunduh
-                      document.body.appendChild(link);
-                      link.click();
-                      document.body.removeChild(link);
+                      window.open(
+                        "https://drive.google.com/file/d/1ej2clopKgz-ml_WG5Il34eDxEOz2LLMD/view?usp=drivesdk",
+                        "_blank",
+                        "noopener,noreferrer"
+                      );
                     }}>
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />

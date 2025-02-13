@@ -68,9 +68,19 @@ export default function Navbar() {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center">
-            <a href="/">
+          <a href="/" className="flex gap-x-2 lg:gap-x-6">
               <img
-                src="/img/logo-cu-ukas-smk3.png"
+                src="/img/cahaya_utama_logo.png"
+                alt="Cahaya Utama"
+                className="h-8 md:h-10 lg:h-12"
+              />
+               <img
+                src="/img/iso_logo.jpg"
+                alt="Cahaya Utama"
+                className="h-8 md:h-10 lg:h-12"
+              />
+               <img
+                src="/img/k3_logo.png"
                 alt="Cahaya Utama"
                 className="h-8 md:h-10 lg:h-12"
               />

@@ -6,6 +6,7 @@ import Equipment from "@/Components/cleaningservice/Equipment";
 import MainLayout from "@/Layouts/MainLayout";
 import React, { useState, useEffect } from "react";
 import CountUp from "react-countup";
+import { motion } from "framer-motion";
 import { Helmet } from "react-helmet";
 
 export default function Trust() {
@@ -141,6 +142,25 @@ export default function Trust() {
                     </div>
                   ))}
                 </div>
+              </div>
+              <div className="flex justify-center md:justify-start mb-6">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    window.open(
+                      "https://drive.google.com/file/d/1K6u8ZY2tVTPuD4mF0Q9Txy2E-BuTzWA2/view?usp=drivesdk ",
+                      "_blank",
+                      "noopener,noreferrer"
+                    );
+                  }}
+                  className="bg-cyan-600 hover:bg-cyan-700 text-white px-6 md:px-8 py-2 md:py-3 rounded-full flex items-center space-x-3 transition duration-300"
+                >
+                  <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                  <span className="text-sm md:text-lg">Download e-Paper</span>
+                </motion.button>
               </div>
             </div>
           </div>
