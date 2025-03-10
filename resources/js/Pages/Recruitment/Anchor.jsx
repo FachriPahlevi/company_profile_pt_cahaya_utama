@@ -3,11 +3,23 @@ import { Check, Mail, FileText, AlertCircle, ChevronRight, ArrowLeft } from "luc
 import { motion } from "framer-motion";
 import { Link } from "@inertiajs/react";
 import { Helmet } from "react-helmet";
+import axios from "axios";
 
 const Requirements = () => {
+  const [positions, setPositions] = useState([]);
   const [agreed, setAgreed] = useState(false);
   const [activeStep, setActiveStep] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    axios.get("/positions") // Pastikan route API benar
+      .then(response => {
+        setPositions(response.data.positions); // Simpan data posisi ke state
+      })
+      .catch(error => {
+        console.error("Error fetching positions:", error);
+      });
+  }, []);
 
   // Detect mobile device
   useEffect(() => {
@@ -157,15 +169,19 @@ Hormat saya,
         </p>
       </div>
 
-      {/* Posisi yang Tersedia */}
+     {/* Posisi yang Tersedia */}
       <div className="bg-green-50 p-6 rounded-lg mb-8">
         <h2 className="text-xl font-semibold mb-4">Posisi yang Tersedia</h2>
         <div className="flex flex-wrap gap-2">
-          {posisiTersedia.map((posisi, idx) => (
-            <span key={idx} className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
-              {posisi}
-            </span>
-          ))}
+          {positions?.length > 0 ? (
+            positions.map((posisi, idx) => (
+              <span key={idx} className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
+                {posisi.name}
+              </span>
+            ))
+          ) : (
+            <p className="text-gray-500">Tidak ada posisi tersedia</p>
+          )}
         </div>
       </div>
 

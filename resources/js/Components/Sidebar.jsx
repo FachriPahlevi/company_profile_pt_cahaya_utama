@@ -8,12 +8,13 @@ import {
   RiTeamLine,
   RiMoneyDollarCircleLine,
   RiCheckDoubleLine,
+  RiCheckboxCircleLine,
 } from "react-icons/ri";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
 import { Link, router } from '@inertiajs/react';
 import axios from 'axios';
 import { FaSignOutAlt, FaUser } from 'react-icons/fa';
-import { PhoneCall } from 'lucide-react';
+import { Building, PhoneCall } from 'lucide-react';
 
 export default function Sidebar({ auth, isMobile = false, isDesktop = false }) {
   const [selectedKey, setSelectedKey] = useState(window.location.pathname);
@@ -64,12 +65,16 @@ export default function Sidebar({ auth, isMobile = false, isDesktop = false }) {
       label: "Contacts",
       path: "/admincu/contacts",
     },
-    // Uncomment jika diperlukan
-    // {
-    //   icon: <RiCheckboxCircleLine className="w-5 h-5" />,
-    //   label: "Efectiveness",
-    //   path: "/efective",
-    // },
+    {
+      icon: <RiCheckboxCircleLine className="w-5 h-5" />,
+      label: "Positions",
+      path: "/admincu/positions",
+    },
+    {
+      icon: <Building className="w-5 h-5" />,
+      label: "Offices",
+      path: "/admincu/offices",
+    },
   ];
 
   return (

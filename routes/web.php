@@ -7,8 +7,11 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CooperationController;
 use App\Http\Controllers\RecruitmentController;
+use App\Http\Controllers\PositionController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Cache;
+
+Route::get('/positions', [PositionController::class, 'index']);
 
 Route::get('/', function () {
     return Cache::remember('homepage', now()->addHours(24), function () {
@@ -78,6 +81,13 @@ Route::middleware('auth')->group(function () {
     
 
     Route::post('/admincu/client/store', [ClientController::class, 'store'])->name('client.store');
+
+    
+    Route::get('/admincu/positions', [PositionController::class, 'show'])->name('admin.position');
+    Route::put('/admincu/positions/{position}', [PositionController::class, 'update'])->name('admin.position.update');
+    Route::post('/admincu/positions', [PositionController::class, 'store'])->name('admin.position.store');
+    Route::delete('/admincu/positions/{id}', [PositionController::class, 'destroy'])->name('admin.position.destroy');
+
 
 
 });

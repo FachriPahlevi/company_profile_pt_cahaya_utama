@@ -56,8 +56,25 @@ export default function Office() {
                                     Tangerang Selatan 15221
                                     <br />
                                     Banten – Indonesia
+                                </p>
+                            </div>
+                        </div>
+
+                         {/* Semarang Office */}
+                         <div className="flex items-start space-x-2">
+                            <div className="text-blue-400 mt-1">
+                                <Phone size={20} />
+                            </div>
+                            <div>
+                                <p className="font-bold">KC Semarang</p>
+                                <p className="leading-relaxed">
+                                    Ruko New York E-15 Citra Grand Boulevard
                                     <br />
-                                    Telp. <span className="text-blue-400">+62 21 73884719</span>, <span className="text-blue-400">+62 21 93393088</span>
+                                    Jl. Kompol R. Soekanto Mangunharjo
+                                    <br />
+                                    Semarang 50276
+                                    <br />
+                                    Jawa Tengah – Indonesia
                                 </p>
                             </div>
                         </div>
@@ -77,8 +94,6 @@ export default function Office() {
                                     Yogyakarta 55281
                                     <br />
                                     Jawa Tengah – Indonesia
-                                    <br />
-                                    Telp. <span className="text-blue-400">+62 274 881330</span>
                                 </p>
                             </div>
                         </div>
@@ -86,26 +101,6 @@ export default function Office() {
 
                     {/* Additional Java Offices */}
                     <div className="space-y-6">
-                        {/* Semarang Office */}
-                        <div className="flex items-start space-x-2">
-                            <div className="text-blue-400 mt-1">
-                                <Phone size={20} />
-                            </div>
-                            <div>
-                                <p className="font-bold">KC Semarang</p>
-                                <p className="leading-relaxed">
-                                    Ruko New York E-15 Citra Grand Boulevard
-                                    <br />
-                                    Jl. Kompol R. Soekanto Mangunharjo
-                                    <br />
-                                    Semarang 50276
-                                    <br />
-                                    Jawa Tengah – Indonesia
-                                    <br />
-                                    Telp. <span className="text-blue-400">+62 246 417981</span>
-                                </p>
-                            </div>
-                        </div>
 
                         {/* Malang Office */}
                         <div className="flex items-start space-x-2">
@@ -122,8 +117,40 @@ export default function Office() {
                                     Malang – 65126
                                     <br />
                                     Jawa Timur – Indonesia
+                                </p>
+                            </div>
+                        </div>
+                          {/* Kediri Office */}
+                          <div className="flex items-start space-x-2">
+                            <div className="text-blue-400 mt-1">
+                                <Phone size={20} />
+                            </div>
+                            <div>
+                                <p className="font-bold">KC Kediri</p>
+                                <p className="leading-relaxed">
+                                    Jl. Kawi 51 A
                                     <br />
-                                    Telp. <span className="text-blue-400">+62 341 403949</span>
+                                    Kediri
+                                    <br />
+                                    Jawa Timur – Indonesia
+                                </p>
+                            </div>
+                        </div>
+                          {/* Gresik Office */}
+                          <div className="flex items-start space-x-2">
+                            <div className="text-blue-400 mt-1">
+                                <Phone size={20} />
+                            </div>
+                            <div>
+                                <p className="font-bold">KC Gresik</p>
+                                <p className="leading-relaxed">
+                                    Jl. Gubernur Suryo
+                                    <br />
+                                    Komplek Ruko Multi Sarana Plaza, Blok C 11
+                                    <br />
+                                    Gresik
+                                    <br />
+                                    Jawa Timur – Indonesia
                                 </p>
                             </div>
                         </div>
@@ -147,45 +174,6 @@ export default function Office() {
                                     Gowa Makassar 90233
                                     <br />
                                     Sulawesi Selatan – Indonesia
-                                    <br />
-                                    Telp. <span className="text-blue-400">+62 411 428553</span>
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Bali Office Section */}
-                        <div>
-                            <h4 className="text-lg font-semibold mb-6">Kantor Perwakilan Pulau Bali & Nusra</h4>
-                            <div className="flex items-start space-x-2">
-                                <div className="text-blue-400 mt-1">
-                                    <Phone size={20} />
-                                </div>
-                                <div>
-                                    <p className="font-bold">KC Bali</p>
-                                    <p className="leading-relaxed">
-                                        Jl. Malioboro No. 12
-                                        <br />
-                                        Denpasar
-                                        <br />
-                                        Bali – Indonesia
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Nusa Tenggara Office */}
-                        <div className="flex items-start space-x-2">
-                            <div className="text-blue-400 mt-1">
-                                <Phone size={20} />
-                            </div>
-                            <div>
-                                <p className="font-bold">KC Nusa Tenggara Timur</p>
-                                <p className="leading-relaxed">
-                                    Jl. Achmad Jais No. 27
-                                    <br />
-                                    Kupang
-                                    <br />
-                                    Nusa Tenggara Timur – Indonesia
                                 </p>
                             </div>
                         </div>
