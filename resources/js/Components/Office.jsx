@@ -1,185 +1,84 @@
-import React from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import axios from "axios";
 import { Phone } from "lucide-react";
 
-export default function Office() {
-    return (
-        <div className="bg-[#1e5779] text-white py-12">
-            <div className="container mx-auto px-6 lg:px-20">
-                {/* First Section */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
-                    {/* Company Info */}
-                    <div className="space-y-6">
-                        <h3 className="text-2xl font-bold">PT. CAHAYA UTAMA</h3>
-                        <div>
-                            <h4 className="text-lg font-semibold mb-2">Kantor Pusat</h4>
-                            <div className="flex items-start space-x-2">
-                                <div className="text-blue-400 mt-1">
-                                    <Phone size={20} />
-                                </div>
-                                <div>
-                                    <p className="leading-relaxed">
-                                        <span className="font-bold">KP Surabaya</span>
-                                        <br />
-                                        Komplek Ruko Mangga Dua A6 No. 01-02
-                                        <br />
-                                        Jl. Jagir Wonokromo No. 100
-                                        <br />
-                                        Surabaya 60244
-                                        <br />
-                                        Jawa Timur – Indonesia
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="bg-[#0b7ba6] rounded-full py-3 px-6 inline-flex items-center space-x-2">
-                            <Phone className="text-xl" />
-                            <span className="font-bold">Hotline +62318481201</span>
-                        </div>
-                    </div>
+const OfficeCard = React.memo(({ office }) => (
+  <div className="flex items-start gap-2">
+    <Phone className="mt-1 text-blue-400 shrink-0" size={20} />
+    <div>
+      <p className="font-bold">{office.name}</p>
+      <p className="leading-relaxed whitespace-pre-line">
+        {office.address}
+        <br />
+        {office.city}
+      </p>
+    </div>
+  </div>
+));
 
-                    {/* Java Offices */}
-                    <div className="space-y-6">
-                        <h4 className="text-lg font-semibold">Kantor Perwakilan Pulau Jawa</h4>
-                        
-                        {/* Jakarta Office */}
-                        <div className="flex items-start space-x-2">
-                            <div className="text-blue-400 mt-1">
-                                <Phone size={20} />
-                            </div>
-                            <div>
-                                <p className="font-bold">KC Jakarta – Tangerang</p>
-                                <p className="leading-relaxed">
-                                    Jl. Bintaro Utara Raya Blok AP No. 59
-                                    <br />
-                                    Bintaro Sektor 3 Bintaro Jaya
-                                    <br />
-                                    Tangerang Selatan 15221
-                                    <br />
-                                    Banten – Indonesia
-                                </p>
-                            </div>
-                        </div>
-
-                         {/* Semarang Office */}
-                         <div className="flex items-start space-x-2">
-                            <div className="text-blue-400 mt-1">
-                                <Phone size={20} />
-                            </div>
-                            <div>
-                                <p className="font-bold">KC Semarang</p>
-                                <p className="leading-relaxed">
-                                    Ruko New York E-15 Citra Grand Boulevard
-                                    <br />
-                                    Jl. Kompol R. Soekanto Mangunharjo
-                                    <br />
-                                    Semarang 50276
-                                    <br />
-                                    Jawa Tengah – Indonesia
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Yogyakarta Office */}
-                        <div className="flex items-start space-x-2">
-                            <div className="text-blue-400 mt-1">
-                                <Phone size={20} />
-                            </div>
-                            <div>
-                                <p className="font-bold">KC Yogyakarta</p>
-                                <p className="leading-relaxed">
-                                    Perum MBS (Mataram Bumi Sejahtera) D-83
-                                    <br />
-                                    Condong Catur, Depok, Sleman
-                                    <br />
-                                    Yogyakarta 55281
-                                    <br />
-                                    Jawa Tengah – Indonesia
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Additional Java Offices */}
-                    <div className="space-y-6">
-
-                        {/* Malang Office */}
-                        <div className="flex items-start space-x-2">
-                            <div className="text-blue-400 mt-1">
-                                <Phone size={20} />
-                            </div>
-                            <div>
-                                <p className="font-bold">KC Malang</p>
-                                <p className="leading-relaxed">
-                                    Jalan Cakalang 102 A
-                                    <br />
-                                    Polowijen, Malang
-                                    <br />
-                                    Malang – 65126
-                                    <br />
-                                    Jawa Timur – Indonesia
-                                </p>
-                            </div>
-                        </div>
-                          {/* Kediri Office */}
-                          <div className="flex items-start space-x-2">
-                            <div className="text-blue-400 mt-1">
-                                <Phone size={20} />
-                            </div>
-                            <div>
-                                <p className="font-bold">KC Kediri</p>
-                                <p className="leading-relaxed">
-                                    Jl. Kawi 51 A
-                                    <br />
-                                    Kediri
-                                    <br />
-                                    Jawa Timur – Indonesia
-                                </p>
-                            </div>
-                        </div>
-                          {/* Gresik Office */}
-                          <div className="flex items-start space-x-2">
-                            <div className="text-blue-400 mt-1">
-                                <Phone size={20} />
-                            </div>
-                            <div>
-                                <p className="font-bold">KC Gresik</p>
-                                <p className="leading-relaxed">
-                                    Jl. Gubernur Suryo
-                                    <br />
-                                    Komplek Ruko Multi Sarana Plaza, Blok C 11
-                                    <br />
-                                    Gresik
-                                    <br />
-                                    Jawa Timur – Indonesia
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Second Section */}
-                <div className="space-y-8">
-                    <h4 className="text-lg font-semibold">Kantor Perwakilan Pulau Sulawesi</h4>
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                        {/* Makassar Office */}
-                        <div className="flex items-start space-x-2">
-                            <div className="text-blue-400 mt-1">
-                                <Phone size={20} />
-                            </div>
-                            <div>
-                                <p className="font-bold">KC Makassar</p>
-                                <p className="leading-relaxed">
-                                    Ruko Citraland Hertasning Blok L 22-23
-                                    <br />
-                                    Gowa Makassar 90233
-                                    <br />
-                                    Sulawesi Selatan – Indonesia
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+const RegionGroup = React.memo(({ region }) => (
+  <div className="mb-12">
+    <h4 className="text-xl font-semibold mb-6">{region.name}</h4>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-8">
+      {region.office.map((office) => (
+        <div key={office.id}>
+          <OfficeCard office={office} />
         </div>
-    );
+      ))}
+    </div>
+    {region.name === "Kantor Pusat" && region.office.length > 0 && region.office[0].phone && (
+      <div className="mt-6">
+        <div className="inline-flex items-center gap-2 px-6 py-3 bg-[#0b7ba6] rounded-full">
+          <Phone className="text-xl" />
+          <span className="font-bold">Hotline {region.office[0].phone}</span>
+        </div>
+      </div>
+    )}
+  </div>
+));
+
+export default function Office() {
+  const [state, setState] = useState({
+    regions: [],
+    isLoading: true,
+    error: null,
+  });
+
+  const fetchOffices = useCallback(async (signal) => {
+    try {
+      const { data } = await axios.get(route("office.api"), { signal });
+      setState({ regions: data.data, isLoading: false, error: null });
+    } catch (error) {
+      if (!axios.isCancel(error)) {
+        console.error("Error fetching offices:", error);
+        setState((prev) => ({
+          ...prev,
+          isLoading: false,
+          error: "Gagal memuat data kantor. Silakan coba lagi.",
+        }));
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const abortController = new AbortController();
+    fetchOffices(abortController.signal);
+    return () => abortController.abort();
+  }, [fetchOffices]);
+
+  return (
+    <div className="bg-[#1e5779] text-white py-12">
+      <div className="container px-4 mx-auto lg:px-8 max-w-7xl">
+        {state.isLoading ? (
+          <p className="text-center">Memuat data kantor...</p>
+        ) : state.error ? (
+          <p className="text-center text-red-300">{state.error}</p>
+        ) : state.regions.length === 0 ? (
+          <p className="text-center">Tidak ada data kantor.</p>
+        ) : (
+          state.regions.map((region) => <RegionGroup key={region.id} region={region} />)
+        )}
+      </div>
+    </div>
+  );
 }

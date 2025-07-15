@@ -4,21 +4,19 @@ import {
   MdOutlinePeopleAlt,
 } from "react-icons/md";
 import {
-  RiBuildingLine,
   RiTeamLine,
-  RiMoneyDollarCircleLine,
-  RiCheckDoubleLine,
   RiCheckboxCircleLine,
 } from "react-icons/ri";
-import { HiOutlineOfficeBuilding } from "react-icons/hi";
-import { Link, router } from '@inertiajs/react';
+import { Link, router , usePage} from '@inertiajs/react';
 import axios from 'axios';
 import { FaSignOutAlt, FaUser } from 'react-icons/fa';
-import { Building, PhoneCall } from 'lucide-react';
+import { Building,PhoneCall } from 'lucide-react';
 
 export default function Sidebar({ auth, isMobile = false, isDesktop = false }) {
   const [selectedKey, setSelectedKey] = useState(window.location.pathname);
+   const user = usePage().props.auth.user;
 
+   console.log(user);
   const handleLogout = (e) => {
     e.preventDefault();
     router.post('/logout', null, {
@@ -73,7 +71,7 @@ export default function Sidebar({ auth, isMobile = false, isDesktop = false }) {
     {
       icon: <Building className="w-5 h-5" />,
       label: "Offices",
-      path: "/admincu/offices",
+      path: "/admincu/office",
     },
   ];
 
@@ -138,10 +136,10 @@ export default function Sidebar({ auth, isMobile = false, isDesktop = false }) {
           </div>
           <div>
             <h4 className="font-semibold text-gray-800">
-              {auth?.user?.name || 'Fachri P'}
+              {user?.name || 'Fachri P'}
             </h4>
             <p className="text-sm text-gray-600">
-              Admin
+            {user?.role || 'Admin'}
             </p>
           </div>
         </div>

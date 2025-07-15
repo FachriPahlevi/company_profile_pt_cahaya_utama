@@ -5,6 +5,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\RegionController;
+use App\Http\Controllers\OfficeController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CooperationController;
 use App\Http\Controllers\RecruitmentController;
 use App\Http\Controllers\PositionController;
@@ -53,6 +56,7 @@ Route::get('/recruitment', [RecruitmentController::class, 'index'])->name('recru
 
 //api data
 Route::get('/clients', [ClientController::class, 'index']);
+Route::get('/offices', [OfficeController::class, 'index'])->name('office.api');
 
 Route::get('/cooperations', [CooperationController::class, 'index']);
 
@@ -60,9 +64,9 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.store');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/admincu/contacts', [ContactController::class, 'show'])->name('admin.contact');
 
@@ -88,8 +92,23 @@ Route::middleware('auth')->group(function () {
     Route::post('/admincu/positions', [PositionController::class, 'store'])->name('admin.position.store');
     Route::delete('/admincu/positions/{id}', [PositionController::class, 'destroy'])->name('admin.position.destroy');
 
+    Route::get('/admincu/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/admincu/office', [OfficeController::class, 'edit'])->name('office.edit');
 
 
+    
+    Route::get('/admincu/office/data', [OfficeController::class, 'getOffices'])->name('office.data');
+    Route::get('/admincu/office/regions', [OfficeController::class, 'getRegions'])->name('office.regions');
+    Route::post('/admincu/office', [OfficeController::class, 'store'])->name('office.store');
+    Route::get('/admincu/office/{id}', [OfficeController::class, 'show'])->name('office.show');
+    Route::put('/admincu/office/{id}', [OfficeController::class, 'update'])->name('office.update');
+    Route::delete('/admincu/office/{id}', [OfficeController::class, 'destroy'])->name('office.destroy');
+
+
+    Route::post('/admincu/region', [RegionController::class, 'store'])->name('region.store');
+    Route::get('/admincu/region/{id}', [RegionController::class, 'show'])->name('region.show');
+    Route::put('/admincu/region/{id}', [RegionController::class, 'update'])->name('region.update');
+    Route::delete('/admincu/region/{id}', [RegionController::class, 'destroy'])->name('region.destroy');
 });
 
 require __DIR__.'/auth.php';

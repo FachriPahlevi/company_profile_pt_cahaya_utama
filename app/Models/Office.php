@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Office extends Model
 {
-    //
+    protected $guarded = [];
+    
+    public function region(){
+        return $this->belongsTo(Region::class);
+    }
 }

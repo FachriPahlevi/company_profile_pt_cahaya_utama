@@ -20,7 +20,7 @@ const FixedContactButton = () => {
         {showIcon && !showDropdown && (
           <motion.img
             src='/img/icon_cs.png'
-            className="w-20 h-20 sm:w-24 sm:h-24 md:w-20 md:h-28 drop-shadow-xl"
+            className="w-16 h-16 sm:w-24 sm:h-24 md:w-20 md:h-28 drop-shadow-xl"
             alt="Customer Service Icon"
             initial={{ opacity: 0, y: -50, x: -10 }}
             animate={{ opacity: 1, y: 0, x: -10 }}
