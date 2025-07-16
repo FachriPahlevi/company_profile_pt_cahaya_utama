@@ -17,17 +17,16 @@ use Illuminate\Support\Facades\Cache;
 Route::get('/positions', [PositionController::class, 'index']);
 
 Route::get('/', function () {
-    return Cache::remember('homepage', now()->addHours(24), function () {
-        return Inertia::render('Index');
-    });
-});
-
-Route::get('/perusahaan', function () {
     return Cache::remember('company_page', now()->addHours(24), function () {
         return Inertia::render('Company');
     });
 });
 
+Route::get('/about', function () {
+    return Cache::remember('about_page', now()->addHours(24), function () {
+        return Inertia::render('About');
+    });
+});
 Route::get('/sonsecurity', function () {
     return Cache::remember('sonsecurity_page', now()->addHours(24), function () {
         return Inertia::render('SonSecurity');
@@ -42,7 +41,7 @@ Route::get('/brilliant-cleaning', function () {
 
 Route::get('/trust-our-resource', function () {
     return Cache::remember('trust_our_resource_page', now()->addHours(24), function () {
-        return Inertia::render('Trust');
+        return Inertia::render('Tor');
     });
 });
 

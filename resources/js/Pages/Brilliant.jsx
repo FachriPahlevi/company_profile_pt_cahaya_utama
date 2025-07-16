@@ -1,184 +1,162 @@
 import React from "react";
-import { motion } from "framer-motion";
-import CountUp from "react-countup";
-import { useInView } from "react-intersection-observer";
-import Scope from "@/Components/cleaningservice/Scope";
-import Footer from "@/Components/Footer";
-import Office from "@/Components/Office";
-import Documentation from "@/Components/cleaningservice/Documentation";
-import Equipment from "@/Components/cleaningservice/Equipment";
 import MainLayout from "@/Layouts/MainLayout";
+import About from "@/Components/brilliant/About";
+import Documentation from "@/Components/brilliant/Documentation";
+import Footer from "@/Components/Footer";
 import { Helmet } from "react-helmet";
+import { motion } from "framer-motion";
+import Service from "@/Components/brilliant/Service";
+import Meaning from "@/Components/brilliant/Meaning";
 
-export default function SonSecurity() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  const statsData = [
-    { value: 31600, label: "Tenaga Kerja Distribusi" },
-    { value: 37, label: "Klien Perusahaan" },
-    { value: 8, label: "Bidang dan Keahlian" }
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        damping: 12,
-        stiffness: 100
-      }
-    }
-  };
-
-  return (
-    <MainLayout>
-      <Helmet>
-        <title>Brilliant Cleaning Service - Layanan Kebersihan Profesional PT. Cahaya Utama</title>
-        <meta name="description" content="Brilliant Cleaning Service dari PT. Cahaya Utama menawarkan layanan kebersihan terbaik untuk kantor, rumah, dan fasilitas komersial. Kami memastikan kebersihan menyeluruh, kualitas tinggi, dan hasil memuaskan dengan tenaga kerja terlatih dan berpengalaman." />
-        <meta name="keywords" content="Brilliant Cleaning Service, layanan kebersihan profesional, jasa kebersihan kantor, kebersihan rumah, kebersihan fasilitas komersial, PT. Cahaya Utama, kebersihan berkualitas, jasa kebersihan terlatih" />
-        <meta name="robots" content="index, follow" />
-        <meta property="og:title" content="Brilliant Cleaning Service - Layanan Kebersihan Profesional PT. Cahaya Utama" />
-        <meta property="og:description" content="Temukan layanan kebersihan profesional terbaik di Brilliant Cleaning Service PT. Cahaya Utama. Kami melayani kebersihan untuk kantor, rumah, dan berbagai fasilitas komersial dengan hasil yang tak tertandingi." />
-        <meta property="og:url" content="https://www.cahayautamapt.com/brilliant-cleaning" />
-        <meta property="og:type" content="website" />
-      </Helmet>
-
-      <div className="relative min-h-screen flex items-center justify-center">
-        {/* Background image with overlay */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(img/background/As.jpg)' }}
-        >
-          <div className="absolute inset-0 bg-black/40" />
-        </div>
-
-        {/* Content container */}
-        <div className="relative z-10 container mx-auto px-4 pt-32">
-          {/* Main content */}
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            {/* left column - Security guard image */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex flex-col items-center"
-            >
-              {/* Header logo */}
-              <div className="mb-8">
-                <img
-                  src="img/service/logo-brilliant-clean.png"
-                  alt="Son Security Logo"
-                  className="h-16 object-contain"
+export default function Brilliant() {
+    return (
+        <MainLayout>
+            <Helmet>
+                <title>
+                    Brilliant Cleaning - Jasa Keamanan Profesional | PT. Cahaya
+                    Utama
+                </title>
+                <meta
+                    name="description"
+                    content="Menyediakan tenaga kerja profesional di bidang keamanan yang jujur, ulet, tangguh, dan disiplin. Menjamin perlindungan optimal untuk area kerja melalui layanan keamanan yang responsif dan terpercaya."
                 />
-              </div>
-              <div className="flex justify-center">
-                <img
-                  src="img/brilliant/cleaning-crop-1.png"
-                  alt="Security Personnel"
-                  className="max-h-[480px] w-auto max-w-full object-cover object-top"
+                <meta
+                    name="keywords"
+                    content="jasa keamanan, outsourcing security, satpam profesional, tenaga keamanan terpercaya, PT Cahaya Utama, Brilliant Cleaning"
                 />
-              </div>
-            </motion.div>
+                <link
+                    rel="canonical"
+                    href="https://www.cahayautamapt.com/brilliant"
+                />
+                <meta name="robots" content="index, follow" />
 
-            {/* right column - Logo and content */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-white space-y-6"
-            >
-              {/* Text content */}
-              <div className="space-y-6">
-                <h1 className="text-3xl lg:text-4xl font-medium leading-tight">
-                  <span className="text-3xl lg:text-4xl font-bold leading-tight">Hal Positif </span>berawal dari
-                  <br />
-                  <span className="text-3xl lg:text-4xl font-medium leading-tight">Aktifitas Lingkungan</span>
-                  <br />
-                  <span className="text-3xl lg:text-4xl font-bold leading-tight">Sehat, Nyaman & Higienis...</span>
-                </h1>
+                {/* Open Graph */}
+                <meta
+                    property="og:title"
+                    content="Brilliant Cleaning - Jasa Keamanan Profesional"
+                />
+                <meta
+                    property="og:description"
+                    content="Tenaga kerja profesional di bidang keamanan yang jujur, ulet, tangguh, dan disiplin. Keamanan optimal untuk area kerja Anda."
+                />
+                <meta
+                    property="og:image"
+                    content="https://www.cahayautamapt.com/img/brilliant/HeroBrilliantV1.webp"
+                />
+                <meta
+                    property="og:url"
+                    content="https://www.cahayautamapt.com/brilliant"
+                />
+                <meta property="og:type" content="website" />
+                <meta property="og:locale" content="id_ID" />
 
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="pt-4"
-                >
-                  <button className="bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-3 rounded-full flex items-center space-x-3 transition duration-300"
-                    onClick={() => {
-                      window.open(
-                        "https://drive.google.com/file/d/1ej2clopKgz-ml_WG5Il34eDxEOz2LLMD/view?usp=drivesdk",
-                        "_blank",
-                        "noopener,noreferrer"
-                      );
-                    }}>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                    </svg>
-                    <span className="text-lg">Download e-Paper</span>
-                  </button>
-                </motion.div>
+                {/* Twitter Card */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta
+                    name="twitter:title"
+                    content="Brilliant Cleaning - Jasa Keamanan Profesional"
+                />
+                <meta
+                    name="twitter:description"
+                    content="Tenaga keamanan yang jujur, tangguh dan terpercaya."
+                />
+                <meta
+                    name="twitter:image"
+                    content="https://www.cahayautamapt.com/img/brilliant/Security-008.jpg"
+                />
 
-                <p className="text-xl mt-8">
-                  <span className="font-bold">Brilliant Clean</span>, layanan penyedia alih daya jasa kebersihan
-                  <br />
-                  (Outsourcing for Cleaning Service) dari Cahaya Utama, untuk Anda...
-                </p>
-              </div>
+                {/* Structured Data */}
+                <script type="application/ld+json">
+                    {`
+                        {
+                            "@context": "https://schema.org",
+                            "@type": "Organization",
+                            "name": "PT. Cahaya Utama",
+                            "url": "https://www.cahayautamapt.com",
+                            "logo": "https://www.cahayautamapt.com/img/logo.png",
+                            "sameAs": [
+                                "https://www.linkedin.com/company/cahayautama",
+                                "https://www.facebook.com/cahayautamapt"
+                            ]
+                        }
+                    `}
+                </script>
+            </Helmet>
 
-              {/* Animated Stats Grid */}
-              <motion.div
-                ref={ref}
-                variants={containerVariants}
-                initial="hidden"
-                animate={inView ? "visible" : "hidden"}
-                className="grid grid-cols-3 gap-8 mt-16"
-              >
-                {statsData.map((stat, index) => (
-                  <motion.div
-                    key={index}
-                    variants={itemVariants}
-                    className="text-center text-white"
-                  >
-                    <h2 className="text-4xl font-bold">
-                      {inView ? (
-                        <CountUp
-                          start={0}
-                          end={stat.value}
-                          duration={2}
-                          separator="."
-                        />
-                      ) : (
-                        0
-                      )}
-                    </h2>
-                    <p className="text-gray-200 text-lg">{stat.label}</p>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
-      </div>
-      <Scope />
-      <Documentation />
-      <Equipment />
-      <Office />
-      <Footer />
-    </MainLayout>
-  );
+            {/* Hero Section */}
+            <div className="relative w-full h-screen bg-black">
+                <picture>
+                    <source
+                        srcSet="/img/brilliant/HeroBrilliantV1.webp"
+                        type="image/webp"
+                    />
+                    <img
+                        src="/img/brilliant/HeroBrilliantV1.png"
+                        alt="Petugas Keamanan Brilliant Cleaning"
+                        className="absolute inset-0 object-cover w-full h-full"
+                        loading="lazy"
+                    />
+                </picture>
+
+                <div className="absolute inset-0 bg-black/50" />
+
+                <div className="relative z-10 flex items-end justify-start h-full px-4 pb-10 md:px-20 md:pb-24">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="text-white max-w-2xl"
+                    >
+                        <p className="text-sm md:text-base text-gray-300 mb-1">
+                            Home / Jasa /{" "}
+                            <span className="text-white">
+                                Brilliant Cleaning
+                            </span>
+                        </p>
+                        <h1 className="text-3xl md:text-5xl font-bold mb-4">
+                            Brilliant Cleaning
+                        </h1>
+                        <p className="text-sm md:text-lg mb-6 leading-relaxed text-gray-200">
+                            Tenaga layanan kebersihan yang kompeten & terlatih
+                            serta berpengalaman pada profesinya. Memberikan
+                            jaminan kebersihan menyeluruh, efisien, dan
+                            terpercaya untuk lingkungan kerja yang lebih sehat
+                            dan produktif.
+                        </p>
+                        <button
+                            onClick={() =>
+                                window.open(
+                                    "https://drive.google.com/file/d/1ecAXuOqjcYxCHskuCZp4Vjaplr9lam4t/view?usp=drivesdk",
+                                    "_blank"
+                                )
+                            }
+                            className="bg-blue-600 hover:bg-blue-700 transition-all px-6 py-3 rounded-md text-white flex items-center space-x-2 text-sm md:text-base"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className="w-5 h-5"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                                />
+                            </svg>
+                            <span>Download e-Paper</span>
+                        </button>
+                    </motion.div>
+                </div>
+            </div>
+
+            <About />
+            <Documentation />
+            <Service />
+            <Meaning />
+            <Footer />
+        </MainLayout>
+    );
 }

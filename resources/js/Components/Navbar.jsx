@@ -8,7 +8,7 @@ export default function Navbar() {
 
     const navLinks = [
         { href: "/", text: "Beranda" },
-        { href: "/perusahaan", text: "Tentang Kami" },
+        { href: "/about", text: "Tentang Kami" },
         {
             text: "Jasa",
             dropdownItems: [

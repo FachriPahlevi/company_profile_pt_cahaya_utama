@@ -1,155 +1,250 @@
-import MainLayout from '@/Layouts/MainLayout';
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import {
+    FaMapMarkerAlt,
+    FaPhoneAlt,
+    FaGlobe,
+    FaEnvelope,
+} from "react-icons/fa";
+import MainLayout from "@/Layouts/MainLayout";
+import axios from "axios";
 
-const Form = () => {
+const ContactSection = () => {
     const [formData, setFormData] = useState({
-        fullName: '',
-        companyName: '',
-        phoneNumber: '',
-        subject: '',
-        message: '',
+        fullName: "",
+        companyName: "",
+        phoneNumber: "",
+        subject: "",
+        message: "",
     });
 
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
+    const [status, setStatus] = useState({ error: "", success: "" });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
+        setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError('');
-        setSuccess('');
+        setStatus({ error: "", success: "" });
 
-        // Validasi input
-        if (!formData.fullName || !formData.companyName || !formData.phoneNumber || !formData.subject || !formData.message) {
-            setError('Semua field harus diisi.');
+        const { fullName, companyName, phoneNumber, subject, message } =
+            formData;
+        if (!fullName || !companyName || !phoneNumber || !subject || !message) {
+            setStatus({ error: "Semua field harus diisi.", success: "" });
             return;
         }
 
         try {
-            const response = await axios.post(route('contact.store'), formData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            setSuccess('Form berhasil dikirim!');
-            // Reset form setelah berhasil
+            await axios.post(route("contact.store"), formData);
+            setStatus({ success: "Pesan berhasil dikirim!", error: "" });
             setFormData({
-                fullName: '',
-                companyName: '',
-                phoneNumber: '',
-                subject: '',
-                message: '',
+                fullName: "",
+                companyName: "",
+                phoneNumber: "",
+                subject: "",
+                message: "",
             });
         } catch (err) {
-            setError('Terjadi kesalahan saat mengirim form. Silakan coba lagi.');
+            setStatus({
+                error: "Terjadi kesalahan, coba lagi nanti.",
+                success: "",
+            });
             console.error(err);
         }
     };
 
     return (
         <MainLayout>
-            <div 
-                className="min-h-screen flex items-center justify-center py-8 px-4 sm:px-2 lg:px-4"
-                style={{
-                    backgroundImage: "url('/img/background/footer_bg.jpg')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                }}
-            >
-                <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8 ">
-                    {/* Bagian Kiri */}
-                    <div className="md:col-span-2 text-center md:text-left px-4 md:px-8 lg:px-8">
-                        <h1 className="text-3xl md:text-4xl lg:text-5xl text-green-500 font-bold mb-4 leading-tight">
-                            Senang bisa<br />berkomunikasi<br /> dengan Anda!
-                        </h1>
-                        <p className="text-gray-300 mb-6 text-base md:text-lg lg:text-xl md:pr-12">
-                            Informasikan ke kami apa saja dengan mengisi formulir berikut.
+            <section className="bg-white text-black">
+                <div className="grid grid-cols-1 md:grid-cols-2 max-w-7xl mx-auto min-h-screen">
+                    {/* Kontak Kiri */}
+                    <div className="flex flex-col justify-center px-8 py-20">
+                        <p className="text-blue-600 font-semibold uppercase text-sm mb-2">
+                            Kontak
                         </p>
+                        <h2 className="text-4xl font-bold mb-10 text-gray-900">
+                            Terhubung dengan Kami
+                        </h2>
+
+                        <div className="space-y-8 text-gray-600 text-base">
+                            <div className="flex items-start gap-4">
+                                <div className="p-3 rounded-lg border border-gray-200 bg-white shadow-md">
+                                    <FaMapMarkerAlt className="text-blue-600 w-5 h-5" />
+                                </div>
+                                <div>
+                                    <h4 className="text-gray-900 font-semibold mb-1">
+                                        Lokasi
+                                    </h4>
+                                    <p>
+                                        Komplek Kantor Mangga Dua Blok A6 No
+                                        1-2.
+                                        <br />
+                                        Jl. Jagir Wonokromo 100 Surabaya, Jawa
+                                        Timur - Indonesia 60244
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="flex items-start gap-4">
+                                <div className="p-3 rounded-lg border border-gray-200 bg-white shadow-md">
+                                    <FaPhoneAlt className="text-blue-600 w-5 h-5" />
+                                </div>
+                                <div>
+                                    <h4 className="text-gray-900 font-semibold mb-1">
+                                        Phone
+                                    </h4>
+                                    <p>031-8480903 dan 031-8481201</p>
+                                </div>
+                            </div>
+
+                            <div className="flex items-start gap-4">
+                                <div className="p-3 rounded-lg border border-gray-200 bg-white shadow-md">
+                                    <FaEnvelope className="text-blue-600 w-5 h-5" />
+                                </div>
+                                <div>
+                                    <h4 className="text-gray-900 font-semibold mb-1">
+                                        Mail
+                                    </h4>
+                                    <p>marketing_manager@cahaya-utama.com</p>
+                                </div>
+                            </div>
+
+                            <div className="flex items-start gap-4">
+                                <div className="p-3 rounded-lg border border-gray-200 bg-white shadow-md">
+                                    <FaGlobe className="text-blue-600 w-5 h-5" />
+                                </div>
+                                <div>
+                                    <h4 className="text-gray-900 font-semibold mb-1">
+                                        Website
+                                    </h4>
+                                    <p>www.cahayautamapt.com</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
-                    {/* Bagian Kanan */}
-                    <div className="md:col-span-3 w-full px-4 md:px-8 lg:px-4">
-                        <form className="space-y-4" onSubmit={handleSubmit}>
-                            {error && <div className="text-red-500">{error}</div>}
-                            {success && <div className="text-green-500">{success}</div>}
-                            
-                            {/* Input Nama Lengkap */}
-                            <input
-                                type="text"
-                                name="fullName"
-                                value={formData.fullName}
-                                onChange={handleChange}
-                                placeholder="Nama Lengkap"
-                                className="w-full p-3 rounded bg-white text-gray-700 border border-gray-300 
-                                focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                            />
-                            
-                            {/* Input Nama Perusahaan & Nomor Telepon */}
-                            <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+
+                    {/* Form Kanan */}
+                    <div className="bg-gray-50 flex items-center justify-center px-6 py-20">
+                        <form
+                            onSubmit={handleSubmit}
+                            className="bg-white w-full max-w-xl p-10 rounded-xl shadow-lg space-y-6"
+                        >
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label
+                                        htmlFor="fullName"
+                                        className="block font-semibold mb-2 text-gray-700"
+                                    >
+                                        Nama
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="fullName"
+                                        value={formData.fullName}
+                                        onChange={handleChange}
+                                        className="w-full border rounded-md p-2 shadow-sm text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                        placeholder="Masukan nama lengkap"
+                                        required
+                                    />
+                                </div>
+
+                                <div>
+                                    <label
+                                        htmlFor="companyName"
+                                        className="block font-semibold mb-2 text-gray-700"
+                                    >
+                                        Nama Perusahaan
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="companyName"
+                                        value={formData.companyName}
+                                        onChange={handleChange}
+                                        className="w-full border rounded-md p-2 shadow-sm text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                        placeholder="Masukan nama perusahaan"
+                                        required
+                                    />
+                                </div>
+
+                                <div>
+                                    <label
+                                        htmlFor="phoneNumber"
+                                        className="block font-semibold mb-2 text-gray-700"
+                                    >
+                                        Kontak
+                                    </label>
+                                    <input
+                                        type="tel"
+                                        name="phoneNumber"
+                                        value={formData.phoneNumber}
+                                        onChange={handleChange}
+                                        className="w-full border rounded-md p-2 shadow-sm text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                        placeholder="Masukan nomor telepon"
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label
+                                    htmlFor="subject"
+                                    className="block font-semibold mb-2 text-gray-700"
+                                >
+                                    Subjek
+                                </label>
                                 <input
                                     type="text"
-                                    name="companyName"
-                                    value={formData.companyName}
+                                    name="subject"
+                                    value={formData.subject}
                                     onChange={handleChange}
-                                    placeholder="Nama Perusahaan"
-                                    className="w-full md:flex-1 p-3 rounded bg-white text-gray-700 
-                                    border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                                />
-                                <input
-                                    type="text"
-                                    name="phoneNumber"
-                                    value={formData.phoneNumber}
-                                    onChange={handleChange}
-                                    placeholder="Nomor Telepon"
-                                    className="w-full md:flex-1 p-3 rounded bg-white text-gray-700 
-                                    border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                    className="w-full border rounded-md p-2 shadow-sm text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                    placeholder="Masukan subjek"
+                                    required
                                 />
                             </div>
-                            
-                            {/* Input Subjek */}
-                            <input
-                                type="text"
-                                name="subject"
-                                value={formData.subject}
-                                onChange={handleChange}
-                                placeholder="Subjek"
-                                className="w-full p-3 rounded bg-white text-gray-700 
-                                border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                            />
-                            
-                            {/* Textarea Pesan */}
-                            <textarea
-                                name="message"
-                                value={formData.message}
-                                onChange={handleChange}
-                                placeholder="Tuliskan Sesuatu ..."
-                                rows="4"
-                                className="w-full p-3 rounded bg-white text-gray-700 
-                                border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                            ></textarea>
-                            
-                            {/* Tombol Submit */}
+
+                            <div>
+                                <label
+                                    htmlFor="message"
+                                    className="block font-semibold mb-2 text-gray-700"
+                                >
+                                    Pesan
+                                </label>
+                                <textarea
+                                    name="message"
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    rows={5}
+                                    className="w-full border rounded-md p-2 shadow-sm text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                    placeholder="Tuliskan sesuatu..."
+                                    required
+                                ></textarea>
+                            </div>
+
+                            {status.error && (
+                                <p className="text-red-500 text-sm">
+                                    {status.error}
+                                </p>
+                            )}
+                            {status.success && (
+                                <p className="text-green-600 text-sm">
+                                    {status.success}
+                                </p>
+                            )}
+
                             <button
                                 type="submit"
-                                className="w-full p-3 bg-green-500 text-white font-bold rounded 
-                                hover:bg-green-600 transition duration-300 ease-in-out transform hover:scale-101"
+                                className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-md hover:bg-blue-700 transition"
                             >
-                                Kirim
+                                Kirim Pesan
                             </button>
                         </form>
                     </div>
                 </div>
-            </div>
+            </section>
         </MainLayout>
     );
 };
 
-export default Form;
+export default ContactSection;

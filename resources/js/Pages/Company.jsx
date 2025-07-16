@@ -1,22 +1,18 @@
 import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import MainLayout from "@/Layouts/MainLayout";
-import Client from "@/Components/Client";
+import Client from "@/Components/Company/Client";
 import Cooperation from "@/Components/Cooperation";
-import Capabilities from "@/Components/Capabilities";
-import Service from "@/Components/Service";
-import Office from "@/Components/Office";
 import Commitment from "@/Components/Company/Commitment";
 import { Helmet } from "react-helmet";
 import AboutUs from "@/Components/Company/About";
+import Benefit from "@/Components/Company/Benefit";
+import CompanyAdvantage from "@/Components/Company/CompanyAdvantage";
+import SmartOffice from "@/Components/Company/SmartOffice";
+import Experience from "@/Components/Company/Experience";
+import Faq from "@/Components/Company/Faq";
 
 export default function Company() {
-    const MemoizedService = useMemo(() => <Service />, []);
-    const MemoizedClient = useMemo(() => <Client />, []);
-    const MemoizedCooperation = useMemo(() => <Cooperation />, []);
-    const MemoizedCapabilities = useMemo(() => <Capabilities />, []);
-    const MemoizedOffice = useMemo(() => <Office />, []);
-
     return (
         <MainLayout>
             <Helmet>
@@ -59,12 +55,21 @@ export default function Company() {
                 className="relative min-h-screen flex items-end justify-start"
             >
                 {/* Background Image */}
-                <img
-                    src="/img/company/hero.png"
-                    alt="Gedung kantor PT Cahaya Utama"
-                    loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover object-center z-0"
-                />
+                <picture className="absolute inset-0 w-full h-full z-0">
+                    <source
+                        srcSet="/img/company/heroV1.webp"
+                        type="image/webp"
+                    />
+                    <img
+                        src="/img/company/heroV1.png"
+                        alt="Gedung kantor PT Cahaya Utama"
+                        loading="lazy"
+                        className="w-full h-full object-cover object-center"
+                        fetchpriority="high"
+                        width="1920"
+                        height="1080"
+                    />
+                </picture>
 
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
@@ -127,11 +132,13 @@ export default function Company() {
 
             <Commitment />
             <AboutUs />
-            {MemoizedService}
-            {MemoizedClient}
-            {MemoizedCooperation}
-            {MemoizedCapabilities}
-            {MemoizedOffice}
+            <Benefit />
+            <CompanyAdvantage />
+            <SmartOffice />
+            <Experience />
+            <Cooperation />
+            <Client />
+            <Faq />
         </MainLayout>
     );
 }
