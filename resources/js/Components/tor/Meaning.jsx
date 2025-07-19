@@ -37,14 +37,14 @@ const Meaning = () => {
 
                     {/* Kolom Kanan: Paragraf */}
                     <div>
-                        <p className="text-justify text-gray-600 mb-4 leading-relaxed text-sm md:text-base">
+                        <p className="text-justify text-gray-600 mb-4 leading-relaxed text-sm md:text-base text-justify">
                             Berbentuk huruf T, O, dan R yang disatukan,
                             merupakan lambang dari kekuatan setiap sumber daya
                             yang ada. Menggunakan warna biru tua sebagai lambang
                             kekuatan, dan dipadukan dengan warna hijau sebagai
                             lambang kemurnian atau ketulusan.
                         </p>
-                        <p className="text-justify text-gray-600 leading-relaxed text-sm md:text-base">
+                        <p className="text-justify text-gray-600 leading-relaxed text-sm md:text-base text-justify">
                             Sehingga arti logo TOR adalah setiap sumber daya
                             yang ada adalah merupakan kekuatan yang benar-benar
                             diberikan kepada pelanggan dengan profesional.

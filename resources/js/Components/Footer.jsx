@@ -15,7 +15,7 @@ export default function Footer() {
                         <h2 className="text-2xl sm:text-3xl font-bold mb-2">
                             Jadi Partner Cahaya Utama Sekarang!
                         </h2>
-                        <p className="text-white/90 text-sm sm:text-base max-w-xl">
+                        <p className="text-white/90 text-sm sm:text-base max-w-xl text-justify">
                             Kami siap menjadi partner dalam penyediaan SDM yang
                             terlatih, disiplin, dan bertanggung jawab, demi
                             menunjang kesuksesan perusahaan Anda.
@@ -94,8 +94,9 @@ export default function Footer() {
 
                 {/* Copyright */}
                 <div className="mt-6 text-center text-sm text-gray-400">
-                    Copyright © {new Date().getFullYear()} Cahaya Utama | All
-                    Rights Reserved
+                    <a href="https://blimbingdigital.com">
+                        Copyright © 2025 Blimbing Digital | All Rights Reserved
+                    </a>
                 </div>
             </div>
         </footer>

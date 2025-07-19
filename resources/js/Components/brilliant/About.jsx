@@ -65,7 +65,7 @@ const Service = () => {
                     {descriptions.map((text, index) => (
                         <p
                             key={index}
-                            className="text-gray-700 text-base leading-relaxed mb-4"
+                            className="text-gray-700 text-base leading-relaxed mb-4 text-justify"
                         >
                             {text}
                         </p>

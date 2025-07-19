@@ -74,7 +74,7 @@ export default function Tor() {
                             "@type": "Organization",
                             "name": "PT. Cahaya Utama",
                             "url": "https://www.cahayautamapt.com",
-                            "logo": "https://www.cahayautamapt.com/img/logo.png",
+                            "logo": "https://www.cahayautamapt.com/img/cahaya_utama_logo.png",
                             "sameAs": [
                                 "https://www.linkedin.com/company/cahayautama",
                                 "https://www.facebook.com/cahayautamapt"
@@ -85,7 +85,10 @@ export default function Tor() {
             </Helmet>
 
             {/* Hero Section */}
-            <div className="relative w-full h-screen bg-black">
+            <section
+                className="relative w-full h-screen bg-black"
+                aria-label="Hero TOR"
+            >
                 <picture>
                     <source
                         srcSet="/img/tor/HeroTorV1.webp"
@@ -95,12 +98,13 @@ export default function Tor() {
                         src="/img/tor/HeroTorV1.png"
                         alt="Trust Our Resource PT Cahaya Utama"
                         className="absolute inset-0 object-cover w-full h-full"
-                        loading="lazy"
+                        loading="eager"
+                        fetchPriority="high"
+                        width="1920"
+                        height="1080"
                     />
                 </picture>
-
                 <div className="absolute inset-0 bg-black/50" />
-
                 <div className="relative z-10 flex items-end justify-start h-full px-4 pb-10 md:px-20 md:pb-24">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -108,16 +112,16 @@ export default function Tor() {
                         transition={{ duration: 0.8 }}
                         className="text-white max-w-2xl"
                     >
-                        <p className="text-sm md:text-base text-gray-300 mb-1">
-                            Home / Jasa /{" "}
-                            <span className="text-white">
+                        <nav className="text-sm md:text-base text-gray-300 mb-1">
+                            <span>Home</span> / <span>Jasa</span> /{" "}
+                            <strong className="text-white">
                                 Trust our Resource
-                            </span>
-                        </p>
+                            </strong>
+                        </nav>
                         <h1 className="text-3xl md:text-5xl font-bold mb-4">
                             Trust Our Resource (TOR)
                         </h1>
-                        <p className="text-sm md:text-lg mb-6 leading-relaxed text-gray-200">
+                        <p className="text-sm md:text-lg mb-6 leading-relaxed text-gray-200 text-justify">
                             TOR atau Trust Our Resources adalah bagian dari PT.
                             Cahaya Utama yang menyediakan alih daya jasa dan
                             pekerjaan lainnya untuk perusahaan yang membutuhkan
@@ -150,9 +154,9 @@ export default function Tor() {
                         </button>
                     </motion.div>
                 </div>
-            </div>
+            </section>
 
-            {/* Other Sections */}
+            {/* Content Sections */}
             <About />
             <Documentation />
             <Standard />

@@ -21,13 +21,13 @@ const Meaning = () => {
                     <h2 className="text-2xl md:text-4xl font-bold mb-6">
                         Makna Logo
                     </h2>
-                    <p className="text-gray-600 mb-4 leading-relaxed text-sm md:text-base">
+                    <p className="text-gray-600 mb-4 leading-relaxed text-sm md:text-base text-justify">
                         Makna dari Nama SON Security adalah berasal dari kata
                         <strong> Son of Nation </strong> (English) yang memiliki
                         makna “Anak laki-laki Bangsa”, yang bisa diartikan anak
                         laki-laki sebagai penjaga bangsa atau negara.
                     </p>
-                    <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+                    <p className="text-gray-600 leading-relaxed text-sm md:text-base text-justify">
                         Berbentuk huruf S yang dilipat tegas, melambangkan
                         kekuatan dan ketegasan. Menggunakan 3 warna, biru tua
                         sebagai lambang kekuatan, biru muda mewakili makna

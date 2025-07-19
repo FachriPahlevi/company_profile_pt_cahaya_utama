@@ -45,7 +45,7 @@ const Service = () => {
                     {points.map((point, idx) => (
                         <p
                             key={idx}
-                            className="text-gray-700 text-sm md:text-base leading-relaxed mb-4"
+                            className="text-gray-700 text-sm md:text-base leading-relaxed mb-4 text-justify"
                         >
                             {point.description}
                         </p>

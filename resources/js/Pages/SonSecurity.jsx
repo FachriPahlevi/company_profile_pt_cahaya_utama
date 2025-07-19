@@ -11,6 +11,43 @@ import Standard from "@/Components/sonsecurity/Standard";
 import Meaning from "@/Components/sonsecurity/Meaning";
 
 export default function SonSecurity() {
+    const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "PT. Cahaya Utama",
+        url: "https://www.cahayautamapt.com",
+        logo: "https://www.cahayautamapt.com/img/cahaya_utama_logo.png",
+        sameAs: [
+            "https://www.linkedin.com/company/cahayautama",
+            "https://www.facebook.com/cahayautamapt",
+        ],
+    };
+
+    const breadcrumbData = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            {
+                "@type": "ListItem",
+                position: 1,
+                name: "Beranda",
+                item: "https://www.cahayautamapt.com",
+            },
+            {
+                "@type": "ListItem",
+                position: 2,
+                name: "Jasa",
+                item: "https://www.cahayautamapt.com#services",
+            },
+            {
+                "@type": "ListItem",
+                position: 3,
+                name: "Son Security",
+                item: "https://www.cahayautamapt.com/sonsecurity",
+            },
+        ],
+    };
+
     return (
         <MainLayout>
             <Helmet>
@@ -31,6 +68,31 @@ export default function SonSecurity() {
                 />
                 <meta name="robots" content="index, follow" />
 
+                {/* Favicon */}
+                <link
+                    rel="icon"
+                    type="image/png"
+                    href="/img/favicon/favicon-96x96.png"
+                    sizes="96x96"
+                />
+                <link
+                    rel="icon"
+                    type="image/svg+xml"
+                    href="/img/favicon/favicon.svg"
+                />
+                <link rel="shortcut icon" href="/img/favicon/favicon.ico" />
+                <link
+                    rel="apple-touch-icon"
+                    sizes="180x180"
+                    href="/img/favicon/apple-touch-icon.png"
+                />
+                <link rel="manifest" href="/img/favicon/site.webmanifest" />
+                <meta name="theme-color" content="#ffffff" />
+                <meta
+                    name="apple-mobile-web-app-title"
+                    content="PT Cahaya Utama"
+                />
+
                 {/* Open Graph */}
                 <meta
                     property="og:title"
@@ -45,13 +107,17 @@ export default function SonSecurity() {
                     content="https://www.cahayautamapt.com/img/sonsecurity/Security-008.jpg"
                 />
                 <meta
+                    property="og:image:alt"
+                    content="Petugas Keamanan Son Security"
+                />
+                <meta property="og:type" content="website" />
+                <meta
                     property="og:url"
                     content="https://www.cahayautamapt.com/sonsecurity"
                 />
-                <meta property="og:type" content="website" />
                 <meta property="og:locale" content="id_ID" />
 
-                {/* Twitter Card */}
+                {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta
                     name="twitter:title"
@@ -68,36 +134,25 @@ export default function SonSecurity() {
 
                 {/* Structured Data */}
                 <script type="application/ld+json">
-                    {`
-                        {
-                            "@context": "https://schema.org",
-                            "@type": "Organization",
-                            "name": "PT. Cahaya Utama",
-                            "url": "https://www.cahayautamapt.com",
-                            "logo": "https://www.cahayautamapt.com/img/logo.png",
-                            "sameAs": [
-                                "https://www.linkedin.com/company/cahayautama",
-                                "https://www.facebook.com/cahayautamapt"
-                            ]
-                        }
-                    `}
+                    {JSON.stringify(structuredData)}
+                </script>
+                <script type="application/ld+json">
+                    {JSON.stringify(breadcrumbData)}
                 </script>
             </Helmet>
 
             {/* Hero Section */}
             <div className="relative w-full h-screen bg-black">
-                {/* Background Image */}
                 <img
                     src="/img/sonsecurity/Security-008.jpg"
                     alt="Petugas Keamanan Son Security"
                     className="absolute inset-0 object-cover w-full h-full"
-                    loading="lazy"
+                    loading="eager"
+                    fetchpriority="high"
+                    width="1920"
+                    height="1080"
                 />
-
-                {/* Overlay */}
                 <div className="absolute inset-0 bg-black/50" />
-
-                {/* Text Overlay */}
                 <div className="relative z-10 flex items-end justify-start h-full px-4 pb-10 md:px-20 md:pb-24">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -112,10 +167,9 @@ export default function SonSecurity() {
                         <h1 className="text-3xl md:text-5xl font-bold mb-4">
                             Son Security
                         </h1>
-                        <p className="text-sm md:text-lg mb-6 leading-relaxed text-gray-200">
+                        <p className="text-sm md:text-lg mb-6 leading-relaxed text-gray-200 text-justify">
                             Menyediakan tenaga kerja profesional di bidang
                             keamanan yang jujur, ulet, tangguh, dan disiplin.
-                            <br />
                             Menjamin perlindungan optimal untuk area kerja
                             melalui layanan keamanan yang responsif dan
                             terpercaya.

@@ -39,7 +39,7 @@ const HeroStats = () => {
                                     separator="."
                                 />
                             </h3>
-                            <p className="text-sm md:text-base mt-1">
+                            <p className="text-sm md:text-base mt-1 text-justify">
                                 {item.label}
                             </p>
                         </div>

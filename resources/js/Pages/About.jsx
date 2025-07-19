@@ -30,6 +30,31 @@ export default function AboutPage() {
                 />
                 <meta name="robots" content="index, follow" />
 
+                {/* Favicon */}
+                <link
+                    rel="icon"
+                    type="image/png"
+                    href="/img/favicon/favicon-96x96.png"
+                    sizes="96x96"
+                />
+                <link
+                    rel="icon"
+                    type="image/svg+xml"
+                    href="/img/favicon/favicon.svg"
+                />
+                <link rel="shortcut icon" href="/img/favicon/favicon.ico" />
+                <link
+                    rel="apple-touch-icon"
+                    sizes="180x180"
+                    href="/img/favicon/apple-touch-icon.png"
+                />
+                <link rel="manifest" href="/img/favicon/site.webmanifest" />
+                <meta name="theme-color" content="#ffffff" />
+                <meta
+                    name="apple-mobile-web-app-title"
+                    content="PT Cahaya Utama"
+                />
+
                 {/* Open Graph */}
                 <meta
                     property="og:title"
@@ -41,7 +66,7 @@ export default function AboutPage() {
                 />
                 <meta
                     property="og:image"
-                    content="https://www.cahayautamapt.com/img/about/HeroaboutV1.webp"
+                    content="https://www.cahayautamapt.com/img/about/HeroAboutV1.webp"
                 />
                 <meta
                     property="og:url"
@@ -62,24 +87,24 @@ export default function AboutPage() {
                 />
                 <meta
                     name="twitter:image"
-                    content="https://www.cahayautamapt.com/img/about/HeroaboutV1.webp"
+                    content="https://www.cahayautamapt.com/img/about/HeroAboutV1.webp"
                 />
 
                 {/* Structured Data */}
                 <script type="application/ld+json">
                     {`
-                        {
-                            "@context": "https://schema.org",
-                            "@type": "Organization",
-                            "name": "PT. Cahaya Utama",
-                            "url": "https://www.cahayautamapt.com",
-                            "logo": "https://www.cahayautamapt.com/img/logo.png",
-                            "sameAs": [
-                                "https://www.linkedin.com/company/cahayautama",
-                                "https://www.facebook.com/cahayautamapt"
-                            ]
-                        }
-                    `}
+            {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "name": "PT. Cahaya Utama",
+                "url": "https://www.cahayautamapt.com",
+                "logo": "https://www.cahayautamapt.com/img/cahaya_utama_logo.png",
+                "sameAs": [
+                    "https://www.linkedin.com/company/cahayautama",
+                    "https://www.facebook.com/cahayautamapt"
+                ]
+            }
+        `}
                 </script>
             </Helmet>
 
@@ -87,16 +112,16 @@ export default function AboutPage() {
             <div className="relative w-full h-screen bg-black">
                 <picture>
                     <source
-                        srcSet="/img/about/HeroaboutV1.webp"
+                        srcSet="/img/about/HeroAboutV1.webp"
                         type="image/webp"
                     />
                     <img
-                        src="/img/about/HeroaboutV1.png"
+                        src="/img/about/HeroAboutV1.png"
                         alt="Karyawan PT Cahaya Utama"
                         className="absolute inset-0 object-cover w-full h-full"
                         width="1920"
-                        height="1080"
-                        loading="lazy"
+                        loading="eager"
+                        fetchpriority="high"
                     />
                 </picture>
 
@@ -126,7 +151,6 @@ export default function AboutPage() {
                     </motion.div>
                 </div>
             </div>
-
             {/* Content Sections */}
             <About />
             <Commitment />

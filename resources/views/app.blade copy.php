@@ -28,27 +28,13 @@
         <meta name="twitter:description" content="Penyedia layanan outsourcing profesional untuk tenaga kerja, cleaning service, dan security di Indonesia. Terpercaya dan berpengalaman.">
         <meta name="twitter:image" content="{{ asset('img/logo/twitter-card.png') }}">
 
-       <!-- Favicon untuk browser lama -->
-        <link rel="shortcut icon" href="/img/favicon/favicon.ico" />
-
-        <!-- Favicon PNG untuk berbagai ukuran -->
-        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="96x96" href="/img/favicon/favicon-96x96.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/img/favicon/favicon-192x192.png" />
-
-        <!-- Favicon SVG untuk browser modern -->
-        <link rel="icon" type="image/svg+xml" href="/img/favicon/favicon.svg" />
-
-        <!-- Apple Touch Icon untuk iOS -->
-        <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png" />
-        <meta name="apple-mobile-web-app-title" content="PT Cahaya Utama" />
-
-        <!-- Web Manifest (PWA support) -->
-        <link rel="manifest" href="/img/favicon/site.webmanifest" />
-
-        <!-- Theme color (untuk address bar Android, PWA) -->
-        <meta name="theme-color" content="#ffffff" />
-
+        <!-- Favicon -->
+        <link rel="icon" href="{{ asset('img/logo/fav-icon-150x150.png') }}" sizes="96x192" type="image/png">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/logo/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/logo/favicon-16x16.png') }}">
+        <link rel="apple-touch-icon" href="{{ asset('img/logo/fav-icon-150x150.png') }}" sizes="180x180">
+        {{-- <link rel="manifest" href="{{ asset('site.webmanifest') }}"> --}}
+        <meta name="theme-color" content="#ffffff">
 
         <!-- Canonical URL -->
         <link rel="canonical" href="{{ url()->current() }}" />
@@ -60,32 +46,31 @@
 
         <!-- Structured Data -->
         <script type="application/ld+json">
-            {!! json_encode([
-                '@context' => 'https://schema.org',
-                '@type' => 'Organization',
-                'name' => 'PT Cahaya Utama',
-                'alternateName' => 'Cahaya Utama',
-                'url' => config('app.url'),
-                'logo' => asset('img/logo/fav-icon-150x150.png'),
-                'sameAs' => [
-                    'https://www.facebook.com/people/PT-Cahaya-Utama/100054382816258/',
-                    'https://www.instagram.com/cahayautama.pt/',
-                    'https://www.linkedin.com/company/cahaya-utama/',
-                ],
-                'description' => 'PT Cahaya Utama adalah perusahaan outsourcing terpercaya yang menyediakan layanan tenaga kerja profesional, cleaning service, dan security di Indonesia',
-                'address' => [
-                    '@type' => 'PostalAddress',
-                    'addressCountry' => 'ID',
-                    'addressRegion' => 'Jakarta',
-                ],
-                'contactPoint' => [
-                    '@type' => 'ContactPoint',
-                    'contactType' => 'customer service',
-                    'availableLanguage' => ['id', 'en'],
-                ],
-            ]) !!}
-         </script>
-
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "PT Cahaya Utama",
+            "alternateName": "Cahaya Utama",
+            "url": "{{ config('app.url') }}",
+            "logo": "{{ asset('img/logo/fav-icon-150x150.png') }}",
+            "sameAs": [
+                "https://www.facebook.com/people/PT-Cahaya-Utama/100054382816258/",
+                "https://www.instagram.com/cahayautama.pt/",
+                "https://www.linkedin.com/company/cahaya-utama/"
+            ],
+            "description": "PT Cahaya Utama adalah perusahaan outsourcing terpercaya yang menyediakan layanan tenaga kerja profesional, cleaning service, dan security di Indonesia",
+            "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "ID",
+                "addressRegion": "Jakarta"
+            },
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "customer service",
+                "availableLanguage": ["id", "en"]
+            }
+        }
+        </script>
 
         <!-- Performance Optimization -->
         <link rel="dns-prefetch" href="//fonts.googleapis.com">

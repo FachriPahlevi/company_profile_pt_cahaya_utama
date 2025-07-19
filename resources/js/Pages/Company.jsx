@@ -1,21 +1,45 @@
-import React, { useMemo } from "react";
+import React, { useMemo, lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import MainLayout from "@/Layouts/MainLayout";
 import Client from "@/Components/Company/Client";
 import Cooperation from "@/Components/Cooperation";
 import Commitment from "@/Components/Company/Commitment";
 import { Helmet } from "react-helmet";
-import AboutUs from "@/Components/Company/About";
+import About from "@/Components/Company/AboutUs";
 import Benefit from "@/Components/Company/Benefit";
 import CompanyAdvantage from "@/Components/Company/CompanyAdvantage";
 import SmartOffice from "@/Components/Company/SmartOffice";
 import Experience from "@/Components/Company/Experience";
 import Faq from "@/Components/Company/Faq";
 
+const Footer = lazy(() => import("@/Components/Footer")); // lazy load Footer
+
 export default function Company() {
+    const serviceList = useMemo(
+        () => [
+            {
+                title: "● SON SECURITY",
+                description:
+                    "Menyediakan tenaga kerja profesional di bidang keamanan yang jujur, ulet, tangguh, dan disiplin.",
+            },
+            {
+                title: "● BRILLIANT CLEAN",
+                description:
+                    "Tenaga layanan kebersihan yang kompeten & terlatih serta berpengalaman di bidangnya.",
+            },
+            {
+                title: "● TOR (TRUST OUR RESOURCES)",
+                description:
+                    "PT Cahaya Utama juga memiliki sumber daya manusia yang terampil di berbagai bidang lainnya.",
+            },
+        ],
+        []
+    );
+
     return (
         <MainLayout>
             <Helmet>
+                <html lang="id" />
                 <title>
                     Tentang PT. Cahaya Utama - Perusahaan Jasa Outsourcing
                     Profesional
@@ -29,13 +53,22 @@ export default function Company() {
                     content="outsourcing, jasa keamanan, kebersihan, tenaga kerja, PT Cahaya Utama"
                 />
                 <meta name="robots" content="index, follow" />
+                <meta name="author" content="PT Cahaya Utama" />
+                <meta name="language" content="id" />
+                <meta name="theme-color" content="#004aad" />
+                <link
+                    rel="canonical"
+                    href="https://www.cahayautamapt.com/perusahaan"
+                />
+
+                {/* OpenGraph */}
                 <meta
                     property="og:title"
                     content="Tentang PT. Cahaya Utama - Solusi Outsourcing Terpercaya"
                 />
                 <meta
                     property="og:description"
-                    content="Pelajui lebih lanjut tentang PT. Cahaya Utama, penyedia solusi outsourcing profesional untuk bisnis Anda."
+                    content="Pelajari lebih lanjut tentang PT. Cahaya Utama, penyedia solusi outsourcing profesional untuk bisnis Anda."
                 />
                 <meta
                     property="og:image"
@@ -63,30 +96,30 @@ export default function Company() {
                     <img
                         src="/img/company/heroV1.png"
                         alt="Gedung kantor PT Cahaya Utama"
-                        loading="lazy"
-                        className="w-full h-full object-cover object-center"
-                        fetchpriority="high"
+                        loading="eager"
+                        fetchPriority="high"
                         width="1920"
                         height="1080"
+                        className="w-full h-full object-cover object-center"
                     />
                 </picture>
 
-                {/* Gradient Overlay */}
+                {/* Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
 
                 {/* Hero Content */}
-                <div className="container relative z-20 px-6 pb-16 text-white max-w-5xl ml-6">
-                    <p className="uppercase text-sm tracking-widest text-white font-semibold mb-2">
+                <div className="relative z-20 container mx-auto px-4 sm:px-6 pb-12 text-white max-w-5xl text-center sm:text-left sm:ml-6">
+                    <p className="uppercase text-[12px] sm:text-xl tracking-widest font-semibold mb-2 text-white">
                         Selamat Datang di PT Cahaya Utama
                     </p>
 
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-tight">
+                    <h1 className="text-[22px] leading-snug sm:text-h2 font-bold mb-4">
                         Layanan Outsourcing Profesional,
-                        <br />
+                        <br className="hidden sm:block" />
                         Berintegritas, Handal & Terpercaya
                     </h1>
 
-                    <p className="text-base sm:text-lg md:text-xl max-w-3xl leading-relaxed mb-8">
+                    <p className="text-body-xs sm:text-body-md leading-relaxed text-white/90 mb-6 max-w-[90%] sm:max-w-3xl mx-auto sm:mx-0">
                         PT Cahaya Utama adalah penyedia tenaga kerja resmi
                         bersertifikat ISO 9001 & 45001 dengan pengalaman lebih
                         dari 20 tahun. Didukung tim profesional dan legalitas
@@ -95,43 +128,23 @@ export default function Company() {
                         pabrik.
                     </p>
 
-                    {/* Services List */}
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm sm:text-base">
-                        <div>
-                            <h3 className="font-bold text-white mb-1">
-                                ● SON SECURITY
-                            </h3>
-                            <p className="text-white/80">
-                                Menyediakan tenaga kerja profesional di bidang
-                                keamanan yang jujur, ulet, tangguh, dan
-                                disiplin.
-                            </p>
-                        </div>
-                        <div>
-                            <h3 className="font-bold text-white mb-1">
-                                ● BRILLIANT CLEAN
-                            </h3>
-                            <p className="text-white/80">
-                                Tenaga layanan kebersihan yang kompeten &
-                                terlatih serta berpengalaman di bidangnya.
-                            </p>
-                        </div>
-                        <div>
-                            <h3 className="font-bold text-white mb-1">
-                                ● TOR (TRUST OUR RESOURCES)
-                            </h3>
-                            <p className="text-white/80">
-                                PT Cahaya Utama juga memiliki sumber daya
-                                manusia yang terampil di berbagai bidang
-                                lainnya.
-                            </p>
-                        </div>
+                    {/* Services */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-body-xs sm:text-body-md text-left sm:text-left">
+                        {serviceList.map((item, idx) => (
+                            <div key={idx}>
+                                <h3 className="font-semibold text-white mb-1">
+                                    {item.title}
+                                </h3>
+                                <p className="text-white/80">
+                                    {item.description}
+                                </p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </motion.section>
 
-            <Commitment />
-            <AboutUs />
+            <About />
             <Benefit />
             <CompanyAdvantage />
             <SmartOffice />
@@ -139,6 +152,14 @@ export default function Company() {
             <Cooperation />
             <Client />
             <Faq />
+
+            <Suspense
+                fallback={
+                    <div className="text-center py-10">Memuat footer...</div>
+                }
+            >
+                <Footer />
+            </Suspense>
         </MainLayout>
     );
 }

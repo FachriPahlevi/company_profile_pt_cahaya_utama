@@ -1,19 +1,16 @@
 import React from "react";
-import {
-    LucideBolt,
-    LucideBriefcase,
-    LucideHandCoins,
-    LucideSettings,
-    LucideUmbrella,
-    LucideBarChart4,
-} from "lucide-react";
+import { BsBriefcase, BsUmbrella } from "react-icons/bs";
+import { HiBolt, HiBriefcase, HiCog6Tooth } from "react-icons/hi2";
+import { AiOutlineThunderbolt } from "react-icons/ai";
+import { HiOutlineCog6Tooth } from "react-icons/hi2";
 
 const benefits = [
     {
         icon: (
-            <LucideBolt
-                className="text-primary-500 w-6 h-6 mb-2"
+            <AiOutlineThunderbolt
+                className="text-primary-500 w-8 h-8 mb-4"
                 aria-hidden="true"
+                role="img"
             />
         ),
         title: "Kinerja Maksimal",
@@ -21,9 +18,10 @@ const benefits = [
     },
     {
         icon: (
-            <LucideBriefcase
-                className="text-primary-500 w-6 h-6 mb-2"
+            <BsBriefcase
+                className="text-primary-500 w-8 h-8 mb-4"
                 aria-hidden="true"
+                role="img"
             />
         ),
         title: "Solusi Cerdas Atasi Birokrasi",
@@ -31,19 +29,10 @@ const benefits = [
     },
     {
         icon: (
-            <LucideHandCoins
-                className="text-primary-500 w-6 h-6 mb-2"
+            <HiOutlineCog6Tooth
+                className="text-primary-500 w-8 h-8 mb-4"
                 aria-hidden="true"
-            />
-        ),
-        title: "Optimalkan Anggaran Belanja",
-        desc: "Optimalkan anggaran dengan alihkan modal jadi biaya sewa alat kantor.",
-    },
-    {
-        icon: (
-            <LucideSettings
-                className="text-primary-500 w-6 h-6 mb-2"
-                aria-hidden="true"
+                role="img"
             />
         ),
         title: "Kesempatan Re-Engineering",
@@ -51,23 +40,14 @@ const benefits = [
     },
     {
         icon: (
-            <LucideUmbrella
-                className="text-primary-500 w-6 h-6 mb-2"
+            <BsUmbrella
+                className="text-primary-500 w-8 h-8 mb-4"
                 aria-hidden="true"
+                role="img"
             />
         ),
         title: "Mengurangi Resiko Operasional",
-        desc: "Beban dan resiko operasional perusahaan dapat terbagi dengan lebih terukur.",
-    },
-    {
-        icon: (
-            <LucideBarChart4
-                className="text-primary-500 w-6 h-6 mb-2"
-                aria-hidden="true"
-            />
-        ),
-        title: "Tingkatkan Tercapainya ROI",
-        desc: "Kerja perusahaan lebih efektif dalam mencapai Return of Investment (ROI).",
+        desc: "Beban dan resiko operasional perusahaan dapat menjadi lebih terukur.",
     },
 ];
 
@@ -77,29 +57,32 @@ export default function Benefit() {
             className="bg-white py-20 px-4"
             aria-labelledby="benefit-heading"
         >
-            <div className="max-w-7xl mx-auto text-center">
-                <p className="text-primary-500 text-sm font-semibold tracking-wide uppercase mb-2">
+            <div className="max-w-5xl mx-auto text-center">
+                <p className="text-primary-500 text-sm font-semibold tracking-wide uppercase mb-3">
                     Mengapa Kami
                 </p>
                 <h2
                     id="benefit-heading"
-                    className="text-h2 font-semibold text-gray-900 mb-4"
+                    className="text-3xl sm:text-4xl font-semibold text-gray-900 mb-4"
                 >
                     Benefit Bergabung dengan Cahaya Utama
                 </h2>
-                <p className="text-body-md text-gray-600 max-w-2xl mx-auto mb-12">
+                <p className="text-base text-gray-600 max-w-2xl mx-auto mb-14">
                     Layanan outsourcing terpercaya dengan tenaga profesional,
                     legalitas lengkap dan dukungan maksimal.
                 </p>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 text-left">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                     {benefits.map((item, index) => (
-                        <div key={index} className="flex flex-col items-start">
+                        <div
+                            key={index}
+                            className="flex flex-col items-center text-center px-4"
+                        >
                             {item.icon}
-                            <h3 className="text-h5 font-semibold text-gray-900 mb-1">
+                            <h3 className="text-lg font-semibold text-gray-900 mb-2">
                                 {item.title}
                             </h3>
-                            <p className="text-body-sm text-gray-600">
+                            <p className="text-sm text-gray-600 w-2/3">
                                 {item.desc}
                             </p>
                         </div>

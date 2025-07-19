@@ -12,32 +12,34 @@ export default function Brilliant() {
     return (
         <MainLayout>
             <Helmet>
+                {/* Basic Meta */}
                 <title>
-                    Brilliant Cleaning - Jasa Keamanan Profesional | PT. Cahaya
-                    Utama
+                    Brilliant Cleaning - Tenaga Kebersihan Profesional | PT.
+                    Cahaya Utama
                 </title>
                 <meta
                     name="description"
-                    content="Menyediakan tenaga kerja profesional di bidang keamanan yang jujur, ulet, tangguh, dan disiplin. Menjamin perlindungan optimal untuk area kerja melalui layanan keamanan yang responsif dan terpercaya."
+                    content="Brilliant Cleaning dari PT. Cahaya Utama adalah layanan kebersihan profesional yang kompeten, terlatih, dan berpengalaman. Menjamin kebersihan menyeluruh, efisien, dan terpercaya untuk lingkungan kerja yang sehat dan produktif."
                 />
                 <meta
                     name="keywords"
-                    content="jasa keamanan, outsourcing security, satpam profesional, tenaga keamanan terpercaya, PT Cahaya Utama, Brilliant Cleaning"
-                />
-                <link
-                    rel="canonical"
-                    href="https://www.cahayautamapt.com/brilliant"
+                    content="Brilliant Cleaning, PT Cahaya Utama, jasa kebersihan profesional, tenaga kebersihan terlatih, layanan cleaning service kantor, outsourcing kebersihan"
                 />
                 <meta name="robots" content="index, follow" />
+                <link
+                    rel="canonical"
+                    href="https://www.cahayautamapt.com/brilliant-cleaning"
+                />
+                <meta name="theme-color" content="#0A0A0A" />
 
                 {/* Open Graph */}
                 <meta
                     property="og:title"
-                    content="Brilliant Cleaning - Jasa Keamanan Profesional"
+                    content="Brilliant Cleaning - Tenaga Kebersihan Profesional"
                 />
                 <meta
                     property="og:description"
-                    content="Tenaga kerja profesional di bidang keamanan yang jujur, ulet, tangguh, dan disiplin. Keamanan optimal untuk area kerja Anda."
+                    content="Brilliant Cleaning dari PT Cahaya Utama menawarkan tenaga kebersihan yang terlatih dan terpercaya. Layanan efisien untuk kebersihan lingkungan kerja Anda."
                 />
                 <meta
                     property="og:image"
@@ -45,41 +47,58 @@ export default function Brilliant() {
                 />
                 <meta
                     property="og:url"
-                    content="https://www.cahayautamapt.com/brilliant"
+                    content="https://www.cahayautamapt.com/brilliant-cleaning"
                 />
                 <meta property="og:type" content="website" />
+                <meta property="og:site_name" content="PT. Cahaya Utama" />
                 <meta property="og:locale" content="id_ID" />
 
                 {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta
                     name="twitter:title"
-                    content="Brilliant Cleaning - Jasa Keamanan Profesional"
+                    content="Brilliant Cleaning - Tenaga Kebersihan Profesional"
                 />
                 <meta
                     name="twitter:description"
-                    content="Tenaga keamanan yang jujur, tangguh dan terpercaya."
+                    content="Layanan kebersihan profesional dari PT Cahaya Utama untuk lingkungan kerja yang sehat dan efisien."
                 />
                 <meta
                     name="twitter:image"
-                    content="https://www.cahayautamapt.com/img/brilliant/Security-008.jpg"
+                    content="https://www.cahayautamapt.com/img/brilliant/HeroBrilliantV1.webp"
                 />
+                <meta name="twitter:site" content="@cahayautamapt" />
 
                 {/* Structured Data */}
                 <script type="application/ld+json">
                     {`
-                        {
-                            "@context": "https://schema.org",
-                            "@type": "Organization",
-                            "name": "PT. Cahaya Utama",
-                            "url": "https://www.cahayautamapt.com",
-                            "logo": "https://www.cahayautamapt.com/img/logo.png",
-                            "sameAs": [
-                                "https://www.linkedin.com/company/cahayautama",
-                                "https://www.facebook.com/cahayautamapt"
-                            ]
-                        }
-                    `}
+        {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Brilliant Cleaning",
+            "provider": {
+                "@type": "Organization",
+                "name": "PT. Cahaya Utama",
+                "url": "https://www.cahayautamapt.com",
+                "logo": "https://www.cahayautamapt.com/img/cahaya_utama_logo.png",
+                "contactPoint": {
+                    "@type": "ContactPoint",
+                    "telephone": "+62-318-481-201",
+                    "contactType": "Customer Service",
+                    "areaServed": "ID"
+                },
+                "sameAs": [
+                    "https://www.linkedin.com/company/cahayautama",
+                    "https://www.facebook.com/cahayautamapt"
+                ]
+            },
+            "description": "Brilliant Cleaning adalah layanan kebersihan profesional dari PT Cahaya Utama. Menyediakan tenaga kerja kebersihan yang kompeten dan terpercaya untuk lingkungan kerja yang lebih bersih dan produktif.",
+            "areaServed": {
+                "@type": "Country",
+                "name": "Indonesia"
+            }
+        }
+        `}
                 </script>
             </Helmet>
 
@@ -94,7 +113,10 @@ export default function Brilliant() {
                         src="/img/brilliant/HeroBrilliantV1.png"
                         alt="Petugas Keamanan Brilliant Cleaning"
                         className="absolute inset-0 object-cover w-full h-full"
-                        loading="lazy"
+                        loading="eager"
+                        fetchpriority="high"
+                        width={1920}
+                        height={1080}
                     />
                 </picture>
 
@@ -116,7 +138,7 @@ export default function Brilliant() {
                         <h1 className="text-3xl md:text-5xl font-bold mb-4">
                             Brilliant Cleaning
                         </h1>
-                        <p className="text-sm md:text-lg mb-6 leading-relaxed text-gray-200">
+                        <p className="text-sm md:text-lg mb-6 leading-relaxed text-gray-200 text-justify">
                             Tenaga layanan kebersihan yang kompeten & terlatih
                             serta berpengalaman pada profesinya. Memberikan
                             jaminan kebersihan menyeluruh, efisien, dan

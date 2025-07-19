@@ -37,14 +37,14 @@ const Meaning = () => {
 
                     {/* Kolom Kanan: Paragraf */}
                     <div>
-                        <p className="text-gray-600 mb-4 leading-relaxed text-sm md:text-base">
+                        <p className="text-gray-600 mb-4 leading-relaxed text-sm md:text-base text-justify">
                             Makna dari Nama <strong>Brilliant Clean</strong>{" "}
                             adalah berasal dari kata Brilliant (English) yang
                             berarti “cemerlang”, yang bisa memiliki makna bahwa
                             semua tugas kebersihan akan dilakukan sehingga
                             memperoleh hasil yang cemerlang.
                         </p>
-                        <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+                        <p className="text-gray-600 leading-relaxed text-sm md:text-base text-justify">
                             Berbentuk huruf C yang seperti bulan sabit dengan
                             bulatan putih di atasnya, melambangkan kecermatan
                             dan ketelitian. Menggunakan 3 warna, hijau muda
